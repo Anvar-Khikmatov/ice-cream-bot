@@ -2,9 +2,9 @@
 const tg = window.Telegram.WebApp;
 
 // Big red menu button (always visible)
-tg.MainButton.setText("🍦 OPEN MENU"); 
+tg.MainButton.setText("🍦 MENU"); 
 tg.MainButton.onClick(() => {
-  tg.openLink("https://arzonbozor.vercel.app"); 
+  tg.openLink("https://arzonbozor-muzqaymoq.vercel.app"); 
 });
 tg.MainButton.show();
 
