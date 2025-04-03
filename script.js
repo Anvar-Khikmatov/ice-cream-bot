@@ -296,6 +296,108 @@ backButton.addEventListener('click', () => {
 
 
 
+// const iceCreamInfo = document.querySelector('.iceCream-info');
+// const galleryBackBtn = document.querySelector('.gallery-back-btn');
+// const galleryTrack = document.querySelector('.gallery-track');
+// const galleryDots = document.querySelector('.gallery-dots');
+
+// let currentImageIndex = 0;
+
+// iceCreamContainer.addEventListener('click', event => {
+//   const clickedIc = event.target.closest('.ic-box');
+//   if (!clickedIc) return;
+  
+//   galleryBackBtn.style.display = "flex";
+  
+//   const productId = clickedIc.getAttribute('data-ic');
+//   const product = getProductById(productId);
+  
+//   if (product) {
+//       showProductGallery(product);
+//   }
+// });
+
+// function getProductById(id) {
+//   for (const brand in icBrands) {
+//       const product = icBrands[brand].products?.find(p => p.id === id);
+//       if (product) return product;
+//   }
+//   return null;
+// }
+
+// function showProductGallery(product) {
+//   iceCreamMenu.style.display = 'none';
+  
+//   galleryTrack.innerHTML = '';
+//   galleryDots.innerHTML = '';
+  
+//   product.viewImg.forEach((imgSrc, index) => {
+//       const img = document.createElement('img');
+//       img.src = imgSrc;
+//       img.className = 'gallery-img';
+//       galleryTrack.appendChild(img);
+      
+//       const dot = document.createElement('span');
+//       dot.className = 'dot' + (index === 0 ? ' active' : '');
+//       galleryDots.appendChild(dot);
+//   });
+  
+//   initSwipe();
+//   iceCreamInfo.style.display = 'block';
+// }
+
+// function initSwipe() {
+//   let startX, moveX;
+//   const images = document.querySelectorAll('.gallery-img');
+  
+//   galleryTrack.addEventListener('touchstart', (e) => {
+//       startX = e.touches[0].clientX;
+//   });
+  
+//   galleryTrack.addEventListener('touchmove', (e) => {
+//       if (!startX) return;
+//       moveX = e.touches[0].clientX;
+//       const diffX = moveX - startX;
+//       galleryTrack.style.transition = 'none';
+//       galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
+//   });
+  
+//   galleryTrack.addEventListener('touchend', () => {
+//       if (!moveX) return;
+//       const diffX = moveX - startX;
+      
+//       if (Math.abs(diffX) > 50) {
+//           if (diffX > 0 && currentImageIndex > 0) {
+//               currentImageIndex--;
+//           } else if (diffX < 0 && currentImageIndex < images.length - 1) {
+//               currentImageIndex++;
+//           }
+//       }
+      
+//       galleryTrack.style.transition = 'transform 0.4s ease-out';
+//       galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+//       updateDots();
+//       startX = null;
+//       moveX = null;
+//   });
+// }
+
+// function updateDots() {
+//   const dots = document.querySelectorAll('.dot');
+//   dots.forEach((dot, index) => {
+//       dot.classList.toggle('active', index === currentImageIndex);
+//   });
+// }
+
+// galleryBackBtn.addEventListener('click', () => {
+//   iceCreamInfo.style.display = 'none';
+//   iceCreamMenu.style.display = 'block';
+// });
+
+
+
+
+
 const iceCreamInfo = document.querySelector('.iceCream-info');
 const galleryBackBtn = document.querySelector('.gallery-back-btn');
 const galleryTrack = document.querySelector('.gallery-track');
@@ -303,92 +405,107 @@ const galleryDots = document.querySelector('.gallery-dots');
 
 let currentImageIndex = 0;
 
+// Event listener when a product is clicked
 iceCreamContainer.addEventListener('click', event => {
   const clickedIc = event.target.closest('.ic-box');
   if (!clickedIc) return;
-  
+
   galleryBackBtn.style.display = "flex";
-  
+
   const productId = clickedIc.getAttribute('data-ic');
   const product = getProductById(productId);
-  
+
   if (product) {
-      showProductGallery(product);
+    showProductGallery(product);
   }
 });
 
+// Function to get product by ID
 function getProductById(id) {
   for (const brand in icBrands) {
-      const product = icBrands[brand].products?.find(p => p.id === id);
-      if (product) return product;
+    const product = icBrands[brand].products?.find(p => p.id === id);
+    if (product) return product;
   }
   return null;
 }
 
+// Function to show the product gallery
 function showProductGallery(product) {
   iceCreamMenu.style.display = 'none';
-  
+
+  // Reset current image index to 0 each time the gallery is opened
+  currentImageIndex = 0;
+
+  // Clear previous images and dots
   galleryTrack.innerHTML = '';
   galleryDots.innerHTML = '';
-  
+
+  // Load images from the product's viewImg array
   product.viewImg.forEach((imgSrc, index) => {
-      const img = document.createElement('img');
-      img.src = imgSrc;
-      img.className = 'gallery-img';
-      galleryTrack.appendChild(img);
-      
-      const dot = document.createElement('span');
-      dot.className = 'dot' + (index === 0 ? ' active' : '');
-      galleryDots.appendChild(dot);
+    const img = document.createElement('img');
+    img.src = imgSrc;
+    img.className = 'gallery-img';
+    galleryTrack.appendChild(img);
+
+    // Create a dot for each image
+    const dot = document.createElement('span');
+    dot.className = 'dot' + (index === 0 ? ' active' : '');
+    galleryDots.appendChild(dot);
   });
-  
+
+  // Initialize swipe functionality for the gallery
   initSwipe();
+
+  // Show the gallery view
   iceCreamInfo.style.display = 'block';
 }
 
+// Swipe functionality
 function initSwipe() {
   let startX, moveX;
   const images = document.querySelectorAll('.gallery-img');
-  
+
   galleryTrack.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].clientX;
+    startX = e.touches[0].clientX;
   });
-  
+
   galleryTrack.addEventListener('touchmove', (e) => {
-      if (!startX) return;
-      moveX = e.touches[0].clientX;
-      const diffX = moveX - startX;
-      galleryTrack.style.transition = 'none';
-      galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
+    if (!startX) return;
+    moveX = e.touches[0].clientX;
+    const diffX = moveX - startX;
+    galleryTrack.style.transition = 'none';
+    galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
   });
-  
+
   galleryTrack.addEventListener('touchend', () => {
-      if (!moveX) return;
-      const diffX = moveX - startX;
-      
-      if (Math.abs(diffX) > 50) {
-          if (diffX > 0 && currentImageIndex > 0) {
-              currentImageIndex--;
-          } else if (diffX < 0 && currentImageIndex < images.length - 1) {
-              currentImageIndex++;
-          }
+    if (!moveX) return;
+    const diffX = moveX - startX;
+
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0 && currentImageIndex > 0) {
+        currentImageIndex--;
+      } else if (diffX < 0 && currentImageIndex < images.length - 1) {
+        currentImageIndex++;
       }
-      
-      galleryTrack.style.transition = 'transform 0.4s ease-out';
-      galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
-      updateDots();
-      startX = null;
-      moveX = null;
+    }
+
+    galleryTrack.style.transition = 'transform 0.4s ease-out';
+    galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+    updateDots();
+    startX = null;
+    moveX = null;
   });
 }
 
+// Update the active dot based on the current image index
 function updateDots() {
   const dots = document.querySelectorAll('.dot');
   dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentImageIndex);
+    dot.classList.toggle('active', index === currentImageIndex);
   });
 }
 
+// Back button to return to the previous screen
 galleryBackBtn.addEventListener('click', () => {
   iceCreamInfo.style.display = 'none';
   iceCreamMenu.style.display = 'block';
