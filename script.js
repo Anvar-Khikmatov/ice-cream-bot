@@ -1,3 +1,17 @@
+// Initialize Telegram WebApp
+const tg = window.Telegram.WebApp;
+
+// Big red menu button (always visible)
+tg.MainButton.setText("🍦 OPEN MENU"); 
+tg.MainButton.onClick(() => {
+  tg.openLink("https://arzonbozor.vercel.app"); 
+});
+tg.MainButton.show();
+
+// Expand the app to fullscreen (optional)
+tg.expand();
+
+
 // const icBrands = {
 //     dairy: {
 //         title: "DAIRY CLASSIC",
