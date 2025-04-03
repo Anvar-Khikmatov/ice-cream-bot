@@ -1,15 +1,23 @@
-// Initialize Telegram WebApp
-const tg = window.Telegram.WebApp;
-
-// Big red menu button (always visible)
-tg.MainButton.setText("🍦 MENU"); 
-tg.MainButton.onClick(() => {
-  tg.openLink("https://arzonbozor-muzqaymoq.vercel.app"); 
+// Add this at the VERY TOP of script.js
+document.addEventListener('DOMContentLoaded', function() {
+  if (window.Telegram && window.Telegram.WebApp) {
+    const tg = window.Telegram.WebApp;
+    
+    // Enable full mobile view
+    tg.expand();
+    
+    // Set up menu button
+    tg.MainButton.setText("🍦 MENU");
+    tg.MainButton.onClick(() => {
+      tg.openLink("https://arzonbozor-muzqaymoq.vercel.app"); 
+    });
+    tg.MainButton.show();
+    
+    console.log("Telegram WebApp initialized!"); // Debug check
+  } else {
+    console.error("Telegram WebApp not detected!");
+  }
 });
-tg.MainButton.show();
-
-// Expand the app to fullscreen (optional)
-tg.expand();
 
 
 // const icBrands = {
@@ -307,106 +315,6 @@ backButton.addEventListener('click', () => {
 });
 
 
-
-
-
-// const iceCreamInfo = document.querySelector('.iceCream-info');
-// const galleryBackBtn = document.querySelector('.gallery-back-btn');
-// const galleryTrack = document.querySelector('.gallery-track');
-// const galleryDots = document.querySelector('.gallery-dots');
-
-// let currentImageIndex = 0;
-
-// iceCreamContainer.addEventListener('click', event => {
-//   const clickedIc = event.target.closest('.ic-box');
-//   if (!clickedIc) return;
-  
-//   galleryBackBtn.style.display = "flex";
-  
-//   const productId = clickedIc.getAttribute('data-ic');
-//   const product = getProductById(productId);
-  
-//   if (product) {
-//       showProductGallery(product);
-//   }
-// });
-
-// function getProductById(id) {
-//   for (const brand in icBrands) {
-//       const product = icBrands[brand].products?.find(p => p.id === id);
-//       if (product) return product;
-//   }
-//   return null;
-// }
-
-// function showProductGallery(product) {
-//   iceCreamMenu.style.display = 'none';
-  
-//   galleryTrack.innerHTML = '';
-//   galleryDots.innerHTML = '';
-  
-//   product.viewImg.forEach((imgSrc, index) => {
-//       const img = document.createElement('img');
-//       img.src = imgSrc;
-//       img.className = 'gallery-img';
-//       galleryTrack.appendChild(img);
-      
-//       const dot = document.createElement('span');
-//       dot.className = 'dot' + (index === 0 ? ' active' : '');
-//       galleryDots.appendChild(dot);
-//   });
-  
-//   initSwipe();
-//   iceCreamInfo.style.display = 'block';
-// }
-
-// function initSwipe() {
-//   let startX, moveX;
-//   const images = document.querySelectorAll('.gallery-img');
-  
-//   galleryTrack.addEventListener('touchstart', (e) => {
-//       startX = e.touches[0].clientX;
-//   });
-  
-//   galleryTrack.addEventListener('touchmove', (e) => {
-//       if (!startX) return;
-//       moveX = e.touches[0].clientX;
-//       const diffX = moveX - startX;
-//       galleryTrack.style.transition = 'none';
-//       galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
-//   });
-  
-//   galleryTrack.addEventListener('touchend', () => {
-//       if (!moveX) return;
-//       const diffX = moveX - startX;
-      
-//       if (Math.abs(diffX) > 50) {
-//           if (diffX > 0 && currentImageIndex > 0) {
-//               currentImageIndex--;
-//           } else if (diffX < 0 && currentImageIndex < images.length - 1) {
-//               currentImageIndex++;
-//           }
-//       }
-      
-//       galleryTrack.style.transition = 'transform 0.4s ease-out';
-//       galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
-//       updateDots();
-//       startX = null;
-//       moveX = null;
-//   });
-// }
-
-// function updateDots() {
-//   const dots = document.querySelectorAll('.dot');
-//   dots.forEach((dot, index) => {
-//       dot.classList.toggle('active', index === currentImageIndex);
-//   });
-// }
-
-// galleryBackBtn.addEventListener('click', () => {
-//   iceCreamInfo.style.display = 'none';
-//   iceCreamMenu.style.display = 'block';
-// });
 
 
 
