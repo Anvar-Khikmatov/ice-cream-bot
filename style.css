@@ -21,7 +21,7 @@ body {
     width: 100%;
     max-width: 410px;  
     height: 700px;  
-    border-radius: 10px;
+    /* border-radius: 10px; */
     background: white;
     box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.349);
     overflow: hidden;
@@ -88,9 +88,12 @@ body {
 .content {
     display: flex;
     flex-direction: row;
+    max-height: 330px;
     column-gap: 20px;
     row-gap: 20px;
     margin-top: 10px;
+    border-bottom: 1px solid rgb(236, 234, 234);
+    border-radius: 7px;
     flex-wrap: wrap;
     justify-content: space-evenly;
     padding: 20px;
@@ -98,7 +101,7 @@ body {
 }
 
 .content::-webkit-scrollbar {
-    display: none;
+    display: block;
 }
 
 
@@ -139,15 +142,19 @@ body {
     bottom: 0;
     left: 0;
     width: 100%;
-    height: 40px;
+    height: 60px;
     background-color: #3498db;
     color: white;
     font-size: 20px;
     display: flex;
+    flex: 1;
+    z-index: 10;
+    border-radius: 7px 7px 0px 0px;
+    box-shadow: 0 0 5px 1px rgb(54, 192, 247);
+    border-top: 1px solid rgb(26, 171, 233);
     justify-content: center;
     align-items: center;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-
 }
 
 .contacts:hover{
