@@ -49,9 +49,10 @@ const iceCreamContainer = document.querySelector(".ic-content");
 
 brandMenu.addEventListener('click', event => {
   const clickedBrand = event.target.closest('.brands');
+  
   if (!clickedBrand) return;
   const brandName = clickedBrand.getAttribute('data-brand');
-
+  
   homepage.style.display = "none";
   iceCreamMenu.style.display = "block";
   titleName.textContent = icBrands[brandName]?.title || "Unknown Brand";
@@ -110,17 +111,17 @@ iceCreamContainer.addEventListener('click', event => {
   galleryBackBtn.style.display = "flex";
 
   const productId = clickedIc.getAttribute('data-ic');
-  const product = getProductById(productId);
+  const productView = getProductById(productId);
 
-  if (product) {
-    showProductGallery(product);
+  if (productView) {
+    showProductGallery(productView);
   }
 });
 
 // Function to get product by ID
-function getProductById(id) {
+function getProductById(idPar) {
   for (const brand in icBrands) {
-    const product = icBrands[brand].products?.find(p => p.id === id);
+    const product = icBrands[brand].products?.find(p => p.id === idPar);
     if (product) return product;
   }
   return null;
@@ -150,10 +151,17 @@ function showProductGallery(product) {
     galleryDots.appendChild(dot);
   });
 
+
+  // Reset gallery position immediately
+  galleryTrack.style.transition = 'none';
+  galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+  setTimeout(() => {
+    galleryTrack.style.transition = '';
+  }, 50);
+
   // Initialize swipe functionality for the gallery
   initSwipe();
 
-  // Show the gallery view
   iceCreamInfo.style.display = 'block';
 }
 
@@ -164,19 +172,22 @@ function initSwipe() {
 
   galleryTrack.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
+    
   });
 
   galleryTrack.addEventListener('touchmove', (e) => {
     if (!startX) return;
     moveX = e.touches[0].clientX;
     const diffX = moveX - startX;
-    galleryTrack.style.transition = 'none';
+    
+    galleryTrack.style.transition = 'none'
     galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
   });
 
   galleryTrack.addEventListener('touchend', () => {
     if (!moveX) return;
     const diffX = moveX - startX;
+    
 
     if (Math.abs(diffX) > 50) {
       if (diffX > 0 && currentImageIndex > 0) {
@@ -194,6 +205,7 @@ function initSwipe() {
   });
 }
 
+
 // Update the active dot based on the current image index
 function updateDots() {
   const dots = document.querySelectorAll('.dot');
@@ -202,8 +214,11 @@ function updateDots() {
   });
 }
 
+
 // Back button to return to the previous screen
 galleryBackBtn.addEventListener('click', () => {
   iceCreamInfo.style.display = 'none';
   iceCreamMenu.style.display = 'block';
 });
+
+
