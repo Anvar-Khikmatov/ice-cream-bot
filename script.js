@@ -101,6 +101,13 @@ const galleryBackBtn = document.querySelector('.gallery-back-btn');
 const galleryTrack = document.querySelector('.gallery-track');
 const galleryDots = document.querySelector('.gallery-dots');
 
+
+galleryBackBtn.addEventListener('click', () => {
+  iceCreamInfo.style.display = 'none';
+  iceCreamMenu.style.display = 'block';
+});
+
+
 let currentImageIndex = 0;
 
 // Event listener when a product is clicked
@@ -109,6 +116,8 @@ iceCreamContainer.addEventListener('click', event => {
   if (!clickedIc) return;
 
   galleryBackBtn.style.display = "flex";
+  iceCreamMenu.style.display = 'none';
+  iceCreamInfo.style.display = "block";
 
   const productId = clickedIc.getAttribute('data-ic');
   const productView = getProductById(productId);
@@ -130,7 +139,7 @@ function getProductById(idPar) {
 
 // Function to show the product gallery
 function showProductGallery(product) {
-  iceCreamMenu.style.display = 'none';
+  // iceCreamMenu.style.display = 'none';
 
   // Reset current image index to 0 each time the gallery is opened
   currentImageIndex = 0;
@@ -160,10 +169,10 @@ function showProductGallery(product) {
     galleryTrack.style.transition = '';
   }, 50);
 
-  // Initialize swipe functionality for the gallery
+  
   initSwipe();
 
-  iceCreamInfo.style.display = 'block';
+  // iceCreamInfo.style.display = 'block';
 }
 
 // Swipe functionality
@@ -216,12 +225,6 @@ function updateDots() {
 }
 
 
-// Back button to return to the previous screen
-galleryBackBtn.addEventListener('click', () => {
-  iceCreamInfo.style.display = 'none';
-  iceCreamMenu.style.display = 'block';
-});
-
 
 
 const productDetails = document.body.querySelector('.product-details');
@@ -232,12 +235,8 @@ const productBoxCount = document.body.querySelector('.product-box-count');
 const boxNumber = document.body.querySelector('.box-number');
 
 
-
-
 function showProductDetails(productIdObject){
 
-  // iceCreamInfo.style.display = "block";
-  // productDetails.innerHTML = "";
   productPrice.textContent = productIdObject.price;
   productNames.textContent = productIdObject.galleryName;
   productGram.textContent = productIdObject.gram;

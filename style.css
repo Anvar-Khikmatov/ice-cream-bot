@@ -88,7 +88,7 @@ body {
 .content {
     display: flex;
     flex-direction: row;
-    height: 43%;
+    height: 44%;
     /* height: 380px; */
     column-gap: 9%;
     row-gap: 3%;
@@ -133,6 +133,8 @@ body {
     width: 100%;
     height: 60%;
     border-radius: 15px;
+    border: 2px solid rgb(219, 219, 217);
+    box-shadow: 0 0 3px 1px rgb(245, 244, 244);
 }
 
 .brands-name{
@@ -154,6 +156,7 @@ body {
     width: 100%;
     height: 7%;
     background-color: #3498db;
+    /* background-color: #6a6b6b; */
     color: white;
     font-size: 20px;
     display: flex;
@@ -443,7 +446,7 @@ body {
 
 .product-gram{
     color: rgb(117, 115, 115);
-    font-size: 1.1em;
+    font-size: 1em;
     /* font-style: italic; */
     font-family: 'Inter', sans-serif;
     font-variation-settings: "wght" 500;
