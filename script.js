@@ -27,7 +27,7 @@ const icBrands = {
   dairy: {
       title: "DAIRY CLASSIC",
       products: [  
-          { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.png", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega" },
+          { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.png", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "50", galleryName: "Classic Vega Plombir"},
           { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.png", viewImg: ["img/view/supchock1.png", "img/view/supchock2.png"], id: "superChock" },
           { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.png", viewImg: [], id: "sandwich" },
           { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.png", viewImg: [], id: "bricket" },
@@ -115,6 +115,7 @@ iceCreamContainer.addEventListener('click', event => {
 
   if (productView) {
     showProductGallery(productView);
+    showProductDetails(productView);
   }
 });
 
@@ -222,3 +223,24 @@ galleryBackBtn.addEventListener('click', () => {
 });
 
 
+
+const productDetails = document.body.querySelector('.product-details');
+const productPrice = document.body.querySelector('.product-price');
+const productNames = document.body.querySelector('.product-names');
+const productGram = document.body.querySelector('.product-gram');
+const productBoxCount = document.body.querySelector('.product-box-count');
+const boxNumber = document.body.querySelector('.box-number');
+
+
+
+
+function showProductDetails(productIdObject){
+
+  // iceCreamInfo.style.display = "block";
+  // productDetails.innerHTML = "";
+  productPrice.textContent = productIdObject.price;
+  productNames.textContent = productIdObject.galleryName;
+  productGram.textContent = productIdObject.gram;
+  boxNumber.textContent = productIdObject.boxNum;
+  
+}
