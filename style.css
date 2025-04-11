@@ -36,7 +36,8 @@ body {
                                                  /* Brands menu */
 
 .homepage{
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 
@@ -88,7 +89,7 @@ body {
 .content {
     display: flex;
     flex-direction: row;
-    height: 60%;
+    height: 63%;
     /* height: 380px; */
     column-gap: 9%;
     row-gap: 1%;
