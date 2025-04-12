@@ -28,9 +28,9 @@ const icBrands = {
       title: "DAIRY CLASSIC",
       products: [  
           { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.png", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "50", galleryName: "Classic Vega Plombir"},
-          { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.png", viewImg: ["img/view/supchock1.png", "img/view/supchock2.png"], id: "superChock" },
-          { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.png", viewImg: [], id: "sandwich" },
-          { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.png", viewImg: [], id: "bricket" },
+          { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.png", viewImg: ["img/view/superchock1.png", "img/view/superchock2.png"], id: "superChock" },
+          { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.png", viewImg: ["img/view/sandwich1.png", "img/view/sandwich2.jpg"], id: "sandwich" },
+          { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.png", viewImg: ["img/view/bricket1.png", "img/view/bricket2.png"], id: "bricket" },
           { name: "Konus Super Twist", gram: "70gr", price: "4 500 UZS", img: "img/konusTwist.png", viewImg: [], id: "konusTwist" },
           { name: "Konus Shokoladli", gram: "70gr", price: "4 500 UZS", img: "img/konusChock.png", viewImg: [], id: "konusChock"  }
       ]

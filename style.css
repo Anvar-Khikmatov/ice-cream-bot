@@ -89,7 +89,7 @@ body {
 .content {
     display: flex;
     flex-direction: row;
-    height: 63%;
+    height: 55%;
     /* height: 380px; */
     column-gap: 9%;
     row-gap: 1%;
