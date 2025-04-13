@@ -197,7 +197,8 @@ function initSwipe() {
   });
 
   galleryTrack.addEventListener('touchend', () => {
-    if (!moveX) return;
+    // if (!moveX) return;
+    if (!moveX || images.length <= 1) return;
     const diffX = moveX - startX;
     
 
