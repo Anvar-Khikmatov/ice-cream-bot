@@ -89,8 +89,8 @@ body {
 .content {
     display: flex;
     flex-direction: row;
-    height: 55%;
-    /* height: 380px; */
+    /* height: 56%; */
+    height: 53vh;
     column-gap: 9%;
     row-gap: 1%;
     margin-top: 8px;
@@ -110,7 +110,7 @@ body {
 .content::after {
     content: "";
     display: block;
-    height: 20px; /* Creates extra scrollable space */
+    height: 10px; 
     width: 100%;
 }
 
@@ -234,7 +234,9 @@ body {
 
 .ic-content{
     display: flex;
-    flex: 1;
+    height: 113vh;
+    border-bottom: 1px solid rgb(236, 234, 234);
+    border-radius: 7px;
     flex-wrap: wrap;
     flex-direction: row;
     overflow-y: scroll;
@@ -253,7 +255,7 @@ body {
 .ic-content::after {
     content: "";
     display: block;
-    height: 50px; /* Creates extra scrollable space */
+    height: 30px; /* Creates extra scrollable space */
     width: 100%;
 }
 
@@ -279,11 +281,12 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    
+    overflow: hidden;  
 }
 .ic-img img{
     width: 90%;
     height: 90%;
+    object-fit: cover; 
     box-shadow: 0 0 5px 2px rgba(210, 210, 210, 0.865);
     border-radius: 5px;
 }

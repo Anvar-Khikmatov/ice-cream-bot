@@ -27,12 +27,14 @@ const icBrands = {
   dairy: {
       title: "DAIRY CLASSIC",
       products: [  
-          { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.png", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "50", galleryName: "Classic Vega Plombir"},
-          { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.png", viewImg: ["img/view/superchock1.png", "img/view/superchock2.png"], id: "superChock" },
-          { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.png", viewImg: ["img/view/sandwich1.png", "img/view/sandwich2.jpg"], id: "sandwich" },
-          { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.png", viewImg: ["img/view/bricket1.png", "img/view/bricket2.png"], id: "bricket" },
-          { name: "Konus Super Twist", gram: "70gr", price: "4 500 UZS", img: "img/konusTwist.png", viewImg: [], id: "konusTwist" },
-          { name: "Konus Shokoladli", gram: "70gr", price: "4 500 UZS", img: "img/konusChock.png", viewImg: [], id: "konusChock"  }
+          { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.JPG", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "50", galleryName: "Classic Vega Plombir"},
+          { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.jpg", viewImg: ["img/view/superchock1.png", "img/view/superchock2.png"], id: "superChock" },
+          { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.jpg", viewImg: ["img/view/sandwich1.jpg", "img/view/sandwich2.jpg"], id: "sandwich" },
+          { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.jpg", viewImg: ["img/view/bricket1.png", "img/view/bricket2.png"], id: "bricket" },
+          { name: "Konus Super Twist", gram: "70gr", price: "4 500 UZS", img: "img/konusTwist.jpg", viewImg: ["img/view/konusTwist1.WEBP", "img/view/konusTwist2.WEBP"], id: "konusTwist" },
+          { name: "Konus Shokoladli", gram: "70gr", price: "4 500 UZS", img: "img/konusChock.jpg", viewImg: ["img/view/konusChoco1.WEBP", "img/view/konusChoco2.WEBP"], id: "konusChock"  },
+          { name: "New Classic", gram: "-gr", price: "- UZS", img: "img/classic.jpg", viewImg: ["img/view/classic1.WEBP", "img/view/classic2.WEBP"], id: "classic"  },
+          { name: "Кофе Мокко", gram: "-gr", price: "- UZS", img: "img/kofeMokko.jpg", viewImg: ["img/view/kofeMokko1.WEBP"], id: "kofeMokko"  },
       ]
   },
   icegold: {
@@ -74,7 +76,7 @@ brandMenu.addEventListener('click', event => {
   
       icBox.innerHTML = `
           <div class="ic-img">
-              <img src="${product.img}" alt="${product.name}">
+              <img src="${product.img}" width="500" height="500" loading="lazy"  alt="${product.name}">
           </div>
           <div class="ic-details">
               <div class="ic-name">${product.name} <span class="ic-gram">${product.gram}</span></div>
