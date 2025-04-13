@@ -27,14 +27,18 @@ const icBrands = {
   dairy: {
       title: "DAIRY CLASSIC",
       products: [  
-          { name: "Vega", gram: "102gr", price: "6 000 UZS", img: "img/vega.jpg", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "50", galleryName: "Classic Vega Plombir"},
-          { name: "SuperChock", gram: "102gr", price: "5 500 UZS", img: "img/superChock.jpg", viewImg: ["img/view/superchock1.png", "img/view/superchock2.png"], id: "superChock" },
-          { name: "Sandwich", gram: "106gr", price: "8 500 UZS", img: "img/sandwich.jpg", viewImg: ["img/view/sandwich1.jpg", "img/view/sandwich2.jpg"], id: "sandwich" },
-          { name: "Bricket", gram: "140gr", price: "13 000 UZS", img: "img/bricket.jpg", viewImg: ["img/view/bricket1.png", "img/view/bricket2.png"], id: "bricket" },
-          { name: "Konus Super Twist", gram: "70gr", price: "4 500 UZS", img: "img/konusTwist.jpg", viewImg: ["img/view/konusTwist1.webp", "img/view/konusTwist2.webp"], id: "konusTwist" },
-          { name: "Konus Shokoladli", gram: "70gr", price: "4 500 UZS", img: "img/konusChock.jpg", viewImg: ["img/view/konusChoco1.webp", "img/view/konusChoco2.webp"], id: "konusChock"  },
-          { name: "New Classic", gram: "-gr", price: "- UZS", img: "img/classic.jpg", viewImg: ["img/view/classic1.webp", "img/view/classic2.webp"], id: "classic"  },
-          { name: "Кофе Мокко", gram: "-gr", price: "- UZS", img: "img/kofeMokko.jpg", viewImg: ["img/view/kofeMokko1.webp"], id: "kofeMokko"  },
+          { name: "Vega", gram: "102gr", price: "6 300 UZS", img: "img/vega.jpg", viewImg: ["img/view/vega1.png", "img/view/vega2.png"], id: "vega", boxNum: "40", galleryName: "Classic Vega Plombir"},
+          { name: "SuperChoc", gram: "102gr", price: "6 130 UZS", img: "img/superChock.jpg", viewImg: ["img/view/superchock1.png", "img/view/superchock2.png"], id: "superChock", boxNum: "40", galleryName: "Super Choc" },
+          { name: "Sandwich", gram: "106gr", price: "9 200 UZS", img: "img/sandwich.jpg", viewImg: ["img/view/sandwich1.jpg", "img/view/sandwich2.webp"], id: "sandwich", boxNum: "40", galleryName: "Classic Sandwich" },
+          { name: "Bricket", gram: "140gr", price: "14 700 UZS", img: "img/bricket.jpg", viewImg: ["img/view/bricket1.png", "img/view/bricket2.png"], id: "bricket", boxNum: "40", galleryName: "Super Bricket" },
+          { name: "Konus Super Twist", gram: "70gr", price: "5 000 UZS", img: "img/konusTwist.jpg", viewImg: ["img/view/konusTwist1.webp", "img/view/konusTwist2.webp"], id: "konusTwist", boxNum: "45", galleryName: "Super Twist" },
+          { name: "Konus Shokoladli", gram: "70gr", price: "5 000 UZS", img: "img/konusChock.jpg", viewImg: ["img/view/konusChoco1.webp", "img/view/konusChoco2.webp"], id: "konusChock", boxNum: "45", galleryName: "Choco Boom"  },
+          { name: "New Classic", gram: "102gr", price: "5 950 UZS", img: "img/classic.jpg", viewImg: ["img/view/classic1.webp", "img/view/classic2.webp"], id: "classic", boxNum: "40", galleryName: "New Classic Plombir Muzqaymoq"  },
+          { name: "Кофе Мокко", gram: "69gr", price: "3 600 UZS", img: "img/kofeMokko.jpg", viewImg: ["img/view/kofeMokko1.webp"], id: "kofeMokko", boxNum: "60", galleryName: "Кофе Мокко"  },
+          { name: "Звездочет", gram: "69gr", price: "3 280 UZS", img: "img/zvezdachet.jpg", viewImg: ["img/view/zvezdachet1.webp"], id: "zvezdachet", boxNum: "60", galleryName: "Звездочет- shokoladli eskimo plombir" },
+          { name: "Tiger King", gram: "90gr", price: "3 500 UZS", img: "img/tigerKing.jpg", viewImg: ["img/view/tigerKing1.webp"], id: "tigerKing", boxNum: "60", galleryName: "Kivi va nok ta'mli muz" },
+          { name: "Royal Fruits", gram: "90gr", price: "3 500 UZS", img: "img/royalFruits.jpg", viewImg: ["img/view/royalFruits1.jpg"], id: "royalFruits", boxNum: "60", galleryName: "Ananas va Apelsin ta'mli muz" },
+          { name: "Creamica", gram: "80gr", price: "5 500 UZS", img: "img/creamica.jpg", viewImg: ["img/view/creamica1.webp", "img/view/creamica2.webp"], id: "creamica", boxNum: "36", galleryName: "Shokolad qoplamali va yong'oqli plombir" },
       ]
   },
   icegold: {
