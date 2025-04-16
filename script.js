@@ -177,57 +177,95 @@ function showProductGallery(product) {
   setTimeout(() => {
     galleryTrack.style.transition = '';
   }, 50);
-
   
   initSwipe();
-
-  // iceCreamInfo.style.display = 'block';
 }
 
+
 // Swipe functionality
+// function initSwipe() {
+//   const images = document.querySelectorAll('.gallery-img');
+  
+//   if (images.length <= 1) return;
+//   let startX, moveX;
+  
+
+//   galleryTrack.addEventListener('touchstart', (e) => {
+//     if (images.length <= 1) return;
+//     startX = e.touches[0].clientX;
+//   });
+
+//   galleryTrack.addEventListener('touchmove', (e) => {
+//     if (!startX || images.length <= 1) return;
+//     moveX = e.touches[0].clientX;
+//     const diffX = moveX - startX;
+    
+//     galleryTrack.style.transition = 'none'
+//     galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
+//   });
+
+//   galleryTrack.addEventListener('touchend', () => {
+//     if (images.length <= 1 || !moveX) return;
+//     const diffX = moveX - startX;
+    
+
+//     if (Math.abs(diffX) > 50) {
+//       if (diffX > 0 && currentImageIndex > 0) {
+//         currentImageIndex--;
+//       } else if (diffX < 0 && currentImageIndex < images.length - 1) {
+//         currentImageIndex++;
+//       }
+//     }
+
+//     galleryTrack.style.transition = 'transform 0.4s ease-out';
+//     galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+//     updateDots();
+//     startX = null;
+//     moveX = null;
+//   });
+// }
+
+
+
+// Store references to the listeners for cleanup
+let currentTouchStart, currentTouchMove, currentTouchEnd;
+
 function initSwipe() {
   const images = document.querySelectorAll('.gallery-img');
   
-  
-  if (images.length <= 1) {
-    // Remove touch event listeners if they exist
-    galleryTrack.ontouchstart = null;
-    galleryTrack.ontouchmove = null;
-    galleryTrack.ontouchend = null;
-    
-    // Hide dots if they exist
-    const dotsContainer = document.querySelector('.gallery-dots');
-    // if (dotsContainer) dotsContainer.style.display = 'none';
-    
-    // Reset any transforms
-    galleryTrack.style.transform = 'translateX(0)';
-    return;
+  // ===== 1. CLEAN UP OLD LISTENERS =====
+  if (currentTouchStart) {
+    galleryTrack.removeEventListener('touchstart', currentTouchStart);
+    galleryTrack.removeEventListener('touchmove', currentTouchMove);
+    galleryTrack.removeEventListener('touchend', currentTouchEnd);
   }
-  
-  
-  
+
+  // ===== 2. DISABLE SWIPE FOR SINGLE IMAGE =====
+  if (images.length <= 1) {
+    // Reset position (prevent drift)
+    galleryTrack.style.transform = 'translateX(0)';
+    galleryTrack.style.transition = 'none';
+  }
+
+  // ===== 3. ENABLE SWIPE FOR MULTIPLE IMAGES =====
   let startX, moveX;
   
-
-  galleryTrack.addEventListener('touchstart', (e) => {
+  // Define listeners (for later cleanup)
+  currentTouchStart = (e) => {
     startX = e.touches[0].clientX;
-    
-  });
-
-  galleryTrack.addEventListener('touchmove', (e) => {
-    if (!startX || images.length <= 1) return;
+  };
+  
+  currentTouchMove = (e) => {
+    if (!startX) return;
     moveX = e.touches[0].clientX;
     const diffX = moveX - startX;
-    
-    galleryTrack.style.transition = 'none'
-    galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
-  });
-
-  galleryTrack.addEventListener('touchend', () => {
-    if (!moveX || images.length <= 1) return;
+    galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px)`;
+  };
+  
+  currentTouchEnd = () => {
+    if (!moveX) return;
     const diffX = moveX - startX;
     
-
     if (Math.abs(diffX) > 50) {
       if (diffX > 0 && currentImageIndex > 0) {
         currentImageIndex--;
@@ -235,14 +273,21 @@ function initSwipe() {
         currentImageIndex++;
       }
     }
-
+    
     galleryTrack.style.transition = 'transform 0.4s ease-out';
     galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
     updateDots();
     startX = null;
     moveX = null;
-  });
+  };
+
+  // Attach new listeners
+  galleryTrack.addEventListener('touchstart', currentTouchStart);
+  galleryTrack.addEventListener('touchmove', currentTouchMove);
+  galleryTrack.addEventListener('touchend', currentTouchEnd);
 }
+
+
 
 
 // Update the active dot based on the current image index
