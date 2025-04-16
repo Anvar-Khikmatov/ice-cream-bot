@@ -445,7 +445,8 @@ body {
     font-family: 'Inter', sans-serif;
     font-variation-settings: "wght" 600;
     font-size: 1.1em;
-    margin-top: 2%;
+    margin-top: 3%;
+    line-height: 1.5em;
 }
 
 .product-gram{
@@ -454,7 +455,7 @@ body {
     /* font-style: italic; */
     font-family: 'Inter', sans-serif;
     font-variation-settings: "wght" 500;
-    margin-top: 2%;
+    margin-top: 3%;
 }
 
 .product-box-count{

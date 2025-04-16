@@ -42,7 +42,10 @@ const icBrands = {
       ]
   },
   icegold: {
-      title: "Ice & GolD"
+      title: "Ice & GolD",
+      products: [
+          { name: "Настоящий Пломбир", gram: "100gr", price: "- UZS", img: "img/nastPlombir.jpg", viewImg: ["img/view/nastPlombir1.jpg", "img/view/nastPlombir2.jpg"], id: "nastPlombir", boxNum: "40", galleryName: "Настоящий Пломбир - bolalikdagi haqiqiy plombir lazzatini hadya etadi."},
+      ]
   }
 };
 
@@ -183,8 +186,28 @@ function showProductGallery(product) {
 
 // Swipe functionality
 function initSwipe() {
-  let startX, moveX;
   const images = document.querySelectorAll('.gallery-img');
+  
+  
+  if (images.length <= 1) {
+    // Remove touch event listeners if they exist
+    galleryTrack.ontouchstart = null;
+    galleryTrack.ontouchmove = null;
+    galleryTrack.ontouchend = null;
+    
+    // Hide dots if they exist
+    const dotsContainer = document.querySelector('.gallery-dots');
+    // if (dotsContainer) dotsContainer.style.display = 'none';
+    
+    // Reset any transforms
+    galleryTrack.style.transform = 'translateX(0)';
+    return;
+  }
+  
+  
+  
+  let startX, moveX;
+  
 
   galleryTrack.addEventListener('touchstart', (e) => {
     startX = e.touches[0].clientX;
@@ -192,7 +215,7 @@ function initSwipe() {
   });
 
   galleryTrack.addEventListener('touchmove', (e) => {
-    if (!startX) return;
+    if (!startX || images.length <= 1) return;
     moveX = e.touches[0].clientX;
     const diffX = moveX - startX;
     
@@ -201,7 +224,6 @@ function initSwipe() {
   });
 
   galleryTrack.addEventListener('touchend', () => {
-    // if (!moveX) return;
     if (!moveX || images.length <= 1) return;
     const diffX = moveX - startX;
     
