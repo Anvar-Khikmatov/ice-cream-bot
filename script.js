@@ -44,7 +44,13 @@ const icBrands = {
   icegold: {
       title: "Ice & GolD",
       products: [
-          { name: "Настоящий Пломбир", gram: "100gr", price: "- UZS", img: "img/nastPlombir.jpg", viewImg: ["img/view/nastPlombir1.jpg", "img/view/nastPlombir2.jpg"], id: "nastPlombir", boxNum: "40", galleryName: "Настоящий Пломбир - bolalikdagi haqiqiy plombir lazzatini hadya etadi."},
+          { name: "Настоящий Пломбир", gram: "100gr", price: "- UZS", img: "img/nastPlombir.jpg", viewImg: ["img/view/nastPlombir1.webp", "img/view/nastPlombir2.jpg"], id: "nastPlombir", boxNum: "40", galleryName: "Настоящий Пломбир - bolalikdagi haqiqiy plombir lazzatini hadya etadi."},
+          { name: "Настоящий shokoladli", gram: "100gr", price: "- UZS", img: "img/nastShok.jpg", viewImg: ["img/view/nastShok1.webp"], id: "nastShok", boxNum: "40", galleryName: "Shokolad qoplamali haqiqiy plombir."},
+          { name: "Как раньше", gram: "100gr", price: "- UZS", img: "img/kakRanshe.jpg", viewImg: ["img/view/kakRanshe1.jpg"], id: "kakRanshe", boxNum: "40", galleryName: "Kofe ta'mli plombir muzqaymoq."},
+          { name: "Ленинградское", gram: "70gr", price: "- UZS", img: "img/leningrad.jpg", viewImg: ["img/view/leningrad1.webp", "img/view/leningrad2.jpg"], id: "leningrad", boxNum: "40", galleryName: "Shokolad qoplamali plombir eskimo."},
+          { name: "Газета", gram: "130gr", price: "- UZS", img: "img/gazeta.jpg", viewImg: ["img/view/gazeta1.jpg", "img/view/gazeta2.jpg"], id: "gazeta", boxNum: "20", galleryName: "Original Gazeta. Shirin vafelli rojok."},
+          { name: "Black Star", gram: "120gr", price: "- UZS", img: "img/blackStar.jpg", viewImg: ["img/view/blackStar1.webp"], id: "blackStar", boxNum: "20", galleryName: "Qora vafelli o'zgacha vanil muzqaymoq."},
+          { name: "Atlas", gram: "85gr", price: "- UZS", img: "img/atlas.jpg", viewImg: ["img/view/atlas1.webp"], id: "atlas", boxNum: "-", galleryName: "Pechenya bo'laklari hamda Malinali jem bilan qoplangan oq shokoladli plombir muzqaymoq"},
       ]
   }
 };
@@ -281,7 +287,6 @@ function initSwipe() {
     moveX = null;
   };
 
-  // Attach new listeners
   galleryTrack.addEventListener('touchstart', currentTouchStart);
   galleryTrack.addEventListener('touchmove', currentTouchMove);
   galleryTrack.addEventListener('touchend', currentTouchEnd);
@@ -290,7 +295,6 @@ function initSwipe() {
 
 
 
-// Update the active dot based on the current image index
 function updateDots() {
   const dots = document.querySelectorAll('.dot');
   dots.forEach((dot, index) => {
@@ -313,6 +317,7 @@ function showProductDetails(productIdObject){
 
   productPrice.textContent = productIdObject.price;
   productNames.textContent = productIdObject.galleryName;
+  // productNames.innerHTML = productIdObject.galleryName.replace(/\n/g, "<br>");
   productGram.textContent = productIdObject.gram;
   boxNumber.textContent = productIdObject.boxNum;
   

@@ -421,7 +421,7 @@ body {
 /* Product details */
 
 .product-details{
-    height: 27%;
+    height: 28%;
     /* width: 100%; */
     display: flex;
     flex-direction: column;
