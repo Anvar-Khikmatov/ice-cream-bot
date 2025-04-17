@@ -46,11 +46,16 @@ const icBrands = {
       products: [
           { name: "Настоящий Пломбир", gram: "100gr", price: "- UZS", img: "img/nastPlombir.jpg", viewImg: ["img/view/nastPlombir1.webp", "img/view/nastPlombir2.jpg"], id: "nastPlombir", boxNum: "40", galleryName: "Настоящий Пломбир - bolalikdagi haqiqiy plombir lazzatini hadya etadi."},
           { name: "Настоящий shokoladli", gram: "100gr", price: "- UZS", img: "img/nastShok.jpg", viewImg: ["img/view/nastShok1.webp"], id: "nastShok", boxNum: "40", galleryName: "Shokolad qoplamali haqiqiy plombir."},
-          { name: "Как раньше", gram: "100gr", price: "- UZS", img: "img/kakRanshe.jpg", viewImg: ["img/view/kakRanshe1.jpg"], id: "kakRanshe", boxNum: "40", galleryName: "Kofe ta'mli plombir muzqaymoq."},
+          { name: "Как раньше <br>", gram: "100gr", price: "- UZS", img: "img/kakRanshe.jpg", viewImg: ["img/view/kakRanshe1.jpg"], id: "kakRanshe", boxNum: "40", galleryName: "Kofe ta'mli plombir muzqaymoq."},
           { name: "Ленинградское", gram: "70gr", price: "- UZS", img: "img/leningrad.jpg", viewImg: ["img/view/leningrad1.webp", "img/view/leningrad2.jpg"], id: "leningrad", boxNum: "40", galleryName: "Shokolad qoplamali plombir eskimo."},
           { name: "Газета", gram: "130gr", price: "- UZS", img: "img/gazeta.jpg", viewImg: ["img/view/gazeta1.jpg", "img/view/gazeta2.jpg"], id: "gazeta", boxNum: "20", galleryName: "Original Gazeta. Shirin vafelli rojok."},
           { name: "Black Star", gram: "120gr", price: "- UZS", img: "img/blackStar.jpg", viewImg: ["img/view/blackStar1.webp"], id: "blackStar", boxNum: "20", galleryName: "Qora vafelli o'zgacha vanil muzqaymoq."},
-          { name: "Atlas", gram: "85gr", price: "- UZS", img: "img/atlas.jpg", viewImg: ["img/view/atlas1.webp"], id: "atlas", boxNum: "-", galleryName: "Pechenya bo'laklari hamda Malinali jem bilan qoplangan oq shokoladli plombir muzqaymoq"},
+          { name: "Atlas", gram: "85gr", price: "- UZS", img: "img/atlas.jpg", viewImg: ["img/view/atlas1.webp", "img/view/atlas2.webp"], id: "atlas", boxNum: "-", galleryName: "Pechenya bo'laklari hamda Malinali jem bilan qoplangan oq shokoladli plombir muzqaymoq"},
+          { name: "Батончик", gram: "85gr", price: "- UZS", img: "img/batonchik.jpg", viewImg: ["img/view/batonchik1.webp", "img/view/batonchik2.webp"], id: "batonchik", boxNum: "-", galleryName: "Vanil va Kofe ta'mli shokolad qoplamali batonchiklar"},
+          { name: "Конус Настоящий", gram: "70gr", price: "- UZS", img: "img/konusIcegold.jpg", viewImg: ["img/view/konusIcegold1.webp"], id: "konusIcegold", boxNum: "14", galleryName: "Shokolad va Yong'oqlar bilan qoplangan plombir konus muzqaymoq"},
+          { name: "Pancake <br>", gram: "80gr", price: "- UZS", img: "img/pancake.jpg", viewImg: ["img/view/pancake1.webp", "img/view/pancake2.webp"], id: "pancake", boxNum: "-", galleryName: "Kakaoli yumshoqqina pankeyk va Italiyan pechenyesi aralashtirilgan qaymoqli muzqaymoq"},
+          { name: "Gold chocolate", gram: "80gr", price: "35 000 UZS", img: "img/goldChoco.jpg", viewImg: ["img/view/goldChoco1.webp", "img/view/goldChoco2.jpg"], id: "goldChoco", boxNum: "5", galleryName: "Qaymoqli va shokolad mazali, sutli shokolad bilan qoplangan muzqaymoq"},
+          { name: "Gold pistachio <br>", gram: "80gr", price: "45 000 UZS", img: "img/goldPistachio.jpg", viewImg: [], id: "goldPistachio", boxNum: "5", galleryName: "Qaymoqli va xandon pista mazali, sutli shokolad bilan qoplangan muzqaymoq"},
       ]
   }
 };

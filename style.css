@@ -421,7 +421,8 @@ body {
 /* Product details */
 
 .product-details{
-    height: 28%;
+    /* height: 29%; */
+    height: fit-content;
     /* width: 100%; */
     display: flex;
     flex-direction: column;
@@ -459,11 +460,12 @@ body {
 }
 
 .product-box-count{
-    margin-top: auto;
     color: rgb(3, 8, 26);
     font-family: 'Inter', sans-serif;
     font-variation-settings: "wght" 600;
-    font-size: 1.2em;
+    font-size: 1.1em;
+    margin-top: 3%;
+    /* margin-top: auto; */
 }
 
 .box-number{
@@ -473,21 +475,3 @@ body {
 }
 
 
-
-/* .product-description{
-    margin-top: 10%;
-}
-
-.description-title{
-    margin-bottom: 1%;
-    color: rgb(3, 8, 26);
-    font-family: 'Inter', sans-serif;
-    font-variation-settings: "wght" 600;
-}
-
-.description-words{
-    line-height: 1.3em;
-    color: rgb(3, 8, 26);
-    font-family: 'Inter', sans-serif;
-    font-variation-settings: "wght" 400;
-} */
