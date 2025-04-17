@@ -54,8 +54,10 @@ const icBrands = {
           { name: "Батончик", gram: "85gr", price: "- UZS", img: "img/batonchik.jpg", viewImg: ["img/view/batonchik1.webp", "img/view/batonchik2.webp"], id: "batonchik", boxNum: "-", galleryName: "Vanil va Kofe ta'mli shokolad qoplamali batonchiklar"},
           { name: "Конус Настоящий", gram: "70gr", price: "- UZS", img: "img/konusIcegold.jpg", viewImg: ["img/view/konusIcegold1.webp"], id: "konusIcegold", boxNum: "14", galleryName: "Shokolad va Yong'oqlar bilan qoplangan plombir konus muzqaymoq"},
           { name: "Pancake <br>", gram: "80gr", price: "- UZS", img: "img/pancake.jpg", viewImg: ["img/view/pancake1.webp", "img/view/pancake2.webp"], id: "pancake", boxNum: "-", galleryName: "Kakaoli yumshoqqina pankeyk va Italiyan pechenyesi aralashtirilgan qaymoqli muzqaymoq"},
-          { name: "Gold chocolate", gram: "80gr", price: "35 000 UZS", img: "img/goldChoco.jpg", viewImg: ["img/view/goldChoco1.webp", "img/view/goldChoco2.jpg"], id: "goldChoco", boxNum: "5", galleryName: "Qaymoqli va shokolad mazali, sutli shokolad bilan qoplangan muzqaymoq"},
-          { name: "Gold pistachio <br>", gram: "80gr", price: "45 000 UZS", img: "img/goldPistachio.jpg", viewImg: [], id: "goldPistachio", boxNum: "5", galleryName: "Qaymoqli va xandon pista mazali, sutli shokolad bilan qoplangan muzqaymoq"},
+          { name: "Gold chocolate", gram: "85gr", price: "35 000 UZS", img: "img/goldChoco.jpg", viewImg: ["img/view/goldChoco1.webp", "img/view/goldChoco2.jpg"], id: "goldChoco", boxNum: "5", galleryName: "Qaymoqli va shokolad mazali, sutli shokolad bilan qoplangan muzqaymoq"},
+          { name: "Gold pistachio <br>", gram: "85gr", price: "45 000 UZS", img: "img/goldPistachio.jpg", viewImg: ["img/view/goldPistachio1.webp", "img/view/goldPistachio2.webp"], id: "goldPistachio", boxNum: "5", galleryName: "Qaymoqli va xandon pista mazali, sutli shokolad bilan qoplangan muzqaymoq"},
+          { name: "Серебряная Пуля", gram: "80gr", price: "5 500 UZS", img: "img/pulya.jpg", viewImg: ["img/view/pulya1.webp"], id: "pulya", boxNum: "42", galleryName: "Shokolad qoplamali qaymoqli eskimo"},
+          { name: "Kilogramlik <br>", gram: "1000gr", price: "- UZS", img: "img/paketIcegold.jpg", viewImg: ["img/view/icegoldKakranshe.webp", "img/view/icegoldRoyal.webp", "img/view/icegoldGelato.webp", "img/view/icegoldSevendays.webp", "img/view/icegoldSweets.webp", "img/view/icegoldOreo.webp", "img/view/icegoldExco.webp", "img/view/icegoldExotic.webp", ], id: "paketIcegold", boxNum: "6", galleryName: "\"Как раньше\" - oq plombir <br>\"Royal\" - qahva ta'mli <br> \"Gelato\" - shokoladli qahvali plombir <br>\"Seven days\" - shokoladli oq plombir <br>\"Sweets\" - karamel va yer yong'oqli <br> \"Oreo\" - pechenyeli plombir <br> \"Эkzo\" - qulupnay jemli plombir <br> \"Exotic\" - qulupnay va apelsin ta'mli" },
       ]
   }
 };
@@ -321,8 +323,8 @@ const boxNumber = document.body.querySelector('.box-number');
 function showProductDetails(productIdObject){
 
   productPrice.textContent = productIdObject.price;
-  productNames.textContent = productIdObject.galleryName;
-  // productNames.innerHTML = productIdObject.galleryName.replace(/\n/g, "<br>");
+  // productNames.textContent = productIdObject.galleryName;
+  productNames.innerHTML = productIdObject.galleryName.replace(/\n/g, "<br>");
   productGram.textContent = productIdObject.gram;
   boxNumber.textContent = productIdObject.boxNum;
   

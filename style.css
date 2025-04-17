@@ -421,7 +421,7 @@ body {
 /* Product details */
 
 .product-details{
-    /* height: 29%; */
+    height: 29%;
     height: fit-content;
     /* width: 100%; */
     display: flex;
@@ -432,6 +432,7 @@ body {
     border: 1px solid rgb(233, 235, 236);
     border-radius: 2%;
     box-shadow: 0 0 5px 1px rgb(209, 206, 206);
+    /* overflow-y: scroll; */
 }
 
 .product-price{
