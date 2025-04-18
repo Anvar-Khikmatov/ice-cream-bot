@@ -59,8 +59,33 @@ const icBrands = {
           { name: "Серебряная Пуля", gram: "80gr", price: "5 500 UZS", img: "img/pulya.jpg", viewImg: ["img/view/pulya1.webp"], id: "pulya", boxNum: "42", galleryName: "Shokolad qoplamali qaymoqli eskimo"},
           { name: "Kilogramlik <br>", gram: "1000gr", price: "- UZS", img: "img/paketIcegold.jpg", viewImg: ["img/view/icegoldKakranshe.webp", "img/view/icegoldRoyal.webp", "img/view/icegoldGelato.webp", "img/view/icegoldSevendays.webp", "img/view/icegoldSweets.webp", "img/view/icegoldOreo.webp", "img/view/icegoldExco.webp", "img/view/icegoldExotic.webp", ], id: "paketIcegold", boxNum: "6", galleryName: "\"Как раньше\" - oq plombir <br>\"Royal\" - qahva ta'mli <br> \"Gelato\" - shokoladli qahvali plombir <br>\"Seven days\" - shokoladli oq plombir <br>\"Sweets\" - karamel va yer yong'oqli <br> \"Oreo\" - pechenyeli plombir <br> \"Эkzo\" - qulupnay jemli plombir <br> \"Exotic\" - qulupnay va apelsin ta'mli" },
       ]
+  },
+  others: {
+      title: "Muzqaymoqlar",
+      products: [
+          { name: "Bomba xasanboy", gram: "100gr", price: "5 400 UZS", img: "img/xasanboy.jpg", viewImg: ["img/view/bombaXas1.jpg"], id: "bombaXas", boxNum: "30", galleryName: "Qayqomli plombir muzqaymoq" },
+
+      ]
+  },
+  xasanboy: {
+      title: "Xasanboy",
+      products: [
+          { name: "Bomba xasanboy", gram: "100gr", price: "5 400 UZS", img: "img/xasanboy.jpg", viewImg: ["img/view/bombaXas1.jpg"], id: "bombaXas", boxNum: "30", galleryName: "Qayqomli plombir muzqaymoq" },
+          { name: "Qora qum <br>", gram: "70gr", price: "- UZS", img: "img/qoraqumXas.jpg", viewImg: ["img/view/qoraqumXas1.webp"], id: "qoraqumXas", boxNum: "50", galleryName: "Asl qahva ta'mli muzqaymoq" },
+          { name: "Хоттабыч <br>", gram: "50gr", price: "48 000 UZS", img: "img/xottabichChoc.jpg", viewImg: ["img/view/xottabichPremium.webp", "img/view/xottabichEskimo.webp", "img/view/xottabichPlombir.webp", "img/view/xottabichBanan.webp", "img/view/xottabichPistachio.webp", "img/view/xottabichChoco.webp", "img/view/xottabichRamazon.webp"], id: "xottabich", boxNum: "6", galleryName: "\"Premium\" - premium shokolad <br>\"Eskimo\" - shokolad qoplamali plombir <br> \"Plombir\" - qaymoqli oq shokolad <br>\"Banan\" - banan ta'mli plombir <br>\"Fistashka\" - xandon pista ta'mli <br> \"Chocolate\" - oq va qora shokolad  <br> \"Ramazon\" - 6 xil ta'm birlashmasi" },
+          { name: "Хоттабыч mevali", gram: "60gr", price: "36 000 UZS", img: "img/xottabichFruit.jpg", viewImg: ["img/view/xottabichOlma.webp", "img/view/xottabichOlxori.webp"], id: "xottabichFruit", boxNum: "6", galleryName: "Haqiqiy olma va olxo'riga o'xshash tabiiy ta'm va bularning barchasi shakarsiz" },
+      ]
+  },
+  sodiqSavdo: {
+      title: "Sodiq Savdo",
+      products: [
+          { name: "Bomba xasanboy", gram: "100gr", price: "5 400 UZS", img: "img/xasanboy.jpg", viewImg: ["img/view/bombaXas1.jpg"], id: "bombaXas", boxNum: "30", galleryName: "Qayqomli plombir muzqaymoq" },
+
+      ]
   }
 };
+
+
 
 const homepage = document.querySelector('.homepage');
 const brandMenu = document.querySelector('.brand-menu');
@@ -107,6 +132,7 @@ brandMenu.addEventListener('click', event => {
       iceCreamContainer.appendChild(icBox);
   });
 });
+
 
 backButton.addEventListener('click', () => {
   iceCreamMenu.style.display = "none";

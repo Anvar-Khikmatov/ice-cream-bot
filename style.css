@@ -445,7 +445,7 @@ body {
 .product-names{
     color: rgb(3, 8, 26);
     font-family: 'Inter', sans-serif;
-    font-variation-settings: "wght" 600;
+    font-variation-settings: "wght" 500;
     font-size: 1.1em;
     margin-top: 3%;
     line-height: 1.5em;
@@ -456,7 +456,7 @@ body {
     font-size: 1em;
     /* font-style: italic; */
     font-family: 'Inter', sans-serif;
-    font-variation-settings: "wght" 500;
+    font-variation-settings: "wght" 550;
     margin-top: 3%;
 }
 
