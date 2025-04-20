@@ -79,7 +79,15 @@ const icBrands = {
   sodiqSavdo: {
       title: "Sodiq Savdo",
       products: [
-          { name: "Bomba xasanboy", gram: "100gr", price: "5 400 UZS", img: "img/xasanboy.jpg", viewImg: ["img/view/bombaXas1.jpg"], id: "bombaXas", boxNum: "30", galleryName: "Qayqomli plombir muzqaymoq" },
+          { name: "Qora qum", gram: "70gr", price: "- UZS", img: "img/qoraqumSS.jpg", viewImg: ["img/view/qoraqumSS1.webp"], id: "qoraqumSS", boxNum: "50", galleryName: "Asl qahva ta'mli muzqaymoq" },
+          { name: "Bubble Gum ", gram: "70gr", price: "- UZS", img: "img/bubblegumSS.jpg", viewImg: ["img/view/bubblegumSS1.webp"], id: "bubblegumSS", boxNum: "-", galleryName: "Shirin saqich ta'mli plombir muzqaymoq" },
+          { name: "Bomba <br>", gram: "70gr", price: "- UZS", img: "img/bombaSS.jpg", viewImg: ["img/view/bombaSS1.png", "img/view/bombaSS2.png"], id: "bombaSS", boxNum: "20", galleryName: "Asl qahva ta'mli hamda qayqomli plombir bomba muzqaymoqlar" },
+          { name: "Plombir-Melon-Mango", gram: "70gr", price: "- UZS", img: "img/pmmSS.jpg", viewImg: ["img/view/pmmSS1.webp", "img/view/pmmSS2.webp", "img/view/pmmSS3.webp"], id: "pmmSS", boxNum: "-", galleryName: "Vanil-Qovun-Mango ta'mli muzqaymoq" },
+          { name: "Choco Stars", gram: "70gr", price: "- UZS", img: "img/chocoStars.jpg", viewImg: ["img/view/chocoStars.webp"], id: "chocoStars", boxNum: "-", galleryName: "Asl shokolad qoplamasi ostida yashiringan oq plombir" },
+          { name: "Майя лёд", gram: "50gr", price: "- UZS", img: "img/maya.jpg", viewImg: ["img/view/maya1.webp"], id: "maya", boxNum: "60", galleryName: "3 xil rangli muz muzqaymoq" },
+          { name: "Star Milk", gram: "100gr", price: "- UZS", img: "img/5star.jpg", viewImg: ["img/view/5star1.webp"], id: "5star", boxNum: "18", galleryName: "6 ta sutli va qaymoqli, bo'lishishga oson mazali muzqaymoqchalar" },
+          { name: "Star Ice", gram: "100gr", price: "- UZS", img: "img/5starIce.jpg", viewImg: ["img/view/5starIce1.webp"], id: "5starIce", boxNum: "18", galleryName: "6 ta muzdek shirinlik - sovitadi, tetiklantiradi, xursand qiladi!" },
+          { name: "Kilogramlik", gram: "1000gr", price: "25 000 UZS", img: "img/kgSS.jpg", viewImg: ["img/view/ssPlombir.webp", "img/view/ssCofe.webp", "img/view/ssYagoda.webp", "img/view/ssBanan.webp", "img/view/ssMelon.webp", ], id: "kgSS", boxNum: "6", galleryName: " \"Plombir\" - vanil ta'mli plombir <br> \"Cofe\" - xushbo'y qahva ta'mli plombir <br> \"Yagoda\" - o'rmon mevalari ta'mli plombir<br> \"Banan\" - banan ta'mli plombir <br> \"Qovun\" - qovun ta'mli plombir <br> " },
 
       ]
   }
