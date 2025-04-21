@@ -87,9 +87,21 @@ const icBrands = {
           { name: "Майя лёд", gram: "50gr", price: "- UZS", img: "img/maya.jpg", viewImg: ["img/view/maya1.webp"], id: "maya", boxNum: "60", galleryName: "3 xil rangli muz muzqaymoq" },
           { name: "Star Milk", gram: "100gr", price: "- UZS", img: "img/5star.jpg", viewImg: ["img/view/5star1.webp"], id: "5star", boxNum: "18", galleryName: "6 ta sutli va qaymoqli, bo'lishishga oson mazali muzqaymoqchalar" },
           { name: "Star Ice", gram: "100gr", price: "- UZS", img: "img/5starIce.jpg", viewImg: ["img/view/5starIce1.webp"], id: "5starIce", boxNum: "18", galleryName: "6 ta muzdek shirinlik - sovitadi, tetiklantiradi, xursand qiladi!" },
-          { name: "Kilogramlik", gram: "1000gr", price: "25 000 UZS", img: "img/kgSS.jpg", viewImg: ["img/view/ssPlombir.webp", "img/view/ssCofe.webp", "img/view/ssYagoda.webp", "img/view/ssBanan.webp", "img/view/ssMelon.webp", ], id: "kgSS", boxNum: "6", galleryName: " \"Plombir\" - vanil ta'mli plombir <br> \"Cofe\" - xushbo'y qahva ta'mli plombir <br> \"Yagoda\" - o'rmon mevalari ta'mli plombir<br> \"Banan\" - banan ta'mli plombir <br> \"Qovun\" - qovun ta'mli plombir <br> " },
+          { name: "Kilogramlik <br>", gram: "1000gr", price: "25 000 UZS", img: "img/kgSS.jpg", viewImg: ["img/view/ssPlombir.webp", "img/view/ssCofe.webp", "img/view/ssYagoda.webp", "img/view/ssBanan.webp", "img/view/ssMelon.webp", ], id: "kgSS", boxNum: "6", galleryName: " \"Plombir\" - vanil ta'mli plombir <br> \"Cofe\" - xushbo'y qahva ta'mli plombir <br> \"Yagoda\" - o'rmon mevalari ta'mli plombir<br> \"Banan\" - banan ta'mli plombir <br> \"Qovun\" - qovun ta'mli plombir <br> " },
 
       ]
+  },
+  zarli: {
+      title: "Zarli",
+      products: [
+          { name: "Sariq zar", gram: "80gr", price: "- UZS", img: "img/zarliYellow.jpg", viewImg: ["img/view/zarYellow1.webp"], id: "zarliYellow", boxNum: "30", galleryName: "Zar qog'ozdagi klassika - shokoladli qoplama, oq qaymoqli eskimo" },
+          { name: "Oq zar", gram: "60gr", price: "- UZS", img: "img/zarliWhite.jpg", viewImg: ["img/view/zarWhite1.webp"], id: "zarliWhite", boxNum: "40", galleryName: "Zar qog'ozdagi klassika - shokoladli qoplama, oq qaymoqli eskimo" },
+          { name: "Zarli idish", gram: "180gr", price: "- UZS", img: "img/zarliIdish.jpg", viewImg: ["img/view/zarliIdish.webp"], id: "zarliIdish", boxNum: "-", galleryName: "Yer yong'oq va shokolad aralashmasi bilan boyitilgan vanil muzqaymoq" },
+          { name: "Лакомка", gram: "80gr", price: "- UZS", img: "img/zarliLakomka.jpg", viewImg: ["img/view/zarliLakomka1.webp"], id: "zarliLakomka", boxNum: "-", galleryName: "Vafli orasidagi shirin shokoladli hamda qaymoqli briket" },
+          { name: "Белое золото", gram: "200gr", price: "- UZS", img: "img/zarliBeloyzoloto.jpg", viewImg: ["img/view/zarliBeloyzoloto1.webp"], id: "zarliBeloyzoloto", boxNum: "-", galleryName: "Toza sutdan tayyorlangan, 200 grammli oq plombir. Kattaligi bilan to'ydiradi, ta'mi bilan rom qiladi" },
+
+      ]
+
   }
 };
 
