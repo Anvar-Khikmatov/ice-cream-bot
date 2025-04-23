@@ -101,7 +101,26 @@ const icBrands = {
           { name: "Белое золото", gram: "200gr", price: "- UZS", img: "img/zarliBeloyzoloto.jpg", viewImg: ["img/view/zarliBeloyzoloto1.webp"], id: "zarliBeloyzoloto", boxNum: "-", galleryName: "Toza sutdan tayyorlangan, 200 grammli oq plombir. Kattaligi bilan to'ydiradi, ta'mi bilan rom qiladi" },
 
       ]
-
+  },
+  korovka: {
+      title: "Коровка из Кореновки",
+      products: [
+          { name: "Стаканчики пломбир", gram: "100gr", price: "12 000 UZS", img: "img/stkKorovka.jpg", viewImg: ["img/view/korovkaStkPlombir.webp", "img/view/korovkaStkChoc.webp", "img/view/korovkaStkCrem.webp", "img/view/korovkaStkFistashka.webp"], id: "korovkaStk", boxNum: "30", galleryName: "15% li vafli stakanchada plombir muzqaymoq. Turlari: <br> -Qaymoqli <br> -Shokolad <br> -Krem-bryule <br> -Xandon pistali" },
+          { name: "Лакомка пломбир", gram: "90gr", price: "14 000 UZS", img: "img/lakomkaKorovka.jpg", viewImg: ["img/view/lakomkaKorovkaPlombir.webp", "img/view/lakomkaKorovkaCrem.webp", "img/view/lakomkaKorovkaMalina.webp"], id: "korovkaLakomka", boxNum: "20", galleryName: "Shokolad-qaymoqli glazuradagi plombir muzqaymoq. Turlari: <br> -Qaymoqli <br> -Krem-bryule <br> -Malina" },
+          { name: "Эскимо пломбир", gram: "70gr", price: "11 000 UZS", img: "img/korovkaEskimoPlombir.jpg", viewImg: ["img/view/korovkaEskimoPlombir1.webp", "img/view/korovkaEskimoPlombir2.webp"], id: "korovkaEskimoPlombir", boxNum: "-", galleryName: "15% li shokolad glazuridagi vanilli plombir eskimo muzqaymoq" },
+          { name: "Эскимо фундук", gram: "70gr", price: "14 000 UZS", img: "img/korovkaEskimoFunduk.jpg", viewImg: ["img/view/korovkaEskimoFunduk1.webp"], id: "korovkaEskimoFunduk", boxNum: "-", galleryName: "15% li vanilli plombir eskimo — sutsimon shokolad glazurida, funduk bo'lakchalari bilan" },
+          { name: "Plombir vafli", gram: "70gr", price: "- UZS", img: "img/korovkaVafli.jpg", viewImg: ["img/view/korovkaVafli1.webp"], id: "korovkaVafli", boxNum: "-", galleryName: "Vafli orasida 15% li vanilli plombir muzqaymoq" },
+          { name: "Сырок", gram: "40gr", price: "- UZS", img: "img/korovkaSirok.jpg", viewImg: ["img/view/korovkaSirok1.webp", "img/view/korovkaSirok2.webp"], id: "korovkaSirok", boxNum: "-", galleryName: "Quyultirilgan sut bilan sirlangan tvorogli sirok 18%" },
+          { name: "Семейный <br>", gram: "400gr", price: "- UZS", img: "img/korovkaFamily.jpg", viewImg: ["img/view/korovkaFamily1.webp"], id: "korovkaFamily", boxNum: "-", galleryName: "15% yog'li vanilli plombir muzqaymoq — oila davrasida baham ko'rish uchun ajoyib tanlov" },
+          { name: "48 Копеек Брикет ", gram: "210gr", price: "- UZS", img: "img/48briketMango.jpg", viewImg: ["img/view/48briketMango1.webp"], id: "48briketMango", boxNum: "-", galleryName: "Mango va qaymoq - tetiklashtiruvchi mango sorbeti va mango sousining ajoyib uyg'unligi" },
+          { name: "48 Копеек Пломбир ", gram: "420gr", price: "- UZS", img: "img/48vannaPlombir.jpg", viewImg: ["img/view/48vannaPlombir1.webp"], id: "48vannaPlombir", boxNum: "-", galleryName: "Tabiiy sut, yangi qaymoq va xushbo'y vanil uyg'unligi. Hammaga birdek yoqadigan klassik muzqaymoq" },
+          { name: "48 Копеек <br> Прага ", gram: "432gr", price: "- UZS", img: "img/48vannaChoc.jpg", viewImg: ["img/view/48vannaChoc1.webp"], id: "48vannaChoc", boxNum: "-", galleryName: "Shokoladli Praga. Haqiqiy shokolad ishqibozlari uchun. Qora shokolad bo'lakchalari, shokoladli biskvit va ustidan quyilgan shokoladli sous" },
+          { name: "48 Копеек Стаканчики", gram: "88gr", price: "11 000 UZS", img: "img/48stk.jpg", viewImg: ["img/view/48stkVanil.png", "img/view/48stkChoc.png", "img/view/48stkMango.png", "img/view/48stkMalina.png", ], id: "48stk", boxNum: "-", galleryName: "12% yog'li, vaflili plombir — tabiiy sut, qaymoq va shirin ta'm uyg'unligi bilan <br> “48 kopeyk” klassikasi. Turlari: <br> -Vanil <br> -Shokolad <br> -Mango <br> -Malina" },
+          { name: "Nestle <br>", gram: "59gr", price: "16 000 UZS", img: "img/nestle.jpg", viewImg: ["img/view/nestle1.webp" ], id: "nestle", boxNum: "-", galleryName: " O'simlik yog'isiz, bodomli va shokoladli qoplamada tayyorlangan haqiqiy Nestle muzqaymog'i" },
+          { name: "Alpen Gold", gram: "58gr", price: "15 000 UZS", img: "img/alpengold.jpg", viewImg: ["img/view/alpengold1.webp", "img/view/alpengold2.webp" ], id: "alpengold", boxNum: "-", galleryName: "Alpen Gold muzqaymoqi — kakao bilan ikki qatlamli yumshoq qaymoqli muzqaymoq, sutli shokolad qoplamasida, qarsildoq guruch va yengil sho‘r sharchalar bilan boyitilgan" },
+          { name: "Oreo", gram: "56gr", price: "14 000 UZS", img: "img/oreo.jpg", viewImg: ["img/view/oreo1.webp" ], id: "oreo", boxNum: "-", galleryName: " Oreo muzqaymog'i — tabiiy tarkib, o'ziga xos Oreo pechenyesi va shokolad glazurasi bilan. O'simlik yog'larisiz" },
+          
+      ]
   }
 };
 
