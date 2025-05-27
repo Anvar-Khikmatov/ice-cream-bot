@@ -53,7 +53,7 @@ const icBrands = {
           { name: "Atlas <br>", gram: "85gr", price: "8 400 UZS", img: "img/atlas.jpg", viewImg: ["img/view/atlas1.webp", "img/view/atlas2.webp"], id: "atlas", boxNum: "30", galleryName: "Pechenya bo'laklari hamda Malinali jem bilan qoplangan oq shokoladli plombir muzqaymoq"},
           { name: "Батончик <br>", gram: "85gr", price: "10 500 UZS", img: "img/batonchik.jpg", viewImg: ["img/view/batonchik1.webp", "img/view/batonchik2.webp"], id: "batonchik", boxNum: "24", galleryName: "Vanil va Kofe ta'mli shokolad qoplamali batonchiklar"},
           { name: "Конус Настоящий", gram: "70gr", price: "5 000 UZS", img: "img/konusIcegold.jpg", viewImg: ["img/view/konusIcegold1.webp"], id: "konusIcegold", boxNum: "14", galleryName: "Shokolad va Yong'oqlar bilan qoplangan plombir konus muzqaymoq"},
-          { name: "Pancake <br>", gram: "80gr", price: "", img: "img/pancake.jpg", viewImg: ["img/view/pancake1.webp", "img/view/pancake2.webp"], id: "pancake", boxNum: "32", galleryName: "Kakaoli yumshoqqina pankeyk va Italiyan pechenyesi aralashtirilgan qaymoqli muzqaymoq"},
+          { name: "Pancake <br>", gram: "80gr", price: "", img: "img/pancake.jpg", viewImg: ["img/view/pancake1.jpg", "img/view/pancake2.webp"], id: "pancake", boxNum: "32", galleryName: "Kakaoli yumshoqqina pankeyk va Italiyan pechenyesi aralashtirilgan qaymoqli muzqaymoq"},
           { name: "Gold chocolate", gram: "85gr", price: "48 000 UZS", img: "img/goldChoco.jpg", viewImg: ["img/view/goldChoco1.webp", "img/view/goldChoco2.jpg"], id: "goldChoco", boxNum: "5", galleryName: "Qaymoqli va shokolad mazali, sutli shokolad bilan qoplangan muzqaymoq"},
           { name: "Gold pistachio <br>", gram: "85gr", price: "", img: "img/goldPistachio.jpg", viewImg: ["img/view/goldPistachio1.webp", "img/view/goldPistachio2.webp"], id: "goldPistachio", boxNum: "5", galleryName: "Qaymoqli va xandon pista mazali, sutli shokolad bilan qoplangan muzqaymoq"},
           { name: "Gold mini <br>", gram: "50gr", price: "30 000 UZS", img: "img/goldMini.webp", viewImg: ["img/view/goldMini1.webp", "img/view/goldMini2.webp"], id: "goldMini", boxNum: "6", galleryName: "Tabiiy malina qiyomi qo'shilgan, qaymoqli plombir, usti oq sutli shokoladga qurutilgan malina donachalari bilan qoplangan. O'zgacha dizayn, o'zgacha ta'm"},
@@ -66,7 +66,10 @@ const icBrands = {
   muzqaymoqlar: {
       title: "Muzqaymoqlar",
       products: [
-          { name: "Чуда", gram: "80gr", price: "2 500 UZS", img: "img/chuda.webp", viewImg: ["img/view/.jpg"], id: "chuda", boxNum: "45", galleryName: "" },
+          { name: "Чуда <br>", gram: "80gr", price: "2 500 UZS", img: "img/chuda.webp", viewImg: ["img/view/chudaQora.webp", "img/view/chudaYashil.webp", "img/view/chudaQizil.webp"], id: "chuda", boxNum: "45", galleryName: "\"Чуда\" - usti muz, ichi qaymoq muzqaymoq. Yozgi issiqlikda haqiqiy zavq baxsh etuvchi tanlov. Turlari: <br>- Черника + Ежевика <br>- Kivi <br>- Qulupnay" },
+          { name: "Kreasy max <br>", gram: "80gr", price: "3 000 UZS", img: "img/kreasy.webp", viewImg: ["img/view/kreasyKivi.webp", "img/view/kreasyOlcha.webp", "img/view/kreasyYagoda.webp"], id: "kreasyMax", boxNum: "40", galleryName: "\"Kreasy max\" - Ichidan mayin qaymoqli muzqaymoq, ustida esa tabiiy mevali muz qoplami. Turlari: <br>- Kivi <br>- Olcha <br>- O'rmon mevalari" },
+          { name: "Doda <br>", gram: "140gr", price: "6 000 UZS", img: "img/doda.webp", viewImg: ["img/view/doda1.webp", "img/view/doda2.webp"], id: "doda", boxNum: "20", galleryName: "Tabiiy mevalar qiyomi bilan boyitilgan, qaymoqli va shirin rojokdagi mazali muzqaymoq. Turlari: <br>- Olcha <br>- Malina <br>- Qulupnay" },
+          { name: "Grand <br>", gram: "120gr", price: "5 000 UZS", img: "img/grand.webp", viewImg: ["img/view/grand1.webp", "img/view/grand2.webp"], id: "grand", boxNum: "20", galleryName: "Usti shokoladli glazur bilan bezatilingan vafli stakanchadagi quyiltirilgan sutli muzqaymoq" },
 
       ]
   },
