@@ -476,8 +476,8 @@ body {
 
 
 
-/* .overlay{
-    display: block;
+.overlay{
+    display: none;
     position: absolute;
     top: 0;
     left: 0;
@@ -488,21 +488,60 @@ body {
     z-index: 2;
 }
 
+.cd-back-btn{
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    z-index: 10;
+    background: rgba(214, 215, 216, 0.744);
+    border: none;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    font-size: 0;
+    color: transparent;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.cd-back-btn::after {
+    content: "‹";
+    font-size: 40px; 
+    color: #3498db;
+    position: relative;
+    top: -2.5px; 
+}
+
+  .cd-back-btn:hover{
+    cursor: pointer;
+    filter: brightness(0.7);
+  } 
+
+
+
 .contact-info{
-    display: block;
+    color: rgb(255, 255, 255);
+    display: none;
     position: absolute;
     width: 90%;
     height: 50%;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
-    background-color: red;
+    background-color: #3a9cddc8;
+    line-height: 1.8em;
+    border-radius: 2%;
+    border: 2px solid #489ed8c8;
+    box-shadow: 0 0 5px 1px rgb(51, 167, 225); ;
     z-index: 3;
 }
-.CD{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    font-size: 30px;
-} */
+
+.CD {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 1.3em;
+  text-align: center;   /* add this */
+  display: inline-block; /* optional, keeps box tight around text */
+}
