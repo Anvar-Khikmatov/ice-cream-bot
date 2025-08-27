@@ -468,15 +468,18 @@ const cdBackBtn = document.body.querySelector('.cd-back-btn');
 const contactInfo = document.body.querySelector('.contact-info');
 
 
-cdBackBtn.addEventListener('click', () => {
-  overlay.style.display = 'none';
-  contactInfo.style.display = 'none';
+contacts.addEventListener('click', () => {
+  overlay.style.display = 'block';
+  contactInfo.style.display = 'block';
   galleryBackBtn.style.display = 'none';
 })
 
 
-contacts.addEventListener('click', () => {
-  overlay.style.display = 'block';
-  contactInfo.style.display = 'block';
+cdBackBtn.addEventListener('click', () => {
+  overlay.style.display = 'none';
+  contactInfo.style.display = 'none';
+  galleryBackBtn.style.display = 'flex';
 })
+
+
 
