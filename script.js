@@ -463,23 +463,154 @@ function showProductDetails(productIdObject){
 
 
 const contacts = document.querySelector('.contacts');
-const overlay = document.body.querySelector('.overlay');
+const cdOverlay = document.body.querySelector('.cd-overlay');
 const cdBackBtn = document.body.querySelector('.cd-back-btn');
 const contactInfo = document.body.querySelector('.contact-info');
 
 
 contacts.addEventListener('click', () => {
-  overlay.style.display = 'block';
+  cdOverlay.style.display = 'block';
   contactInfo.style.display = 'block';
   galleryBackBtn.style.display = 'none';
 })
 
 
 cdBackBtn.addEventListener('click', () => {
-  overlay.style.display = 'none';
+  cdOverlay.style.display = 'none';
   contactInfo.style.display = 'none';
   galleryBackBtn.style.display = 'flex';
 })
 
 
 
+
+
+
+// Enhanced search functionality
+const searchInput = document.getElementById("searchInput");
+const overlay = document.getElementById("overlay");
+
+// Store original brand display states
+let originalBrandStates = null;
+let isInSearchView = false;
+
+searchInput.addEventListener("input", () => {
+  const searchTerm = searchInput.value.toLowerCase().trim();
+  
+  if (searchTerm.length >= 3) {
+    // Save original states if not already saved
+    if (originalBrandStates === null) {
+      originalBrandStates = {};
+      document.querySelectorAll(".brands").forEach(brand => {
+        const brandName = brand.getAttribute("data-brand");
+        originalBrandStates[brandName] = brand.style.display;
+      });
+    }
+    
+    // Switch to search view if not already there
+    if (!isInSearchView) {
+      showSearchView();
+      isInSearchView = true;
+    }
+    
+    // Filter products based on search term
+    filterProducts(searchTerm);
+  } else {
+    // Clear search and restore original view
+    clearSearch();
+    isInSearchView = false;
+  }
+});
+
+function showSearchView() {
+  homepage.style.display = "none";
+  iceCreamMenu.style.display = "block";
+  titleName.textContent = "Search Results";
+  
+  // Clear previous content
+  iceCreamContainer.innerHTML = "";
+  
+  // Add all products from all brands
+  for (const brand in icBrands) {
+    if (icBrands[brand]?.products) {
+      icBrands[brand].products.forEach(product => {
+        const productElement = createProductElement(product, brand);
+        iceCreamContainer.appendChild(productElement);
+      });
+    }
+  }
+}
+
+function createProductElement(product, brand) {
+  const icBox = document.createElement('div');
+  icBox.classList.add("ic-box");
+  icBox.setAttribute('data-ic', product.id);
+  icBox.setAttribute('data-brand', brand);
+
+  icBox.innerHTML = `
+    <div class="ic-img">
+      <img src="${product.img}" width="500" height="500" loading="lazy" alt="${product.name}">
+    </div>
+    <div class="ic-details">
+      <div class="ic-name">${product.name} <span class="ic-gram">${product.gram}</span></div>
+      <span class="ic-price">${product.price}</span>
+    </div>
+  `;
+  
+  return icBox;
+}
+
+function filterProducts(searchTerm) {
+  const products = document.querySelectorAll(".ic-box");
+  let hasMatches = false;
+
+  products.forEach(product => {
+    const productName = product.querySelector(".ic-name").textContent.toLowerCase();
+    const isMatch = productName.includes(searchTerm);
+    
+    product.style.display = isMatch ? "block" : "none";
+    if (isMatch) hasMatches = true;
+  });
+
+  // DEBUG: Check if we're getting here
+  console.log("Filtering products. Has matches:", hasMatches);
+  
+  // Show overlay if no matches found
+  overlay.style.display = hasMatches ? "none" : "flex";
+  
+  // DEBUG: Check overlay state
+  console.log("Overlay display:", overlay.style.display);
+}
+
+function clearSearch() {
+  // Only reset if we're in search view
+  if (titleName.textContent === "Search Results") {
+    iceCreamMenu.style.display = "none";
+    homepage.style.display = "block";
+    
+    // Restore original brand states
+    if (originalBrandStates !== null) {
+      Object.entries(originalBrandStates).forEach(([brandName, displayValue]) => {
+        const brandElement = document.querySelector(`.brands[data-brand="${brandName}"]`);
+        if (brandElement) {
+          brandElement.style.display = displayValue;
+        }
+      });
+    }
+  }
+  
+  // Always hide overlay when clearing search
+  overlay.style.display = "none";
+}
+
+// Enhanced back button functionality
+backButton.addEventListener('click', function() {
+  if (titleName.textContent === "Search Results") {
+    searchInput.value = "";
+    clearSearch();
+    isInSearchView = false;
+  } else {
+    iceCreamMenu.style.display = "none";
+    homepage.style.display = "block";
+  }
+});

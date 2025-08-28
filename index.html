@@ -10,7 +10,8 @@
 <body>  
     
     <div class="container">
-        <div class="overlay"></div>
+
+        <div class="cd-overlay"></div>
         <div class="contact-info">
             <button class="cd-back-btn">&lsaquo;</button>
             <div class="CD">
@@ -25,9 +26,18 @@
 
             <img class="logo" src="img/logo/logo.webp" loading="lazy" alt="logo">
             <div class="searchbar">
-                <input type="search"  placeholder=" &#x1F50E;&#xFE0E;  Mahsulotlarni qidirish">
+                <input id="searchInput" type="search"  placeholder=" &#x1F50E;&#xFE0E;  Mahsulotlarni qidirish">
             </div>
+
         
+             <!-- Overlay for no search results - ADD THIS -->
+            <div id="overlay" class="overlay">
+                <div class="no-results">
+                <span style="font-size:40px;">⚪⚫</span>
+                <p>Oops! No matching ice cream found.</p>
+                </div>
+            </div>
+
 
 
             <!-- Brand Selection Menu -->
