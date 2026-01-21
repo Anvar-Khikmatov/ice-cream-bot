@@ -1,4 +1,3 @@
-// Add this at the VERY TOP of script.js
 document.addEventListener('DOMContentLoaded', function() {
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp;
@@ -6,7 +5,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Enable full mobile view
     tg.expand();
     
-    // Set up menu button
+    
     tg.MainButton.setText("🍦 MENU");
     tg.MainButton.onClick(() => {
       tg.openLink("https://arzonbozor-muzqaymoq.vercel.app"); 
@@ -17,13 +16,109 @@ document.addEventListener('DOMContentLoaded', function() {
   } else {
     console.error("Telegram WebApp not detected!");
   }
+
+  loadIceCreamData(); //added new line
+
 });
 
 
 
 
 
-const icBrands = {
+
+
+
+// ============ SUPABASE CONFIGURATION ============
+
+const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
+
+
+let icBrands = {};
+let appInitialized = false;  //new added line
+
+
+async function loadIceCreamData() {
+  try {
+    console.log('Loading data from Supabase...');
+    
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*`, {
+      headers: {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${SUPABASE_KEY}`
+      }
+    });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! Status: ${response.status}`);
+    }
+    
+    const products = await response.json();
+    console.log(`✅ Loaded ${products.length} products from Supabase`);
+    
+    // Transform Supabase data to match your structure
+    const transformedProducts = products.map(product => ({
+      name: product.name,
+      gram: product.gram,
+      price: product.price,
+      img: product.img,
+      viewImg: product.viewimg,      
+      id: product.id,
+      boxNum: product.boxnum,       
+      galleryName: product.galleryname, 
+      brand: product.brand          
+    }));
+    
+    
+    icBrands = groupProductsByBrand(transformedProducts);
+    
+    console.log('Data organized by brand:', icBrands);
+    
+    initApp();
+    
+  } catch (error) {
+    console.error('❌ Error loading data:', error);
+    // Optional: Load fallback data or show error message
+    loadFallbackData();
+  }
+}
+
+// ============ GROUP PRODUCTS BY BRAND ============
+function groupProductsByBrand(products) {
+  
+  const brandStructure = {
+    dairy: { title: "DAIRY CLASSIC", products: [] },
+    icegold: { title: "Ice & GolD", products: [] },
+    muzqaymoqlar: { title: "Muzqaymoqlar", products: [] },
+    naturel: { title: "Naturel", products: [] },
+    sodiqSavdo: { title: "Sodiq Savdo", products: [] },
+    zarli: { title: "Zarli", products: [] },
+    korovka: { title: "Коровка из Кореновки", products: [] },
+    bahroma: { title: "Bahroma", products: [] },
+    svitlogore: { title: "Свитлогорье", products: [] }
+  };
+  
+  // Group products into their brands
+  products.forEach(product => {
+    if (brandStructure[product.brand]) {
+      brandStructure[product.brand].products.push(product);
+    } else {
+      console.warn(`Product ${product.id} has unknown brand: ${product.brand}`);
+    }
+  });
+  
+  return brandStructure;
+}
+
+
+
+
+
+function loadFallbackData() {
+  console.log('Loading fallback data...');
+
+
+ icBrands = {
   dairy: {
       title: "DAIRY CLASSIC",
       products: [  
@@ -185,12 +280,29 @@ const icBrands = {
           { name: "Лакомство <br>", gram: "90gr", price: "8 000 UZS", img: "img/lakomstvo.webp", viewImg: ["img/view/lakomstvo1.webp", "img/view/lakomstvo2.webp"], id: "lakomstvo", boxNum: "20", galleryName: "Qalin quyma shokoladli qobiq ostida yashiringan silliq plombir va karamelga o'xshash krem-brule ta'mlari bilan haqiqiy lazzatni his eting " },
           { name: "ГОСТ эскимо <br>", gram: "70gr", price: "10 000 UZS", img: "img/gostEskimo.webp", viewImg: ["img/view/gostEskimo1.webp"], id: "gostEskimo", boxNum: "30", galleryName: "Sutli shokolad qobig'ida qoplangan eskimo plombir" },
           { name: "Простоквашино  <br>", gram: "90gr", price: "10 000 UZS", img: "img/prostakvashino.webp", viewImg: ["img/view/prostokvashino1.webp"], id: "prostokvashino", boxNum: "24", galleryName: "Mazasi tabiiy, sifati ishonchli! O'simlik yog'lari yo'q - faqat haqiqiy qaymoqdan tayyorlangan! 15% yog' miqdori bilan to'liq lazzat" },
-
     ]
   }
-};
+ };
 
 
+ initApp();
+}  
+
+
+
+
+
+function initApp() {
+
+   if (appInitialized) {
+    console.log('App already initialized, skipping...');
+    return;
+  }
+
+
+  console.log('Initializing app with data...');
+  appInitialized = true;
+ 
 
 const homepage = document.querySelector('.homepage');
 const brandMenu = document.querySelector('.brand-menu');
@@ -614,3 +726,6 @@ backButton.addEventListener('click', function() {
     homepage.style.display = "block";
   }
 });
+
+
+};
