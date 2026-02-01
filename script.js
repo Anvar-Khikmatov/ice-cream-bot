@@ -2,27 +2,20 @@ document.addEventListener('DOMContentLoaded', function() {
   if (window.Telegram && window.Telegram.WebApp) {
     const tg = window.Telegram.WebApp;
     
-    // Enable full mobile view
     tg.expand();
-    
-    
     tg.MainButton.setText("🍦 MENU");
     tg.MainButton.onClick(() => {
       tg.openLink("https://arzonbozor-muzqaymoq.vercel.app"); 
     });
+
     tg.MainButton.show();
-    
-    console.log("Telegram WebApp initialized!"); // Debug check
+    console.log("Telegram WebApp initialized!"); 
   } else {
     console.error("Telegram WebApp not detected!");
   }
 
-  loadIceCreamData(); //added new line
-
+  loadIceCreamData();
 });
-
-
-
 
 
 
@@ -35,27 +28,35 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 
 let icBrands = {};
-let appInitialized = false;  //new added line
-
 
 async function loadIceCreamData() {
+  console.log('🔄 Loading ice cream data from Supabase...');
+
   try {
-    console.log('Loading data from Supabase...');
-    
-    const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*`, {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/products?select=*`,  {  
       headers: {
         'apikey': SUPABASE_KEY,
         'Authorization': `Bearer ${SUPABASE_KEY}`
       }
     });
     
+    console.log('📡 Supabase response status:', response.status);
+
     if (!response.ok) {
       throw new Error(`HTTP error! Status: ${response.status}`);
     }
     
     const products = await response.json();
-    console.log(`✅ Loaded ${products.length} products from Supabase`);
-    
+    console.log('📊 Products fetched:', products.length);
+
+    if (!products || products.length == 0) {
+      console.warn('⚠️ No products returned from Supabase');
+      showEmptyState();
+      return;
+    }
+
+
+
     // Transform Supabase data to match your structure
     const transformedProducts = products.map(product => ({
       name: product.name,
@@ -68,24 +69,25 @@ async function loadIceCreamData() {
       galleryName: product.galleryname, 
       brand: product.brand          
     }));
+
+    console.log('Transformed products:', transformedProducts.length);
     
     
     icBrands = groupProductsByBrand(transformedProducts);
-    
-    console.log('Data organized by brand:', icBrands);
-    
+    console.log('🏷️ Brands with data:', Object.keys(icBrands).filter(brand => icBrands[brand].products.length > 0));
     initApp();
-    
+
   } catch (error) {
     console.error('❌ Error loading data:', error);
-    // Optional: Load fallback data or show error message
-    loadFallbackData();
+    showErrorMessage(error.message);
   }
 }
 
+
 // ============ GROUP PRODUCTS BY BRAND ============
 function groupProductsByBrand(products) {
-  
+  console.log('📦 Grouping', products.length, 'products by brand...');
+
   const brandStructure = {
     dairy: { title: "DAIRY CLASSIC", products: [] },
     icegold: { title: "Ice & GolD", products: [] },
@@ -98,12 +100,26 @@ function groupProductsByBrand(products) {
     svitlogore: { title: "Свитлогорье", products: [] }
   };
   
+  let groupedCount = 0;
+  let unknownBrands = 0;
+
   // Group products into their brands
   products.forEach(product => {
     if (brandStructure[product.brand]) {
       brandStructure[product.brand].products.push(product);
+      groupedCount++;
     } else {
-      console.warn(`Product ${product.id} has unknown brand: ${product.brand}`);
+      console.warn(`❓ Product "${product.name}" (ID: ${product.id}) has unknown brand: "${product.brand}"`);
+      unknownBrands++;
+    }
+  });
+
+  console.log(`📊 Grouped ${groupedCount} products, ${unknownBrands} with unknown brands`);
+
+   // Log each brand's product count
+  Object.entries(brandStructure).forEach(([brandKey, brandData]) => {
+    if (brandData.products.length > 0) {
+      console.log(`${brandData.title}: ${brandData.products.length} products`);
     }
   });
   
@@ -111,12 +127,20 @@ function groupProductsByBrand(products) {
 }
 
 
+function showEmptyState() {
+  console.log('🔄 Showing empty state to user');
+
+}
+
+function showErrorMessage(errorMsg) {
+  console.log('🔄 Showing error message to user:', errorMsg);
+}
 
 
 
+/*
 function loadFallbackData() {
   console.log('Loading fallback data...');
-
 
  icBrands = {
   dairy: {
@@ -287,6 +311,10 @@ function loadFallbackData() {
 
  initApp();
 }  
+*/
+
+
+
 
 
 
@@ -294,16 +322,9 @@ function loadFallbackData() {
 
 function initApp() {
 
-   if (appInitialized) {
-    console.log('App already initialized, skipping...');
-    return;
-  }
 
 
-  console.log('Initializing app with data...');
-  appInitialized = true;
- 
-
+                          // Home page menu 
 const homepage = document.querySelector('.homepage');
 const brandMenu = document.querySelector('.brand-menu');
 const iceCreamMenu = document.querySelector('.iceCream-menu');
@@ -311,6 +332,35 @@ const backButton = document.querySelector(".title button");
 const titleName = document.querySelector('.title-name');
 const iceCreamContainer = document.querySelector(".ic-content");
 
+                          // Specific brand menu
+const iceCreamInfo = document.querySelector('.iceCream-info');
+const galleryBackBtn = document.querySelector('.gallery-back-btn');
+const galleryTrack = document.querySelector('.gallery-track');
+const galleryDots = document.querySelector('.gallery-dots');
+
+                          // Each product info
+const productDetails = document.body.querySelector('.product-details');
+const productPrice = document.body.querySelector('.product-price');
+const productNames = document.body.querySelector('.product-names');
+const productGram = document.body.querySelector('.product-gram');
+const productBoxCount = document.body.querySelector('.product-box-count');
+const boxNumber = document.body.querySelector('.box-number');
+
+                          // Contacts button
+const contacts = document.querySelector('.contacts');
+const cdOverlay = document.body.querySelector('.cd-overlay');
+const cdBackBtn = document.body.querySelector('.cd-back-btn');
+const contactInfo = document.body.querySelector('.contact-info');
+
+                          // Search products form
+const searchInput = document.getElementById("searchInput");
+const overlay = document.getElementById("overlay");
+
+
+
+
+
+// 1. Homepage
 brandMenu.addEventListener('click', event => {
   const clickedBrand = event.target.closest('.brands');
   
@@ -351,7 +401,7 @@ brandMenu.addEventListener('click', event => {
 });
 
 
-backButton.addEventListener('click', () => {
+backButton.addEventListener('click', () => {   
   iceCreamMenu.style.display = "none";
   homepage.style.display = "block";
 });
@@ -360,14 +410,8 @@ backButton.addEventListener('click', () => {
 
 
 
-
-const iceCreamInfo = document.querySelector('.iceCream-info');
-const galleryBackBtn = document.querySelector('.gallery-back-btn');
-const galleryTrack = document.querySelector('.gallery-track');
-const galleryDots = document.querySelector('.gallery-dots');
-
-
-galleryBackBtn.addEventListener('click', () => {
+//2. Specific brand menu 
+galleryBackBtn.addEventListener('click', () => {     
   iceCreamInfo.style.display = 'none';
   iceCreamMenu.style.display = 'block';
 });
@@ -376,11 +420,11 @@ galleryBackBtn.addEventListener('click', () => {
 let currentImageIndex = 0;
 
 // Event listener when a product is clicked
-iceCreamContainer.addEventListener('click', event => {
+iceCreamContainer.addEventListener('click', event => {   
   const clickedIc = event.target.closest('.ic-box');
   if (!clickedIc) return;
 
-  galleryBackBtn.style.display = "flex";
+  galleryBackBtn.style.display = "flex";     
   iceCreamMenu.style.display = 'none';
   iceCreamInfo.style.display = "block";
 
@@ -404,12 +448,9 @@ function getProductById(idPar) {
 
 // Function to show the product gallery
 function showProductGallery(product) {
-  // iceCreamMenu.style.display = 'none';
 
-  // Reset current image index to 0 each time the gallery is opened
   currentImageIndex = 0;
 
-  // Clear previous images and dots
   galleryTrack.innerHTML = '';
   galleryDots.innerHTML = '';
 
@@ -439,49 +480,50 @@ function showProductGallery(product) {
 }
 
 
-// Swipe functionality
-// function initSwipe() {
-//   const images = document.querySelectorAll('.gallery-img');
+/*
+Swipe functionality
+function initSwipe() {
+  const images = document.querySelectorAll('.gallery-img');
   
-//   if (images.length <= 1) return;
-//   let startX, moveX;
+  if (images.length <= 1) return;
+  let startX, moveX;
   
 
-//   galleryTrack.addEventListener('touchstart', (e) => {
-//     if (images.length <= 1) return;
-//     startX = e.touches[0].clientX;
-//   });
+  galleryTrack.addEventListener('touchstart', (e) => {
+    if (images.length <= 1) return;
+    startX = e.touches[0].clientX;
+  });
 
-//   galleryTrack.addEventListener('touchmove', (e) => {
-//     if (!startX || images.length <= 1) return;
-//     moveX = e.touches[0].clientX;
-//     const diffX = moveX - startX;
+  galleryTrack.addEventListener('touchmove', (e) => {
+    if (!startX || images.length <= 1) return;
+    moveX = e.touches[0].clientX;
+    const diffX = moveX - startX;
     
-//     galleryTrack.style.transition = 'none'
-//     galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
-//   });
+    galleryTrack.style.transition = 'none'
+    galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
+  });
 
-//   galleryTrack.addEventListener('touchend', () => {
-//     if (images.length <= 1 || !moveX) return;
-//     const diffX = moveX - startX;
+  galleryTrack.addEventListener('touchend', () => {
+    if (images.length <= 1 || !moveX) return;
+    const diffX = moveX - startX;
     
 
-//     if (Math.abs(diffX) > 50) {
-//       if (diffX > 0 && currentImageIndex > 0) {
-//         currentImageIndex--;
-//       } else if (diffX < 0 && currentImageIndex < images.length - 1) {
-//         currentImageIndex++;
-//       }
-//     }
+    if (Math.abs(diffX) > 50) {
+      if (diffX > 0 && currentImageIndex > 0) {
+        currentImageIndex--;
+      } else if (diffX < 0 && currentImageIndex < images.length - 1) {
+        currentImageIndex++;
+      }
+    }
 
-//     galleryTrack.style.transition = 'transform 0.4s ease-out';
-//     galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
-//     updateDots();
-//     startX = null;
-//     moveX = null;
-//   });
-// }
-
+    galleryTrack.style.transition = 'transform 0.4s ease-out';
+    galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
+    updateDots();
+    startX = null;
+    moveX = null;
+  });
+}
+*/
 
 
 // Store references to the listeners for cleanup
@@ -545,7 +587,6 @@ function initSwipe() {
 
 
 
-
 function updateDots() {
   const dots = document.querySelectorAll('.dot');
   dots.forEach((dot, index) => {
@@ -556,41 +597,29 @@ function updateDots() {
 
 
 
-const productDetails = document.body.querySelector('.product-details');
-const productPrice = document.body.querySelector('.product-price');
-const productNames = document.body.querySelector('.product-names');
-const productGram = document.body.querySelector('.product-gram');
-const productBoxCount = document.body.querySelector('.product-box-count');
-const boxNumber = document.body.querySelector('.box-number');
-
-
+// 3. Each product info
 function showProductDetails(productIdObject){
-
   productPrice.textContent = productIdObject.price;
-  // productNames.textContent = productIdObject.galleryName;
   productNames.innerHTML = productIdObject.galleryName.replace(/\n/g, "<br>");
   productGram.textContent = productIdObject.gram;
   boxNumber.textContent = productIdObject.boxNum;
 }
 
 
-const contacts = document.querySelector('.contacts');
-const cdOverlay = document.body.querySelector('.cd-overlay');
-const cdBackBtn = document.body.querySelector('.cd-back-btn');
-const contactInfo = document.body.querySelector('.contact-info');
 
 
-contacts.addEventListener('click', () => {
+// 4. Contacts button
+contacts.addEventListener('click', () => {       
   cdOverlay.style.display = 'block';
   contactInfo.style.display = 'block';
-  galleryBackBtn.style.display = 'none';
+  galleryBackBtn.style.display = 'none';           
 })
 
-
-cdBackBtn.addEventListener('click', () => {
+  
+cdBackBtn.addEventListener('click', () => {            
   cdOverlay.style.display = 'none';
   contactInfo.style.display = 'none';
-  galleryBackBtn.style.display = 'flex';
+  galleryBackBtn.style.display = 'flex';      
 })
 
 
@@ -598,9 +627,7 @@ cdBackBtn.addEventListener('click', () => {
 
 
 
-// Enhanced search functionality
-const searchInput = document.getElementById("searchInput");
-const overlay = document.getElementById("overlay");
+//5. Search products form
 
 // Store original brand display states
 let originalBrandStates = null;
