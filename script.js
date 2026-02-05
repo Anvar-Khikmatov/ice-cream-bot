@@ -391,7 +391,7 @@ brandMenu.addEventListener('click', event => {
               <img src="${product.img}" width="500" height="500" loading="lazy"  alt="${product.name}">
           </div>
           <div class="ic-details">
-              <div class="ic-name">${product.name} <span class="ic-gram">${product.gram}</span></div>
+              <div class="ic-name">${product.name} <div class="ic-gram">${product.gram}</div></div>
               <span class="ic-price">${product.price}</span>
           </div>
       `;

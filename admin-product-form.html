@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Product - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-form-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .form-header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid rgba(13, 164, 240, 0.466);
+            position: relative;
+        }
+        
+        .form-back-btn {
+            position: absolute;
+            left: 30px;
+            background: none;
+            border: none;
+            font-size: 40px;
+            color: #3498db;
+            cursor: pointer;
+        }
+        
+        .form-title {
+            font-size: 20px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .form-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .image-upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+            background: #f8fbff;
+        }
+        
+        .image-upload-area:hover {
+            background: #eef5ff;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 150px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .gallery-images {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .gallery-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -5px;
+            right: -5px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .submit-btn {
+            width: 100%;
+            padding: 15px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        
+        
+        .submit-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .form-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+        }
+        
+        .image-item {
+            position: relative;
+            display: inline-block;
+        }
+    </style>
+</head>
+<body>
+    <div class="container product-form-container">
+        <div class="form-header">
+            <button class="form-back-btn" onclick="goBack()">‹</button>
+            <div class="form-title" id="pageTitle">Add New Product</div>
+        </div>
+        
+        <div class="form-content">
+            <!-- Brand info -->
+            <div class="form-group">
+                <div class="form-label">Brend</div>
+                <input type="text" id="brandName" class="form-input" readonly>
+            </div>
+            
+            <!-- Product Name -->
+            <div class="form-group">
+                <div class="form-label">Mahsulot Nomi *</div>
+                <input type="text" id="productName" class="form-input"  required>
+            </div>
+            
+            <!-- Price -->
+            <div class="form-group">
+                <div class="form-label">Narxi (UZS) </div>
+                <input type="text" id="productPrice" class="form-input" >
+                <!-- <div class="form-hint">Masalan: "6 300"</div> -->
+            </div>
+            
+            <!-- Weight -->
+            <div class="form-group">
+                <div class="form-label">Og'irligi (gramm)</div>
+                <input type="text" id="productGram" class="form-input" >
+                <!-- <div class="form-hint">Format: "102gr" or "100g"</div> -->
+            </div>
+            
+            <!-- Box Number -->
+            <div class="form-group">
+                <div class="form-label">Qutidagi soni</div>
+                <input type="number" id="boxNum" class="form-input" min="0" max="200">
+                <!-- <div class="form-hint">How many pieces in one box (optional)</div> -->
+            </div>
+            
+            <!-- Product ID -->
+            <div class="form-group">
+                <div class="form-label">Mahsulot ID *</div>
+                <input type="text" id="productId" class="form-input"  required>
+                <!-- <div class="form-hint">Unique lowercase ID (no spaces, use camelCase)</div> -->
+            </div>
+            
+            <!-- Description -->
+            <div class="form-group">
+                <div class="form-label">Tavsif</div>
+                <textarea id="productDescription" class="form-input" rows="4" placeholder="Mahsulotning batafsil tavsifi..."></textarea>
+                <!-- <div class="form-hint">Use &lt;br&gt; for line breaks in description</div> -->
+            </div>
+            
+            <!-- Main Image Upload -->
+            <div class="form-group">
+                <div class="form-label">Asosiy mahsulot rasmi</div>
+                <div class="image-upload-area" onclick="document.getElementById('mainImageInput').click()">
+                    <div class="upload-icon">📷</div>
+                    <div>Asosiy rasmni yuklash</div>
+                    <div class="form-hint">Tavsiya etiladi: 500×500 piksel</div>
+                </div>
+                <input type="file" id="mainImageInput" accept="image/*" style="display: none">
+                <img id="mainImagePreview" class="preview-image" src="" alt="Preview">
+            </div>
+            
+            <!-- Gallery Images Upload -->
+            <div class="form-group">
+                <div class="form-label">Galereya rasmlari (ixtiyoriy)</div>
+                <div class="image-upload-area" onclick="document.getElementById('galleryInput').click()">
+                    <div class="upload-icon">🍦</div>
+                    <div>Galereya rasmlarini yuklash</div>
+                    <div class="form-hint">Bir nechta rasm yuklash mumkin</div>
+                </div>
+                <input type="file" id="galleryInput" accept="image/*" multiple style="display: none">
+                <div class="gallery-images" id="galleryPreview"></div>
+            </div>
+            
+            <!-- Submit Button -->
+            <button class="submit-btn" onclick="saveProduct()" id="submitBtn">➕ Mahsulotni Qo'shish</button>
+            
+            <!-- <button class="logout-btn" onclick="logout()">🚪 Logout</button> -->
+        </div>
+    </div>
+
+    <script src="admin-product-form.js"></script>
+</body>
+</html>

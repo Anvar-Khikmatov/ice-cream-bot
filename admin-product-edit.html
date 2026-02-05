@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mahsulotni Tahrirlash - Admin</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .product-edit-container {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .edit-header {
+            width: 100%;
+            height: 60px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-bottom: 2px solid rgba(13, 164, 240, 0.466);
+            position: relative;
+        }
+        
+        .edit-back-btn {
+            position: absolute;
+            left: 30px;
+            background: none;
+            border: none;
+            font-size: 40px;
+            color: #3498db;
+            cursor: pointer;
+        }
+        
+        .edit-title {
+            font-size: 20px;
+            color: #3498db;
+            font-weight: 600;
+        }
+        
+        .edit-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        
+        .form-input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .form-input[readonly] {
+            background-color: #f5f5f5;
+            color: #666;
+        }
+        
+        .image-section {
+            border: 2px solid #eee;
+            border-radius: 8px;
+            padding: 15px;
+            margin-bottom: 20px;
+            background: #fafafa;
+        }
+        
+        .current-image {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .current-img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+        
+        .image-change-btn {
+            display: inline-block;
+            padding: 8px 15px;
+            background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .image-upload-area {
+            border: 2px dashed #3498db;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-bottom: 15px;
+            background: #f8fbff;
+            display: none;
+        }
+        
+        .image-upload-area.active {
+            display: block;
+        }
+        
+        .upload-icon {
+            font-size: 40px;
+            color: #3498db;
+            margin-bottom: 10px;
+        }
+        
+        .preview-image {
+            max-width: 100%;
+            max-height: 150px;
+            margin: 10px 0;
+            border-radius: 5px;
+            display: none;
+        }
+        
+        .gallery-section {
+            margin-top: 20px;
+        }
+        
+        .gallery-images {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-top: 10px;
+        }
+        
+        .gallery-item {
+            position: relative;
+        }
+        
+        .gallery-preview {
+            width: 80px;
+            height: 80px;
+            object-fit: cover;
+            border-radius: 5px;
+            border: 2px solid #ddd;
+        }
+        
+        .remove-image {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            cursor: pointer;
+            font-size: 14px;
+            line-height: 1;
+        }
+        
+        .add-gallery-btn {
+            padding: 10px 15px;
+            background: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        
+        .gallery-upload-area {
+            border: 2px dashed #9b59b6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            margin-top: 15px;
+            background: #f9f0ff;
+            display: none;
+        }
+        
+        .gallery-upload-area.active {
+            display: block;
+        }
+        
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            margin-top: 30px;
+        }
+        
+        .save-btn {
+            flex: 1;
+            padding: 15px;
+            background-color: #2ecc71;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        
+        .save-btn:hover {
+            background-color: #27ae60;
+        }
+        
+        .save-btn:disabled {
+            background-color: #95a5a6;
+            cursor: not-allowed;
+        }
+        
+        .cancel-btn {
+            flex: 1;
+            padding: 15px;
+            background-color: #95a5a6;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .cancel-btn:hover {
+            background-color: #7f8c8d;
+        }
+        
+        .delete-product-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #e74c3c;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+        
+        .delete-product-btn:hover {
+            background-color: #c0392b;
+        }
+        
+        .form-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+            font-style: italic;
+        }
+        
+        .logout-btn {
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            width: fit-content;
+        }
+        
+        .image-info {
+            font-size: 14px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container product-edit-container">
+        <div class="edit-header">
+            <button class="edit-back-btn" onclick="goBack()">‹</button>
+            <div class="edit-title">Mahsulotni Tahrirlash</div>
+        </div>
+        
+        <div class="edit-content">
+            <!-- Product ID (readonly) -->
+            <div class="form-group">
+                <div class="form-label">Mahsulot ID</div>
+                <input type="text" id="productId" class="form-input" readonly>
+                <div class="form-hint">ID ni o'zgartirib bo'lmaydi</div>
+            </div>
+            
+            <!-- Brand (readonly) -->
+            <div class="form-group">
+                <div class="form-label">Brend</div>
+                <input type="text" id="brandName" class="form-input" readonly>
+            </div>
+            
+            <!-- Product Name -->
+            <div class="form-group">
+                <div class="form-label">Mahsulot Nomi *</div>
+                <input type="text" id="productName" class="form-input" required>
+            </div>
+            
+            <!-- Price -->
+            <div class="form-group">
+                <div class="form-label">Narxi (UZS) *</div>
+                <input type="text" id="productPrice" class="form-input" required>
+            </div>
+            
+            <!-- Weight -->
+            <div class="form-group">
+                <div class="form-label">Og'irligi (gramm) *</div>
+                <input type="text" id="productGram" class="form-input" required>
+            </div>
+            
+            <!-- Box Number -->
+            <div class="form-group">
+                <div class="form-label">Qutidagi soni</div>
+                <input type="number" id="boxNum" class="form-input" min="0" max="200">
+            </div>
+            
+            <!-- Description -->
+            <div class="form-group">
+                <div class="form-label">Tavsif</div>
+                <textarea id="productDescription" class="form-input" rows="4"></textarea>
+            </div>
+            
+            <!-- Current Main Image -->
+            <div class="image-section">
+                <div class="form-label">Joriy Asosiy Rasm</div>
+                <div class="current-image">
+                    <img id="currentMainImage" class="current-img" src="" alt="Joriy rasm">
+                    <div class="image-info" id="imageInfo">Rasm yuklanmoqda...</div>
+                </div>
+                <button type="button" class="image-change-btn" onclick="toggleImageUpload()">
+                    ✏️ Rasmni almashtirish
+                </button>
+            </div>
+            
+            <!-- New Image Upload (hidden by default) -->
+            <div class="image-upload-area" id="imageUploadArea" onclick="document.getElementById('mainImageInput').click()">
+                <div class="upload-icon">📷</div>
+                <div>Yangi rasmni yuklash</div>
+                <div class="form-hint">Tavsiya etiladi: 500×500 piksel</div>
+            </div>
+            <input type="file" id="mainImageInput" accept="image/*" style="display: none">
+            <img id="mainImagePreview" class="preview-image" src="" alt="Yangi rasm ko'rinishi">
+            
+            <!-- Current Gallery Images -->
+            <div class="gallery-section">
+                <div class="form-label">Joriy Galereya Rasmlari</div>
+                <div class="gallery-images" id="currentGallery"></div>
+                <button type="button" class="add-gallery-btn" onclick="toggleGalleryUpload()">
+                    🖼️ Galereya rasmlarini qo'shish
+                </button>
+            </div>
+            
+            <!-- New Gallery Upload (hidden by default) -->
+            <div class="gallery-upload-area" id="galleryUploadArea" onclick="document.getElementById('galleryInput').click()">
+                <div class="upload-icon">➕</div>
+                <div>Yangi galereya rasmlarini yuklash</div>
+                <div class="form-hint">Bir nechta rasm tanlash mumkin</div>
+            </div>
+            <input type="file" id="galleryInput" accept="image/*" multiple style="display: none">
+            <div class="gallery-images" id="galleryPreview"></div>
+            
+            <!-- Action Buttons -->
+            <div class="action-buttons">
+                <button class="save-btn" onclick="updateProduct()" id="saveBtn">
+                    💾 Saqlash
+                </button>
+                <a href="#" class="cancel-btn" onclick="goBack()">
+                    ❌ Bekor qilish
+                </a>
+            </div>
+            
+            <!-- Delete Product Button -->
+            <button class="delete-product-btn" onclick="deleteProduct()" id="deleteBtn">
+                🗑️ Mahsulotni O'chirish
+            </button>
+            
+            <!-- <button class="logout-btn" onclick="logout()">🚪 Chiqish</button> -->
+        </div>
+    </div>
+
+    <script src="admin-product-edit.js"></script>
+</body>
+</html>
