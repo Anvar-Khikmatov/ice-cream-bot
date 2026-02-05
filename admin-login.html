@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Ice Cream Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Additional styles for login page */
+        .login-container {
+            max-width: 405px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        
+        .login-box {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #3498db;
+        }
+        
+        .login-title {
+            text-align: center;
+            color: #3498db;
+            margin-bottom: 30px;
+            font-size: 24px;
+            font-weight: 600;
+        }
+        
+        .input-group {
+            margin-bottom: 20px;
+        }
+        
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+            transition: border-color 0.3s;
+        }
+        
+        .input-group input:focus {
+            border-color: #3498db;
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #2980b9;
+        }
+        
+        .error-message {
+            color: #e74c3c;
+            text-align: center;
+            margin-top: 15px;
+            display: none;
+        }
+        
+        .back-home {
+            text-align: center;
+            margin-top: 20px;
+        }
+        
+        .back-home a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .back-home a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="container login-container">
+        <div class="login-box">
+            <h1 class="login-title">🍦 Admin Login</h1>
+            
+            <div class="input-group">
+                <label for="username">Login</label>
+                <input type="text" id="username" placeholder="Foydalanuvchi nomini kiriting">
+            </div>
+            
+            <div class="input-group">
+                <label for="password">Parol</label>
+                <input type="password" id="password" placeholder="Parolni kiriting">
+            </div>
+            
+            <button class="login-btn" onclick="login()">Kirish</button>
+            
+            <div id="errorMessage" class="error-message">
+                ❌ Foydalanuvchi nomi yoki parol noto‘g‘ri
+            </div>
+            
+            <div class="back-home">
+                <a href="index.html">← Asosiy sahifaga qaytish</a>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin-login.js"></script>
+</body>
+</html>

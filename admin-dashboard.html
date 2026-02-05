@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Ice Cream Shop</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .dashboard-container {
+            max-width: 410px;
+            margin: 0 auto;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .dashboard-header {
+            text-align: center;
+            margin: 40px 0;
+            margin-top: 60px;
+        }
+        
+        .dashboard-title {
+            color: #3498db;
+            font-size: 28px;
+            margin-bottom: 10px;
+        }
+        
+        .welcome-text {
+            color: #666;
+            font-size: 16px;
+        }
+        
+        .dashboard-actions {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            margin-top: 40px;
+        }
+        
+        .action-btn {
+            padding: 20px;
+            background: white;
+            border: 2px solid #3498db;
+            border-radius: 10px;
+            color: #3498db;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .action-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(52, 152, 219, 0.3);
+        }
+        
+        .btn-icon {
+            font-size: 24px;
+        }
+        
+        .logout-btn {
+            /* position: fixed; */
+            top: 15px;
+            right: 15px;
+            position: absolute;
+            background: #e74c3c;
+            color: white;
+            border: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        
+        .logout-btn:hover {
+            background: #c0392b;
+        }
+        
+        .stats-box {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 15px;
+            margin-top: 30px;
+            text-align: center;
+            border: 1px solid #ddd;
+        }
+        
+        .stats-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3498db;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container dashboard-container">
+        <button class="logout-btn" onclick="logout()">🚪 Chiqish</button>
+        
+        <div class="dashboard-header">
+            <h1 class="dashboard-title">Administrator Paneli</h1>
+            <p class="welcome-text" id="welcomeMessage">Xush kelibsiz!</p>
+        </div>
+        
+        <div class="dashboard-actions">
+            <a href="admin-brand-select.html?action=add" class="action-btn">
+                <span class="btn-icon">➕</span>
+                Yangi mahsulot qo‘shish
+            </a>
+            
+            <a href="admin-brand-select.html?action=manage" class="action-btn">
+                <span class="btn-icon">📋</span>
+                Mahsulotlarni boshqarish
+            </a>
+        </div>
+        
+        <div class="stats-box">
+            <div>Bazadagi jami mahsulotlar</div>
+            <div class="stats-number" id="totalProducts">Yuklanmoqda...</div>
+        </div>
+    </div>
+
+    <script src="admin-dashboard.js"></script>
+</body>
+</html>
