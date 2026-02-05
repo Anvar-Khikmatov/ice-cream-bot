@@ -11,7 +11,7 @@ function checkLogin() {
     // If no login or expired (24 hours)
     if (!localStorage.getItem('adminLoggedIn') || hoursSinceLogin >= 24) {
         localStorage.clear();
-        window.location.href = 'admin/login';
+        window.location.href = 'admin-login.html';
         return false;
     }
     
@@ -55,6 +55,6 @@ function logout() {
     if (confirm('Are you sure you want to logout?')) {
         localStorage.clear();
         sessionStorage.clear();
-        window.location.href = 'admin/login';
+        window.location.href = 'admin-login.html';
     }
 }

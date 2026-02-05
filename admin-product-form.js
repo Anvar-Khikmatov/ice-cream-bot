@@ -33,7 +33,7 @@ function checkLogin() {
     
     if (!localStorage.getItem('adminLoggedIn') || hoursSinceLogin >= 24) {
         localStorage.clear();
-        window.location.href = 'admin/login';
+        window.location.href = 'admin-login.html';
         return false;
     }
     
@@ -277,6 +277,6 @@ function goBack() {
 function logout() {
     if (confirm('Chiqishni xohlaysizmi?')) {
         localStorage.clear();
-        window.location.href = 'admin/login';
+        window.location.href = 'admin-login.html';
     }
 }
