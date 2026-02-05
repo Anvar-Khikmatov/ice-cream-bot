@@ -7,6 +7,7 @@ let currentBrand = '';
 let currentProductData = null;
 let newMainImage = null;
 let newGalleryImages = [];
+let removeMainImageOnSave = false;
 
 document.addEventListener('DOMContentLoaded', function() {
     if (!checkLogin()) return;
@@ -96,7 +97,7 @@ function fillFormData() {
     const mainImgElement = document.getElementById('currentMainImage');
     const imageInfo = document.getElementById('imageInfo');
     
-    if (currentProductData.img) {
+    if (currentProductData.img && currentProductData.img.trim() !== '') {
         if (currentProductData.img.startsWith('data:image')) {
             // Base64 image
             mainImgElement.src = currentProductData.img;
@@ -168,6 +169,26 @@ function displayCurrentGallery() {
         galleryContainer.appendChild(galleryItem);
     });
 }
+
+
+function removeMainImage() {
+    if (confirm('Asosiy rasmni olib tashlamoqchimisiz?\n\nMahsulot standart rasm bilan ko\'rinadi.')) {
+        // Set flag to remove image on save
+        removeMainImageOnSave = true;
+        
+        // Clear UI
+        document.getElementById('currentMainImage').style.display = 'none';
+        document.getElementById('imageInfo').textContent = 'Rasm olib tashlandi. Saqlashni unutmang!';
+        document.getElementById('imageUploadArea').classList.remove('active');
+        document.getElementById('mainImagePreview').style.display = 'none';
+        
+        // Clear any selected new image
+        newMainImage = null;
+        document.getElementById('mainImageInput').value = '';
+    }
+}
+
+
 
 function removeCurrentGalleryImage(index) {
     if (confirm('Bu rasmni olib tashlamoqchimisiz?')) {
@@ -284,11 +305,22 @@ async function updateProduct() {
         };
         
         // Update main image if new one uploaded
-        if (newMainImage) {
-            // Convert to base64 for now
+        // if (newMainImage) {
+        //     // Convert to base64 for now
+        //     const imageUrl = await fileToBase64(newMainImage);
+        //     updateData.img = imageUrl;
+        // }
+        if (removeMainImageOnSave) {
+        // User wants to REMOVE the image
+            updateData.img = null; // Or empty string ''
+        } else if (newMainImage) {
+            // User wants to REPLACE with new image
             const imageUrl = await fileToBase64(newMainImage);
             updateData.img = imageUrl;
         }
+
+
+
         
         // Update gallery images if new ones added
         if (newGalleryImages.length > 0) {
@@ -336,6 +368,8 @@ async function updateProduct() {
         if (response.ok) {
             alert('✅ Mahsulot muvaffaqiyatli yangilandi!');
             // Go back to product list
+             removeMainImageOnSave = false;
+
             setTimeout(() => {
                 window.location.href = `admin-product-list.html?brand=${currentBrand}`;
             }, 1000);

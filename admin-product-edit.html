@@ -95,8 +95,21 @@
         
         .image-change-btn {
             display: inline-block;
+            width: 175px;
             padding: 8px 15px;
             background: #f39c12;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .image-remove-btn {
+            display: inline-block;
+            width: 175px;
+            padding: 8px 8px;
+            background: #e74c3c;
             color: white;
             border: none;
             border-radius: 5px;
@@ -344,6 +357,10 @@
                 </div>
                 <button type="button" class="image-change-btn" onclick="toggleImageUpload()">
                     ✏️ Rasmni almashtirish
+                </button>
+                <!-- In the image-section div, after the change button -->
+                <button type="button" class="image-remove-btn" onclick="removeMainImage()">
+                    🗑️ Rasmni olib tashlash
                 </button>
             </div>
             

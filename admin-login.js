@@ -51,7 +51,7 @@ async function login() {
         
         // 2. Check if user exists
         if (users.length === 0) {
-            errorElement.textContent = '❌ User not found';
+            errorElement.textContent = '❌ Foydalanuvchi topilmadi';
             errorElement.style.display = 'block';
             return;
         }
