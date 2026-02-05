@@ -123,54 +123,6 @@
 
     <script src="admin-brand-select.js"></script>
 
-            // Mobile viewport height fix - ADD TO EVERY ADMIN PAGE
-        (function() {
-            function setVH() {
-                const vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }
-            
-            // Initial set
-            setVH();
-            
-            // Update on resize/orientation
-            window.addEventListener('resize', setVH);
-            window.addEventListener('orientationchange', setVH);
-            
-            // Update when browser UI hides/shows (mobile)
-            window.addEventListener('focus', setVH);
-        })();
-        </script>
-
-        <style>
-        /* Add this CSS to EVERY admin page's style block */
-        :root {
-            --vh: 1vh;
-        }
-
-        /* Fix ALL container heights */
-        .container,
-        .dashboard-container,
-        .product-form-container, 
-        .product-list-container,
-        .product-edit-container,
-        .login-container,
-        .product-edit-container,
-        .admin-brand-container {
-            height: calc(var(--vh, 1vh) * 100) !important;
-            min-height: calc(var(--vh, 1vh) * 100) !important;
-        }
-
-        /* Make sure content scrolls properly */
-        .edit-content,
-        .products-container,
-        .form-content,
-        .dashboard-actions,
-        .brands-grid {
-            flex: 1;
-            overflow-y: auto;
-        }
-        </style>
-
+    
 </body>
 </html>

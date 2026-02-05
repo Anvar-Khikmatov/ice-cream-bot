@@ -5,10 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Login - Ice Cream Shop</title>
     <link rel="stylesheet" href="style.css">
+    
+    
+<!--
     <style>
         /* Additional styles for login page */
         .login-container {
             max-width: 405px;
+            max-height: 100dvh;
             margin: 0 auto;
             padding: 40px 20px;
             height: 100vh;
@@ -96,6 +100,131 @@
             text-decoration: underline;
         }
     </style>
+   -->
+    <style>
+    /* Mobile viewport fix FIRST */
+    body {
+        margin: 0;
+        padding: 0;
+        min-height: 100vh;
+        min-height: -webkit-fill-available;
+    }
+    
+    .container {
+        max-width: 405px;
+        margin: 0 auto;
+        /* REMOVE height: 100vh */
+        height: -webkit-fill-available; /* Mobile fix */
+        min-height: 100vh; /* Fallback */
+        background: white;
+        box-shadow: 0 0 8px 3px rgba(0, 0, 0, 0.349);
+        overflow: hidden;
+        display: flex;
+        flex-direction: column;
+    }
+    
+    /* Additional styles for login page */
+    .login-container {
+        max-width: 405px;
+        margin: 0 auto;
+        padding: 40px 20px;
+        /* REMOVE height: 100vh */
+        height: -webkit-fill-available; /* Mobile fix */
+        min-height: 100vh; /* Fallback */
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        flex: 1; /* Important: fills container */
+    }
+    
+    .login-box {
+        background: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        border: 2px solid #3498db;
+    }
+    
+    .login-title {
+        text-align: center;
+        color: #3498db;
+        margin-bottom: 30px;
+        font-size: 24px;
+        font-weight: 600;
+    }
+    
+    .input-group {
+        margin-bottom: 20px;
+    }
+    
+    .input-group label {
+        display: block;
+        margin-bottom: 5px;
+        color: #333;
+        font-weight: 500;
+    }
+    
+    .input-group input {
+        width: 100%;
+        padding: 12px;
+        border: 2px solid #ddd;
+        border-radius: 5px;
+        font-size: 16px;
+        transition: border-color 0.3s;
+    }
+    
+    .input-group input:focus {
+        border-color: #3498db;
+        outline: none;
+    }
+    
+    .login-btn {
+        width: 100%;
+        padding: 12px;
+        background-color: #3498db;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        font-weight: 600;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
+    
+    .login-btn:hover {
+        background-color: #2980b9;
+    }
+    
+    .error-message {
+        color: #e74c3c;
+        text-align: center;
+        margin-top: 15px;
+        display: none;
+    }
+    
+    .back-home {
+        text-align: center;
+        margin-top: 20px;
+    }
+    
+    .back-home a {
+        color: #3498db;
+        text-decoration: none;
+    }
+    
+    .back-home a:hover {
+        text-decoration: underline;
+    }
+    
+    /* Safari/Chrome mobile specific */
+    @supports (-webkit-touch-callout: none) {
+        .container, .login-container {
+            height: -webkit-fill-available;
+        }
+    }
+</style>
+
+
 </head>
 <body>
     <div class="container login-container">
@@ -125,54 +254,6 @@
     </div>
 
     <script src="admin-login.js"></script>
-    <script>
-        // Mobile viewport height fix - ADD TO EVERY ADMIN PAGE
-        (function() {
-            function setVH() {
-                const vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
-            }
-            
-            // Initial set
-            setVH();
-            
-            // Update on resize/orientation
-            window.addEventListener('resize', setVH);
-            window.addEventListener('orientationchange', setVH);
-            
-            // Update when browser UI hides/shows (mobile)
-            window.addEventListener('focus', setVH);
-        })();
-        </script>
-
-        <style>
-        /* Add this CSS to EVERY admin page's style block */
-        :root {
-            --vh: 1vh;
-        }
-
-        /* Fix ALL container heights */
-        .container,
-        .dashboard-container,
-        .product-form-container, 
-        .product-list-container,
-        .product-edit-container,
-        .login-container,
-        .product-edit-container,
-        .admin-brand-container {
-            height: calc(var(--vh, 1vh) * 100) !important;
-            min-height: calc(var(--vh, 1vh) * 100) !important;
-        }
-
-        /* Make sure content scrolls properly */
-        .edit-content,
-        .products-container,
-        .form-content,
-        .dashboard-actions,
-        .brands-grid {
-            flex: 1;
-            overflow-y: auto;
-        }
-        </style>
+   
 </body>
 </html>
