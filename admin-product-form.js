@@ -122,14 +122,14 @@ function updateGalleryPreview() {
 async function saveProduct() {
     const submitBtn = document.getElementById('submitBtn');
     submitBtn.disabled = true;
-    submitBtn.textContent = 'Saving...';
+    submitBtn.textContent = 'Saqlanmoqda...';
     
     try {
         // Validate form
         const productData = validateForm();
         if (!productData) {
             submitBtn.disabled = false;
-            submitBtn.textContent = '➕ Add Product';
+            submitBtn.textContent = '➕ Mahsulot qo\'shish';
             return;
         }
         
@@ -191,7 +191,7 @@ async function saveProduct() {
         alert(`❌ Error: ${error.message}`);
     } finally {
         submitBtn.disabled = false;
-        submitBtn.textContent = '➕ Add Product';
+        submitBtn.textContent = '➕ Mahsulot qo\'shish';
     }
 }
 
