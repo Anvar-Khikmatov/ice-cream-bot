@@ -419,10 +419,7 @@ body {
 .product-details::-webkit-scrollbar{
     width: 5px;
 }
-.product-details::-webkit-scrollbar-thumb {
-    /* background-color: #3a9cddc8;
-    border-radius: 5px; */
-}
+
 
 
 
@@ -966,9 +963,7 @@ body {
   color: #3498db;
 }
 
-.footer-btn:active {
-  /* transform: translateY(1px); */
-}
+
 
 .footer-btn.cart .cart-badge {
   position: absolute;
