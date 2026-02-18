@@ -346,9 +346,10 @@ const productGram = document.body.querySelector('.product-gram');
 const productBoxCount = document.body.querySelector('.product-box-count');
 const boxNumber = document.body.querySelector('.box-number');
 
-                          // Contacts button
-const contacts = document.querySelector('.contacts');
-const cdOverlay = document.body.querySelector('.cd-overlay');
+                          // Footer buttons / Contacts
+const footerHomeBtn = document.querySelector('.footer-btn.home');
+const footerCartBtn = document.querySelector('.footer-btn.cart');
+const footerContactsBtn = document.querySelector('.footer-btn.contacts');
 const cdBackBtn = document.body.querySelector('.cd-back-btn');
 const contactInfo = document.body.querySelector('.contact-info');
 
@@ -356,11 +357,61 @@ const contactInfo = document.body.querySelector('.contact-info');
 const searchInput = document.getElementById("searchInput");
 const overlay = document.getElementById("overlay");
 
+// NEW: CART SYSTEM - PROPERLY DEFINED BEFORE USE
+const cartView = document.querySelector('.cart-view');
+const cartBackBtn = document.querySelector('.cart-back-btn');
+const clearCartBtn = document.querySelector('.clear-cart-btn');
+const sendToTelegramBtn = document.querySelector('.send-to-telegram-btn');
+
+// NEW: PRODUCT QUANTITY SELECTOR - PROPERLY DEFINED BEFORE USE
+const qtyInput = document.querySelector('.qty-input');
+const minusBtn = document.querySelector('.minus-btn');
+const plusBtn = document.querySelector('.plus-btn');
+const addToCartBtn = document.querySelector('.add-to-cart-btn');
+
+// Modal alreat messages
+const modal = document.getElementById('clear-modal');
+const modalCancel = document.getElementById('modal-cancel');
+const modalConfirm = document.getElementById('modal-confirm');
+const emptyModal = document.getElementById('empty-modal');
+const emptyModalClose = document.getElementById('empty-modal-close');  
 
 
+  // NEW: Track which view we came from
+  let previousView = 'homepage';
 
+  // ============ HELPER FUNCTION: view toggling ============
+  // Unified view toggling: show one view, hide all others
+  function setActiveView(viewName) {
+    const views = {
+      'homepage': homepage,
+      'iceCreamMenu': iceCreamMenu,
+      'iceCreamInfo': iceCreamInfo,
+      'cartView': cartView,
+      'contactInfo': contactInfo
+    };
+    
+    // Hide all views
+    Object.values(views).forEach(view => {
+      if (view) view.style.display = 'none';
+    });
+    
+    // Show requested view + overlays
+    if (viewName === 'iceCreamInfo') {
+      galleryBackBtn.style.display = 'flex';
+      views.iceCreamInfo.style.display = 'block';
+    } else if (viewName === 'contactInfo') {
+      // Show contact page as a full solid view (no dark overlay)
+      views.contactInfo.style.display = 'flex';
+      galleryBackBtn.style.display = 'none';
+    } else if (viewName === 'cartView') {
+      views.cartView.style.display = 'flex';
+    } else if (views[viewName]) {
+      views[viewName].style.display = 'block';
+    }
+  }
 
-// 1. Homepage
+  // 1. Homepage
 brandMenu.addEventListener('click', event => {
   const clickedBrand = event.target.closest('.brands');
   
@@ -369,7 +420,7 @@ brandMenu.addEventListener('click', event => {
   
   homepage.style.display = "none";
   iceCreamMenu.style.display = "block";
-  titleName.textContent = icBrands[brandName]?.title || "Unknown Brand";
+  titleName.innerHTML = `<h3>${icBrands[brandName]?.title || "Unknown Brand"}</h2>`;
 
   iceCreamContainer.innerHTML = "";
 
@@ -381,7 +432,7 @@ brandMenu.addEventListener('click', event => {
       return;
   }
 
-  icBrands[brandName].products.forEach(product => {
+  icBrands[brandName].products.forEach (product => {
       const icBox = document.createElement('div');
       icBox.classList.add("ic-box");
       icBox.setAttribute('data-ic', product.id);
@@ -402,8 +453,7 @@ brandMenu.addEventListener('click', event => {
 
 
 backButton.addEventListener('click', () => {   
-  iceCreamMenu.style.display = "none";
-  homepage.style.display = "block";
+  setActiveView('homepage');
 });
 
 
@@ -412,8 +462,7 @@ backButton.addEventListener('click', () => {
 
 //2. Specific brand menu 
 galleryBackBtn.addEventListener('click', () => {     
-  iceCreamInfo.style.display = 'none';
-  iceCreamMenu.style.display = 'block';
+  setActiveView('iceCreamMenu');
 });
 
 
@@ -424,9 +473,7 @@ iceCreamContainer.addEventListener('click', event => {
   const clickedIc = event.target.closest('.ic-box');
   if (!clickedIc) return;
 
-  galleryBackBtn.style.display = "flex";     
-  iceCreamMenu.style.display = 'none';
-  iceCreamInfo.style.display = "block";
+  setActiveView('iceCreamInfo');
 
   const productId = clickedIc.getAttribute('data-ic');
   const productView = getProductById(productId);
@@ -480,50 +527,6 @@ function showProductGallery(product) {
 }
 
 
-/*
-Swipe functionality
-function initSwipe() {
-  const images = document.querySelectorAll('.gallery-img');
-  
-  if (images.length <= 1) return;
-  let startX, moveX;
-  
-
-  galleryTrack.addEventListener('touchstart', (e) => {
-    if (images.length <= 1) return;
-    startX = e.touches[0].clientX;
-  });
-
-  galleryTrack.addEventListener('touchmove', (e) => {
-    if (!startX || images.length <= 1) return;
-    moveX = e.touches[0].clientX;
-    const diffX = moveX - startX;
-    
-    galleryTrack.style.transition = 'none'
-    galleryTrack.style.transform = `translateX(calc(-${currentImageIndex * 100}% + ${diffX}px))`;
-  });
-
-  galleryTrack.addEventListener('touchend', () => {
-    if (images.length <= 1 || !moveX) return;
-    const diffX = moveX - startX;
-    
-
-    if (Math.abs(diffX) > 50) {
-      if (diffX > 0 && currentImageIndex > 0) {
-        currentImageIndex--;
-      } else if (diffX < 0 && currentImageIndex < images.length - 1) {
-        currentImageIndex++;
-      }
-    }
-
-    galleryTrack.style.transition = 'transform 0.4s ease-out';
-    galleryTrack.style.transform = `translateX(-${currentImageIndex * 100}%)`;
-    updateDots();
-    startX = null;
-    moveX = null;
-  });
-}
-*/
 
 
 // Store references to the listeners for cleanup
@@ -603,24 +606,59 @@ function showProductDetails(productIdObject){
   productNames.innerHTML = productIdObject.galleryName.replace(/\n/g, "<br>");
   productGram.textContent = productIdObject.gram;
   boxNumber.textContent = productIdObject.boxNum;
+  qtyInput.value = 1;
+  // Store current product id on the Add button for reliable lookup
+  if (addToCartBtn) addToCartBtn.dataset.productId = productIdObject.id;
 }
 
 
 
 
-// 4. Contacts button
-contacts.addEventListener('click', () => {       
-  cdOverlay.style.display = 'block';
-  contactInfo.style.display = 'block';
-  galleryBackBtn.style.display = 'none';           
-})
+// 4. Contacts button (footer)
+if (footerContactsBtn) {
+  footerContactsBtn.addEventListener('click', () => {
+    // Save current view before opening contact
+    if (homepage.style.display === 'block') {
+      previousView = 'homepage';
+    } else if (iceCreamMenu.style.display === 'block') {
+      previousView = 'iceCreamMenu';
+    } else if (iceCreamInfo.style.display === 'block') {
+      previousView = 'iceCreamInfo';
+    }
+    
+    setActiveView('contactInfo');
+  });
 
-  
-cdBackBtn.addEventListener('click', () => {            
-  cdOverlay.style.display = 'none';
-  contactInfo.style.display = 'none';
-  galleryBackBtn.style.display = 'flex';      
-})
+  footerContactsBtn.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      footerContactsBtn.click();
+    }
+  });
+}
+
+// 4b. Contact back button - return to previous view
+if (cdBackBtn) {
+  cdBackBtn.addEventListener('click', () => {
+    if (contactInfo && contactInfo.style.display !== 'none') {
+      // Return to previous view when back is clicked from contact page
+      if (previousView === 'homepage') {
+        setActiveView('homepage');
+      } else if (previousView === 'iceCreamMenu') {
+        setActiveView('iceCreamMenu');
+      } else if (previousView === 'iceCreamInfo') {
+        setActiveView('iceCreamInfo');
+      } else {
+        setActiveView('homepage');
+      }
+    } else {
+      setActiveView('iceCreamInfo');
+    }
+  });
+}
+
+
+
 
 
 
@@ -711,7 +749,7 @@ function filterProducts(searchTerm) {
     if (isMatch) hasMatches = true;
   });
 
-  // DEBUG: Check if we're getting here
+  
   console.log("Filtering products. Has matches:", hasMatches);
   
   // Show overlay if no matches found
@@ -724,8 +762,7 @@ function filterProducts(searchTerm) {
 function clearSearch() {
   // Only reset if we're in search view
   if (titleName.textContent === "Search Results") {
-    iceCreamMenu.style.display = "none";
-    homepage.style.display = "block";
+    setActiveView('homepage');
     
     // Restore original brand states
     if (originalBrandStates !== null) {
@@ -749,10 +786,292 @@ backButton.addEventListener('click', function() {
     clearSearch();
     isInSearchView = false;
   } else {
-    iceCreamMenu.style.display = "none";
-    homepage.style.display = "block";
+    setActiveView('homepage');
   }
 });
 
+  // NEW: 6. CART SYSTEM (footer cart)
+  if (footerCartBtn) {
+    footerCartBtn.addEventListener('click', () => {
+      // If cart is already open, close it and return to previous view
+      if (cartView.style.display === 'flex') {
+        cartView.style.display = 'none';
+        if (previousView === 'homepage') {
+          setActiveView('homepage');
+        } else if (previousView === 'iceCreamMenu') {
+          setActiveView('iceCreamMenu');
+        } else if (previousView === 'iceCreamInfo') {
+          setActiveView('iceCreamInfo');
+        }
+        return;
+      }
 
-};
+      // Save current view before opening cart
+      if (homepage.style.display === 'block') {
+        previousView = 'homepage';
+      } else if (iceCreamMenu.style.display === 'block') {
+        previousView = 'iceCreamMenu';
+      } else if (iceCreamInfo.style.display === 'block') {
+        previousView = 'iceCreamInfo';
+      }
+
+      setActiveView('cartView');
+      updateCartDisplay();
+    });
+
+    footerCartBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        footerCartBtn.click();
+      }
+    });
+  }
+
+  // Footer Home button
+  if (footerHomeBtn) {
+    footerHomeBtn.addEventListener('click', () => {
+      setActiveView('homepage');
+    });
+
+    footerHomeBtn.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        footerHomeBtn.click();
+      }
+    });
+  }
+
+  // Cart back button - FIXED to return to previous view
+  cartBackBtn.addEventListener('click', () => {
+    cartView.style.display = 'none';
+    
+    // Return to the view we came from
+    if (previousView === 'homepage') {
+      setActiveView('homepage');
+    } else if (previousView === 'iceCreamMenu') {
+      setActiveView('iceCreamMenu');
+    } else if (previousView === 'iceCreamInfo') {
+      setActiveView('iceCreamInfo');
+    }
+  });
+
+
+
+  emptyModalClose.addEventListener('click', () => {
+    emptyModal.style.display = 'none';
+  });
+    
+    
+  clearCartBtn.addEventListener('click', () => {
+      if (cart.items.length === 0) {
+      emptyModal.style.display = 'flex';
+      return;
+      }
+      modal.style.display = 'flex';
+    });
+
+  modalCancel.addEventListener('click', () => {
+      modal.style.display = 'none';
+  });
+
+  modalConfirm.addEventListener('click', () => {
+      cart.clearCart();
+      updateCartDisplay();
+      modal.style.display = 'none';
+  });
+
+
+
+
+  // FIXED: Send to Telegram with prefilled cart message
+  sendToTelegramBtn.addEventListener('click', () => {
+    if (cart.items.length === 0) {
+      emptyModal.style.display = "flex";
+      return;
+    }
+
+    // Build prefilled message with cart items
+    let message = '🛒 Buyurtma:\n\n';
+    let grandTotal = 0;
+
+    cart.items.forEach((item) => {
+      const hasPrice = item.price && !isNaN(item.price) && item.price > 0;
+      const hasBoxNum = item.boxNum && item.boxNum !== '-' && !isNaN(parseInt(item.boxNum));
+      
+      message += `🍦 ${item.name}\n`;
+      message += `Soni: ${item.quantity}`;
+      
+      if (hasBoxNum) {
+        const boxNum = parseInt(item.boxNum);
+        message += ` x ${boxNum} = ${item.quantity * boxNum}\n`;
+      } else {
+        message += ` dona\n`;
+      }
+      
+      if (hasPrice && hasBoxNum) {
+        const boxNum = parseInt(item.boxNum) || 1;
+        const subtotal = item.price * item.quantity * boxNum;
+        message += `Narxi: ${cart.formatPrice(subtotal)}\n`;
+        grandTotal += subtotal;
+      } else if (hasPrice) {
+        const subtotal = item.price * item.quantity;
+        message += `Narxi: ${cart.formatPrice(subtotal)}\n`;
+        grandTotal += subtotal;
+      } else {
+        message += `Narxi: Narxi kelishiladi\n`;
+      }
+      
+      message += '\n';
+    });
+
+    message += '─────────────────\n';
+    message += `💰 Jami: ${cart.formatPrice(grandTotal)}`;
+
+    // URL encode the message
+    const encodedMessage = encodeURIComponent(message);
+    
+    // Open Telegram with prefilled message
+    window.open(`https://t.me/faz_25?text=${encodedMessage}`, '_blank');
+  });
+
+  minusBtn.addEventListener('click', () => {
+    const currentQty = parseInt(qtyInput.value);
+    if (currentQty > 1) qtyInput.value = currentQty - 1;
+  });
+
+  plusBtn.addEventListener('click', () => {
+    const currentQty = parseInt(qtyInput.value);
+    qtyInput.value = currentQty + 1;
+  });
+
+  qtyInput.addEventListener('change', () => {
+    let value = parseInt(qtyInput.value);
+    if (isNaN(value) || value < 1) qtyInput.value = 1;
+    if (value > 100) qtyInput.value = 100;
+  });
+
+  // FIXED: Add to cart - use stored product ID for reliable lookup
+  addToCartBtn.addEventListener('click', () => {
+    // Get product by stored ID (unique, reliable)
+    const pid = addToCartBtn.dataset.productId;
+    let currentProduct = pid ? getProductById(pid) : null;
+    
+    // Fallback: match by price/gram if ID is missing (legacy)
+    if (!currentProduct) {
+      const productPrice = document.querySelector('.product-price');
+      const productGram = document.querySelector('.product-gram');
+      for (const brand in icBrands) {
+        const found = icBrands[brand].products?.find(p => {
+          return p.price === (productPrice ? productPrice.textContent : '') &&
+                 p.gram === (productGram ? productGram.textContent : '');
+        });
+        if (found) { currentProduct = found; break; }
+      }
+    }
+    
+    if (!currentProduct) {
+      alert('Mahsulot topilmadi!');
+      return;
+    }
+    
+    const quantity = parseInt(qtyInput.value);
+    cart.addToCart(currentProduct, quantity);
+    
+    qtyInput.value = 1;
+    addToCartBtn.textContent = 'Savatga qo\'shildi!';
+    setTimeout(() => {
+      addToCartBtn.textContent = 'Savatga qo\'shish';
+    }, 1500);
+  });
+
+  
+
+  // Ensure badge reflects stored cart on app init
+  if (typeof cart !== 'undefined' && cart && typeof cart.updateCartBadge === 'function') {
+    cart.updateCartBadge();
+  }
+
+  // Set default view to homepage
+  setActiveView('homepage');
+
+
+// FIXED: Update cart display with correct price calculation (handles missing prices)
+function updateCartDisplay() {
+  const container = document.querySelector('.cart-items-container');
+  const totalPrice = document.querySelector('.total-price');
+  const totalItems = document.querySelector('.total-items');
+
+  container.innerHTML = '';
+
+    if (cart.items.length === 0) {
+      container.innerHTML = `
+        <div class="empty-cart-message">Savat bo'sh</div>
+        <div class="empty_cart_logo">
+          <img src="img/logo/empty_cart.png" width="110" height="110" alt="">
+        </div>
+      `;
+    totalPrice.textContent = '0 UZS';
+    totalItems.textContent = '0';
+    return;
+  }
+  
+
+  cart.items.forEach((item) => {
+    // Check if product has valid price and boxNum
+    const hasPrice = item.price && !isNaN(item.price) && item.price > 0;
+    const hasBoxNum = item.boxNum && item.boxNum !== '-' && !isNaN(parseInt(item.boxNum));
+    
+    let priceDisplay = '';
+    
+    if (hasPrice && hasBoxNum) {
+      const boxNum = parseInt(item.boxNum) || 1;
+      const itemTotal = item.price * item.quantity * boxNum;
+      priceDisplay = cart.formatPrice(itemTotal);
+    } else {
+      // Missing price or box count - show placeholder message
+      priceDisplay = '<span style="color: #999; font-style: italic;">Narxi kelishiladi</span>';
+    }
+    
+    const cartItem = document.createElement('div');
+    cartItem.className = 'cart-item';
+    cartItem.innerHTML = `
+      <div class="cart-item-img">
+        <img src="${item.img}" alt="${item.name}">
+      </div>
+      <div class="cart-item-details">
+        <div class="cart-item-name">${item.name}</div>
+        <div class="cart-item-gram">${item.gram} ${item.boxNum && item.boxNum !== '-' ? `(Qutida ${item.boxNum} )` : '(Soni kelishiladi)'}</div>
+        <div class="cart-item-price">${priceDisplay}</div>
+      </div>
+      <div class="cart-item-controls">
+        <div class="qty-control">
+          <button onclick="cart.updateQuantity('${item.productId}', ${item.quantity - 1}); updateCartDisplay();">−</button>
+          <input type="number" value="${item.quantity}" disabled>
+          <button onclick="cart.updateQuantity('${item.productId}', ${item.quantity + 1}); updateCartDisplay();">+</button>
+        </div>
+        <button class="remove-item-btn" onclick="cart.removeFromCart('${item.productId}'); updateCartDisplay();">✕</button>
+      </div>
+    `;
+    container.appendChild(cartItem);
+  });
+
+  // FIXED: Calculate total with box multiplier - ONLY for items with valid price & boxNum
+  const grandTotal = cart.items.reduce((sum, item) => {
+    const hasPrice = item.price && !isNaN(item.price) && item.price > 0;
+    const hasBoxNum = item.boxNum && item.boxNum !== '-' && !isNaN(parseInt(item.boxNum));
+    
+    if (hasPrice && hasBoxNum) {
+      const boxNum = parseInt(item.boxNum) || 1;
+      return sum + (item.price * item.quantity * boxNum);
+    }
+    // Skip items with missing price/boxNum
+    return sum;
+  }, 0);
+
+  totalPrice.textContent = cart.formatPrice(grandTotal);
+  totalItems.textContent = cart.getItemCount();
+}
+
+// Expose globally for inline onclick handlers (declared after function def)
+window.updateCartDisplay = updateCartDisplay;
+}

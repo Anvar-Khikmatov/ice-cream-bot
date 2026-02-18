@@ -4,28 +4,51 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="style.css">
-
     <title>Muzqaymoq bot</title>
 </head>
 <body>  
-    
-
-
     <div class="container">
-
         <div class="cd-overlay"></div>
-        <div class="contact-info">
-            <button class="cd-back-btn">&lsaquo;</button>
-            <div class="CD">
-                <p>Fozil - <a href="https://t.me/faz_25">Telegram</a></p>
-                <p>+998 97 736 53 13</p>
-                <p>+998 99 806 53 13</p>
-                <p>Manzil:  <a href ="https://maps.app.goo.gl/LDgtjVXF3c4f8W8f6" > Arzon bozor</a></p>
+        <div class="contact-info" aria-hidden="true">
+            <div class="contact-header">
+                <button class="cd-back-btn" aria-label="Orqaga">&lsaquo;</button>
+                <h2>Kontaktlar</h2>
             </div>
-        </div>    
+            <div class="contact-body">
+
+                <div class="contact-row">
+                    <svg class="icon tg-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 240 240" width="24" height="24" aria-hidden="true"><path fill="#000" d="M120 0C53.73 0 0 53.73 0 120s53.73 120 120 120 120-53.73 120-120S186.27 0 120 0zm54.9 80.3l-15.7 74.1c-1.2 5-4.4 6.2-8.9 3.8l-24.5-18.1-11.8 11.4c-1.3 1.3-2.4 2.4-4.9 2.4l1.8-25.8 46.9-42.3c2-1.8-.5-2.8-3.1-1l-57.9 36.4-24.9-7.8c-5.4-1.7-5.5-5.4 1.1-7.9l97.1-37.4c4.5-1.7 8.4 1.1 6.8 8z"/></svg>
+                    <div>
+                        <div class="label">Telegram</div>
+                        <a class="contact-link" href="https://t.me/faz_25" target="_blank" rel="noopener noreferrer">Fozil</a>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <svg class="icon phone-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#000" d="M6.62 10.79a15.091 15.091 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 4a1 1 0 0 1 1-1h2.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+                    <div>
+                        <div class="label">Murojat uchun telefon</div>
+                        <a class="contact-link" href="tel:+998977365313">+998 97 736 53 13</a><br>
+                        <a class="contact-link" href="tel:+998998065313">+998 99 806 53 13</a>
+                    </div>
+                </div>
+
+                <div class="contact-row">
+                    <svg class="icon loc-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" aria-hidden="true"><path fill="#000" d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5z"/></svg>
+                    <div>
+                        <div class="label">Manzil</div>
+                        <a class="contact-link" href="https://maps.app.goo.gl/VCcXoBWtiQ9MkVWUA" target="_blank" rel="noopener noreferrer">Chig'atoy shaharchasi, Shifobaxsh Suvlar ko'chasi, 4<br></a>
+                    </div>
+                </div>
+                
+                <div class="contact-map">
+                    
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d8975.596913344914!2d69.16176539788879!3d41.3470056776547!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x38ae8f0031fcac65%3A0xa60182256645dbe2!2sArzon%20bozor!5e0!3m2!1suz!2s!4v1771407426630!5m2!1suz!2s" width="350" height="300" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+
+                </div>
+            </div>
+        </div>
         
-        
-        <!-- Overlay for no search results - ADD THIS -->
         <div id="overlay" class="overlay">
             <div class="no-results">
             <span class="overlay-img">
@@ -35,19 +58,11 @@
             </div>
         </div>
 
-
-
         <div class="homepage">
-
-            <img class="logo" src="img/logo/logo.webp" loading="lazy" alt="logo">
+            <img class="logo" src="img/logo/LOGO.webp" loading="lazy" alt="logo">
             <div class="searchbar">
                 <input id="searchInput" type="search"  placeholder=" &#x1F50E;&#xFE0E;  Mahsulotlarni qidirish">
             </div>
-
-
-
-
-            <!-- Brand Selection Menu -->
 
             <div class="content brand-menu">  
                 <div class="brands" data-brand="dairy">
@@ -89,9 +104,6 @@
             </div>
         </div>
         
-       
-             <!-- Ice Cream Menu (hidden by default) -->
-
         <div class="iceCream-menu">
             <div class="title">
                 <button class="back-btn">&lsaquo;</button>
@@ -101,30 +113,96 @@
                 <!-- dynamically ic-box goes here -->
             </div>
         </div>
-            
 
-
-        <!-- Ice Cream Info View (hidden by default) -->
         <div class="iceCream-info">
             <div class="gallery-container">
                 <button class="gallery-back-btn" style="display: none;">&lsaquo;</button>
-                <div class="gallery-track"></div> <!-- Images load here -->
-                <div class="gallery-dots"></div>   <!-- Dots load here -->
+                <div class="gallery-track"></div>
+                <div class="gallery-dots"></div>
             </div>
             <div class="product-details">
                 <div class="product-price"></div>
                 <div class="product-names"></div>
                 <div class="product-gram"></div>
                 <div class="product-box-count">Qutidagi soni: <span class="box-number"></span></div>
+                <div class="product-actions">
+                    <div class="qty-selector">
+                        <button class="qty-btn minus-btn">−</button>
+                        <input type="number" class="qty-input" value="1" min="1" max="100">
+                        <button class="qty-btn plus-btn">+</button>
+                    </div>
+                    <button class="add-to-cart-btn">Savatga qo'shish</button>
+                </div>
             </div>
-        </div>  
-        
-        
+        </div>
 
-        <div class="contacts" tabindex="0">Kontaktlar</div>
+        <!-- CART VIEW -->
+        <div class="cart-view">
+            <div class="cart-header">
+                <button class="cart-back-btn">&lsaquo;</button>
+                <h2>Savat</h2>
+                <button class="clear-cart-btn">🗑️</button>
+                <div id="clear-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+                    <div style="background:white; border-radius:16px; padding:24px; margin:20px; text-align:center;">
+                        <p style="font-size:16px; font-weight:600; margin-bottom:8px;">Savatni tozalash</p>
+                        <p style="font-size:14px; color:#666; margin-bottom:20px;">Barcha mahsulotlar o'chiriladi. Ishonchingiz komilmi?</p>
+                        <div style="display:flex; gap:10px;">
+                        <button id="modal-cancel" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px; background:white; font-size:14px;">Bekor qilish</button>
+                        <button id="modal-confirm" style="flex:1; padding:12px; border:none; border-radius:8px; background:#ef5350; color:white; font-size:14px; font-weight:600;">Tozalash</button>
+                        </div>
+                    </div>
+                </div>
+                <div id="empty-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+                    <div style="background:white; border-radius:16px; padding:24px; margin:20px; max-width:320px; width:100%; text-align:center;">
+                        <p style="font-size:32px; margin-bottom:8px;">🛒</p>
+                        <p style="font-size:16px; font-weight:600; margin-bottom:8px;">Savat bo'sh</p>
+                        <p style="font-size:14px; color:#666; margin-bottom:20px;">Hozircha hech narsa qo'shilmagan. Mahsulotlarni tanlang va savatga qo'shing.</p>
+                        <button id="empty-modal-close" style="width:100%; padding:12px; border:none; border-radius:8px; background:#42a5f5; color:white; font-size:14px; font-weight:600;">Xarid qilishni boshlash</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="cart-items-container">
+                <div class="empty-cart-message">Savat bo'sh</div>
+                <div class="empty_cart_logo">
+                    <img  src="img/logo/empty_cart.png" width="80" height="80" alt="">
+                </div>
+            </div>
+
+            <div class="cart-footer">
+                <div class="cart-summary">
+                    <div class="summary-row">
+                        <span>Jami:</span>
+                        <span class="total-price">0 UZS</span>
+                    </div>
+                    <div class="summary-row">
+                        <span>Mahsulot soni:</span>
+                        <span class="total-items">0</span>
+                    </div>
+                </div>
+                <button class="send-to-telegram-btn">Telegram orqali yuborish</button>
+            </div>
+        </div>
+
+        <!-- APP FOOTER: Home / Cart / Contacts -->
+        <footer class="app-footer" role="navigation" aria-label="App footer">
+            <button class="footer-btn home" aria-label="Bosh sahifa" tabindex="0">
+                <svg class="home-svg" viewBox="-2.8 -2.8 33.60 33.60" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="#000000" stroke-width="0.00028" transform="matrix(1, 0, 0, 1, 0, 0)rotate(0)"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="1.4"></g><g id="SVGRepo_iconCarrier"><path clip-rule="evenodd" d="M16.3382 1.94393L25.9705 9.82424L26.0201 9.8788C26.1701 10.0437 26.3998 10.3064 26.5943 10.6198C26.7798 10.9189 27 11.3686 27 11.8956V24.9976C27 26.1013 26.1068 27 25 27H18.7601C17.9317 27 17.2601 26.3284 17.2601 25.5V20.7939C17.2601 18.9948 15.8058 17.5405 14.0168 17.5405C12.2279 17.5405 10.7735 18.9948 10.7735 20.7939V25.5C10.7735 26.3284 10.102 27 9.27354 27H3C1.89318 27 1 26.1013 1 24.9976V11.7425C1 11.0901 1.36299 10.564 1.56986 10.3028C1.69049 10.1505 1.80873 10.0264 1.89631 9.94036C1.9407 9.89677 1.97877 9.86147 2.0074 9.83565C2.02175 9.8227 2.03384 9.81204 2.0433 9.80382L2.05551 9.79329L2.06007 9.7894L2.06278 9.7871C2.06278 9.7871 2.06356 9.78646 2.7075 10.5515L2.06356 9.78646L2.07352 9.77807L11.6288 1.94617C12.9452 0.685478 15.0206 0.684487 16.3382 1.94393ZM3.35246 11.3159L3.3468 11.3209C3.33673 11.33 3.31953 11.3459 3.29759 11.3674C3.25251 11.4117 3.19388 11.4736 3.13764 11.5446C3.07966 11.6178 3.038 11.6834 3.01374 11.7344C3.00661 11.7494 3.00238 11.7602 3 11.767V24.9976L3.00006 24.9992L3.0007 25H8.77354V20.7939C8.77354 17.8948 11.1188 15.5405 14.0168 15.5405C16.9149 15.5405 19.2601 17.8948 19.2601 20.7939V25H24.9993L24.9999 24.9992L25 24.9976V11.8956C25 11.8989 25.0008 11.8992 25 11.8956C24.9966 11.8812 24.9788 11.8095 24.8948 11.6742C24.8108 11.5389 24.7005 11.4037 24.588 11.2772L15.004 3.43645L14.9714 3.40439C14.4228 2.86484 13.5451 2.86525 12.997 3.40534L12.9644 3.43744L3.35246 11.3159Z" fill="#000000" fill-rule="evenodd"></path></g></svg>
+                <span class="label">Bosh sahifa</span>
+            </button>
+            <button class="footer-btn cart" aria-label="Savat" tabindex="0">
+                <svg class="cart-svg" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <path d="M7.2998 5H22L20 12H8.37675M21 16H9L7 3H4M4 8H2M5 11H2M6 14H2M10 20C10 20.5523 9.55228 21 9 21C8.44772 21 8 20.5523 8 20C8 19.4477 8.44772 19 9 19C9.55228 19 10 19.4477 10 20ZM21 20C21 20.5523 20.5523 21 20 21C19.4477 21 19 20.5523 19 20C19 19.4477 19.4477 19 20 19C20.5523 19 21 19.4477 21 20Z" stroke="#000000" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path> </g></svg>
+                <div class="cart-badge" aria-hidden="true"></div>
+                <span class="label">Savat</span>
+            </button>
+            <button class="footer-btn contacts" aria-label="Kontaktlar" tabindex="0">
+                <svg class="about-svg" viewBox="0 0 512 512" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <title>about</title> <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"> <g id="about-white" fill="#000000" transform="translate(42.666667, 42.666667)"> <path d="M213.333333,3.55271368e-14 C95.51296,3.55271368e-14 3.55271368e-14,95.51168 3.55271368e-14,213.333333 C3.55271368e-14,331.153707 95.51296,426.666667 213.333333,426.666667 C331.154987,426.666667 426.666667,331.153707 426.666667,213.333333 C426.666667,95.51168 331.154987,3.55271368e-14 213.333333,3.55271368e-14 Z M213.333333,384 C119.227947,384 42.6666667,307.43872 42.6666667,213.333333 C42.6666667,119.227947 119.227947,42.6666667 213.333333,42.6666667 C307.44,42.6666667 384,119.227947 384,213.333333 C384,307.43872 307.44,384 213.333333,384 Z M240.04672,128 C240.04672,143.46752 228.785067,154.666667 213.55008,154.666667 C197.698773,154.666667 186.713387,143.46752 186.713387,127.704107 C186.713387,112.5536 197.99616,101.333333 213.55008,101.333333 C228.785067,101.333333 240.04672,112.5536 240.04672,128 Z M192.04672,192 L234.713387,192 L234.713387,320 L192.04672,320 L192.04672,192 Z" id="Shape"> </path> </g> </g> </g></svg>
+                <span class="label">Biz haqimizda</span>
+            </button>
+        </footer>
     </div>
 
-    
+    <script src="cart.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
