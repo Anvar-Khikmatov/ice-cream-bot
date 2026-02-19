@@ -1,4 +1,4 @@
-# 🍦 Muzqaymoq Catalog — Telegram Web App
+# 🍦 Ice Cream Catalog — Telegram Web App
 
 A production-ready ice cream catalog and ordering system built as a Telegram Web App, with a full admin panel for product management.
 
@@ -6,7 +6,7 @@ A production-ready ice cream catalog and ordering system built as a Telegram Web
 
 ## Overview
 
-This app lets customers browse ice cream products by brand directly inside Telegram. Admins manage the entire catalog through a separate secured panel — adding, editing, and deleting products with image uploads, all backed by a live Supabase database.
+This app lets customers browse ice cream products by brand directly inside Telegram. Admins manage the entire catalog through a separate secured panel adding, editing, and deleting products with image uploads, all backed by a live Supabase database.
 
 ---
 
@@ -60,17 +60,13 @@ This app lets customers browse ice cream products by brand directly inside Teleg
 
 ---
 
-## Notes
-
-- This is a private repository. API keys are currently stored client-side and should be moved to a backend proxy before any public exposure.
-- Existing catalog images are served from Vercel (committed to repo). New uploads go to Supabase Storage.
-- The app is fully functional on mobile inside Telegram and on desktop browsers.
 
 
 
 ### Preview
 
-![App Preview](screenshot.png)
+
+  <img src="screenshot.png" width="250">
 
 ---
 
