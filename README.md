@@ -70,4 +70,4 @@ This app lets customers browse ice cream products by brand directly inside Teleg
 
 ---
 
-[🍦 View the Product](https://arzonbozor-muzqaymoq-51yvv96k8-anvars-projects-6cd98a1b.vercel.app/)
+[🍦 View the Product](https://arzonbozor-muzqaymoq.vercel.app/)
