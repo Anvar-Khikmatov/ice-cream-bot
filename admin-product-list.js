@@ -124,7 +124,7 @@ function displayProducts(products) {
 
         html += `  
 
-                <div class="ic-box" data-id="${product.id}">
+            <div class="ic-box" data-id="${product.id}">
                     <div class="ic-img">
                         <img src="${imageSrc}" alt="${product.name}" class="product-image">
                     </div>
@@ -134,17 +134,16 @@ function displayProducts(products) {
                     <div class="ic-name">${product.name} <div class="ic-gram">${product.gram}</div></div>
                     <span class="ic-price">${product.price}</span>
                 </div>
-
             </div>
 
-                <div class="product-actions">
+            <div class="product-actions">
                     <button class="action-btn edit-btn" onclick="editProduct('${product.id}')">
                         ✏️ Tahrirlash
                     </button>
                     <button class="action-btn delete-btn" onclick="deleteProduct('${product.id}', '${product.name}')">
                         🗑️ O'chirish
                     </button>
-                </div>
+            </div>
             
             
         `;

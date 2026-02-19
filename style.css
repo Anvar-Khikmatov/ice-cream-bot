@@ -518,7 +518,7 @@ body {
   background-color: #ffffff;
   color: #0b0b0b;
   z-index: 5;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
 }
 

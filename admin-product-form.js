@@ -275,6 +275,7 @@ async function uploadToSupabaseStorage(file, path) {
 }
 
 
+
 function resetForm() {
     document.getElementById('productName').value = '';
     document.getElementById('productPrice').value = '';
