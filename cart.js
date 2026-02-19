@@ -100,7 +100,7 @@ class ShoppingCart {
   generateTelegramMessage() {
     if (this.items.length === 0) return '';
 
-    let message = '🛒 *BUYURTMA XULASASI*\n';
+    let message = '🛒 *BUYURTMA XULOSASI*\n';
     message += '━━━━━━━━━━━━━━━━━\n\n';
 
     let totalPrice = 0;

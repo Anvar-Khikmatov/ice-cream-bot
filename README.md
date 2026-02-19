@@ -20,4 +20,4 @@ Users can browse ice cream brands, view products with details, and search for it
 Ice cream catalog solution for Telegram businesses
 ---
 
-[🍦 View the Product](https://arzonbozor-muzqaymoq-a3pk4tdof-anvars-projects-6cd98a1b.vercel.app/)
+[🍦 View the Product](https://arzonbozor-muzqaymoq-51yvv96k8-anvars-projects-6cd98a1b.vercel.app/)

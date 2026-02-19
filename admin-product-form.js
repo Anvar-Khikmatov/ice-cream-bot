@@ -235,21 +235,45 @@ function validateForm() {
     };
 }
 
+// async function uploadToSupabaseStorage(file, path) {
+//     // For now, we'll use a placeholder URL since Supabase Storage needs special setup
+//     // In production, you would use: supabase.storage.from('bucket').upload(path, file)
+    
+//     console.log('Would upload to:', path, file.name);
+//     return new Promise((resolve) => {
+//         const reader = new FileReader();
+//         reader.onload = function(e) {
+//             resolve(e.target.result); // Returns base64 data URL
+//         };
+//         reader.readAsDataURL(file);
+//     });
+// }
+
 async function uploadToSupabaseStorage(file, path) {
-    // For now, we'll use a placeholder URL since Supabase Storage needs special setup
-    // In production, you would use: supabase.storage.from('bucket').upload(path, file)
-    
-    console.log('Would upload to:', path, file.name);
-    
-    // Return a data URL for now (for testing)
-    return new Promise((resolve) => {
-        const reader = new FileReader();
-        reader.onload = function(e) {
-            resolve(e.target.result); // Returns base64 data URL
-        };
-        reader.readAsDataURL(file);
-    });
+    const ext = file.name.split('.').pop();
+    const fullPath = `${path}_${Date.now()}.${ext}`;
+
+    const response = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/product-images/${fullPath}`,
+        {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Content-Type': file.type
+            },
+            body: file
+        }
+    );
+
+    if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`Image upload failed: ${err}`);
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fullPath}`;
 }
+
 
 function resetForm() {
     document.getElementById('productName').value = '';
