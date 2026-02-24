@@ -198,7 +198,7 @@ function deleteProduct(productId, productName) {
     
 confirmModal.addEventListener('click', () => {
             // Delete from Supabase
-        fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${encodeURIComponent(productId)}`, {
+        fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${encodeURIComponent(productToDelete.id)}`, {
             method: 'DELETE',
             headers: {
                 'apikey': SUPABASE_KEY,
@@ -210,7 +210,7 @@ confirmModal.addEventListener('click', () => {
             if (response.ok) {
                 console.log('✅ Mahsulot muvaffaqiyatli o\'chirildi!');
                 // Remove from local array and UI
-                allProducts = allProducts.filter(p => p.id !== productId);
+                allProducts = allProducts.filter(p => p.id !== productToDelete.id);
                 displayProducts(allProducts);
             } else {
                 throw new Error('Oʻchirishda xato');
