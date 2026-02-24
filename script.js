@@ -29,7 +29,7 @@ const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZ
 
 let icBrands = {};
 
-async function loadIceCreamData() {
+ async function loadIceCreamData() {
   console.log('🔄 Loading ice cream data from Supabase...');
 
   try {
@@ -357,19 +357,19 @@ const contactInfo = document.body.querySelector('.contact-info');
 const searchInput = document.getElementById("searchInput");
 const overlay = document.getElementById("overlay");
 
-// NEW: CART SYSTEM - PROPERLY DEFINED BEFORE USE
+//  CART SYSTEM 
 const cartView = document.querySelector('.cart-view');
 const cartBackBtn = document.querySelector('.cart-back-btn');
 const clearCartBtn = document.querySelector('.clear-cart-btn');
 const sendToTelegramBtn = document.querySelector('.send-to-telegram-btn');
 
-// NEW: PRODUCT QUANTITY SELECTOR - PROPERLY DEFINED BEFORE USE
+//  PRODUCT QUANTITY SELECTOR 
 const qtyInput = document.querySelector('.qty-input');
 const minusBtn = document.querySelector('.minus-btn');
 const plusBtn = document.querySelector('.plus-btn');
 const addToCartBtn = document.querySelector('.add-to-cart-btn');
 
-// Modal alreat messages
+// Modal alert messages
 const modal = document.getElementById('clear-modal');
 const modalCancel = document.getElementById('modal-cancel');
 const modalConfirm = document.getElementById('modal-confirm');
@@ -377,7 +377,7 @@ const emptyModal = document.getElementById('empty-modal');
 const emptyModalClose = document.getElementById('empty-modal-close');  
 
 
-  // NEW: Track which view we came from
+  //  Track which view we came from
   let previousView = 'homepage';
 
   // ============ HELPER FUNCTION: view toggling ============
@@ -401,7 +401,6 @@ const emptyModalClose = document.getElementById('empty-modal-close');
       galleryBackBtn.style.display = 'flex';
       views.iceCreamInfo.style.display = 'block';
     } else if (viewName === 'contactInfo') {
-      // Show contact page as a full solid view (no dark overlay)
       views.contactInfo.style.display = 'flex';
       galleryBackBtn.style.display = 'none';
     } else if (viewName === 'cartView') {
@@ -416,8 +415,8 @@ brandMenu.addEventListener('click', event => {
   const clickedBrand = event.target.closest('.brands');
   
   if (!clickedBrand) return;
+
   const brandName = clickedBrand.getAttribute('data-brand');
-  
   homepage.style.display = "none";
   iceCreamMenu.style.display = "block";
   titleName.innerHTML = `<h3>${icBrands[brandName]?.title || "Unknown Brand"}</h2>`;
@@ -428,7 +427,7 @@ brandMenu.addEventListener('click', event => {
       const noProductMessage = document.createElement('div');
       noProductMessage.classList.add("no-message");
       iceCreamContainer.appendChild(noProductMessage);
-      noProductMessage.textContent = "No products available for this brand.";
+      noProductMessage.textContent = "Ushbu brend uchun mahsulotlar mavjud emas.";
       return;
   }
 
@@ -637,11 +636,10 @@ if (footerContactsBtn) {
   });
 }
 
-// 4b. Contact back button - return to previous view
+
 if (cdBackBtn) {
   cdBackBtn.addEventListener('click', () => {
     if (contactInfo && contactInfo.style.display !== 'none') {
-      // Return to previous view when back is clicked from contact page
       if (previousView === 'homepage') {
         setActiveView('homepage');
       } else if (previousView === 'iceCreamMenu') {
@@ -702,7 +700,7 @@ searchInput.addEventListener("input", () => {
 function showSearchView() {
   homepage.style.display = "none";
   iceCreamMenu.style.display = "block";
-  titleName.textContent = "Search Results";
+  titleName.textContent = "Qidiruv Natijalari";
   
   // Clear previous content
   iceCreamContainer.innerHTML = "";
@@ -761,7 +759,7 @@ function filterProducts(searchTerm) {
 
 function clearSearch() {
   // Only reset if we're in search view
-  if (titleName.textContent === "Search Results") {
+  if (titleName.textContent === "Qidiruv Natijalari") {
     setActiveView('homepage');
     
     // Restore original brand states
@@ -781,7 +779,7 @@ function clearSearch() {
 
 // Enhanced back button functionality
 backButton.addEventListener('click', function() {
-  if (titleName.textContent === "Search Results") {
+  if (titleName.textContent === "Qidiruv Natijalari") {
     searchInput.value = "";
     clearSearch();
     isInSearchView = false;
@@ -790,7 +788,7 @@ backButton.addEventListener('click', function() {
   }
 });
 
-  // NEW: 6. CART SYSTEM (footer cart)
+  // 6. CART SYSTEM (footer cart)
   if (footerCartBtn) {
     footerCartBtn.addEventListener('click', () => {
       // If cart is already open, close it and return to previous view
@@ -911,7 +909,7 @@ backButton.addEventListener('click', function() {
       if (hasPrice && hasBoxNum) {
         const boxNum = parseInt(item.boxNum) || 1;
         const subtotal = item.price * item.quantity * boxNum;
-        message += `Narxi: ${cart.formatPrice(subtotal)}\n`;
+        message += `Narxi: ${cart.s(subtotal)}\n`;
         grandTotal += subtotal;
       } else if (hasPrice) {
         const subtotal = item.price * item.quantity;
@@ -950,7 +948,7 @@ backButton.addEventListener('click', function() {
     if (value > 100) qtyInput.value = 100;
   });
 
-  // FIXED: Add to cart - use stored product ID for reliable lookup
+ 
   addToCartBtn.addEventListener('click', () => {
     // Get product by stored ID (unique, reliable)
     const pid = addToCartBtn.dataset.productId;
@@ -977,6 +975,7 @@ backButton.addEventListener('click', function() {
     const quantity = parseInt(qtyInput.value);
     cart.addToCart(currentProduct, quantity);
     
+    
     qtyInput.value = 1;
     addToCartBtn.textContent = 'Savatga qo\'shildi!';
     setTimeout(() => {
@@ -995,7 +994,7 @@ backButton.addEventListener('click', function() {
   setActiveView('homepage');
 
 
-// FIXED: Update cart display with correct price calculation (handles missing prices)
+
 function updateCartDisplay() {
   const container = document.querySelector('.cart-items-container');
   const totalPrice = document.querySelector('.total-price');
@@ -1017,7 +1016,6 @@ function updateCartDisplay() {
   
 
   cart.items.forEach((item) => {
-    // Check if product has valid price and boxNum
     const hasPrice = item.price && !isNaN(item.price) && item.price > 0;
     const hasBoxNum = item.boxNum && item.boxNum !== '-' && !isNaN(parseInt(item.boxNum));
     
@@ -1055,7 +1053,7 @@ function updateCartDisplay() {
     container.appendChild(cartItem);
   });
 
-  // FIXED: Calculate total with box multiplier - ONLY for items with valid price & boxNum
+
   const grandTotal = cart.items.reduce((sum, item) => {
     const hasPrice = item.price && !isNaN(item.price) && item.price > 0;
     const hasBoxNum = item.boxNum && item.boxNum !== '-' && !isNaN(parseInt(item.boxNum));

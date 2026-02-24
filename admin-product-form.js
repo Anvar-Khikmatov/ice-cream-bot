@@ -158,7 +158,7 @@ async function saveProduct() {
             brand: selectedBrand,
             gram: productData.gram,
             price: productData.price,
-            img: mainImageUrl || 'img/default.jpg', // Use default if no image
+            img: mainImageUrl || 'img/default.jpg', 
             viewimg: galleryUrls.length > 0 ? galleryUrls : null,
             boxnum: productData.boxNum || null,
             galleryname: productData.description,
@@ -235,19 +235,6 @@ function validateForm() {
     };
 }
 
-// async function uploadToSupabaseStorage(file, path) {
-//     // For now, we'll use a placeholder URL since Supabase Storage needs special setup
-//     // In production, you would use: supabase.storage.from('bucket').upload(path, file)
-    
-//     console.log('Would upload to:', path, file.name);
-//     return new Promise((resolve) => {
-//         const reader = new FileReader();
-//         reader.onload = function(e) {
-//             resolve(e.target.result); // Returns base64 data URL
-//         };
-//         reader.readAsDataURL(file);
-//     });
-// }
 
 async function uploadToSupabaseStorage(file, path) {
     const ext = file.name.split('.').pop();

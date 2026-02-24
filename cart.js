@@ -14,14 +14,12 @@ class ShoppingCart {
   }
 
   addToCart(product, quantity = 1) {
-    // FIXED: Check if product already exists by ID
     const productIdStr = String(product.id);
     const existingItem = this.items.find(item => String(item.productId) === productIdStr);
     
     if (existingItem) {
       existingItem.quantity += quantity;
     } else {
-      // FIXED: Store complete product data to prevent mismatches
       this.items.push({
         productId: productIdStr,
         name: product.name,
@@ -97,39 +95,42 @@ class ShoppingCart {
     return new Intl.NumberFormat('uz-UZ').format(price) + ' UZS';
   }
 
-  generateTelegramMessage() {
-    if (this.items.length === 0) return '';
+  
+  // generateTelegramMessage() {
+  //   if (this.items.length === 0) return '';
 
-    let message = '🛒 *BUYURTMA XULOSASI*\n';
-    message += '━━━━━━━━━━━━━━━━━\n\n';
+  //   let message = '🛒 *BUYURTMA XULOSASI*\n';
+  //   message += '━━━━━━━━━━━━━━━━━\n\n';
 
-    let totalPrice = 0;
+  //   let totalPrice = 0;
 
-    this.items.forEach((item, index) => {
-      const boxNum = parseInt(item.boxNum) || 1;
-      const itemTotal = item.price * item.quantity * boxNum;
-      totalPrice += itemTotal;
+  //   this.items.forEach((item, index) => {
+  //     const boxNum = parseInt(item.boxNum) || 1;
+  //     const itemTotal = item.price * item.quantity * boxNum;
+  //     totalPrice += itemTotal;
       
-      message += `${index + 1}. ${item.name}\n`;
-      message += `   ${item.gram} × ${item.quantity} (${item.boxNum} boxes) = ${this.formatPrice(itemTotal)}\n\n`;
-    });
+  //     message += `${index + 1}. ${item.name}\n`;
+  //     message += `   ${item.gram} × ${item.quantity} (${item.boxNum} boxes) = ${this.formatPrice(itemTotal)}\n\n`;
+  //   });
 
-    message += '━━━━━━━━━━━━━━━━━\n';
-    message += `💰 *JAMI: ${this.formatPrice(totalPrice)}*\n`;
-    message += `📦 Jami mahsulot: ${this.getItemCount()} dona\n`;
+  //   message += '━━━━━━━━━━━━━━━━━\n';
+  //   message += `💰 *JAMI: ${this.formatPrice(totalPrice)}*\n`;
+  //   message += `📦 Jami mahsulot: ${this.getItemCount()} dona\n`;
 
-    return encodeURIComponent(message);
-  }
+  //   return encodeURIComponent(message);
+  // }
 
-  sendToTelegram(ownerTelegramId = 'faz_25') {
-    const message = this.generateTelegramMessage();
-    if (!message) {
-      alert('Savat bo\'sh!');
-      return;
-    }
+  // sendToTelegram(ownerTelegramId = 'faz_25') {
+  //   const message = this.generateTelegramMessage();
+  //   if (!message) {
+  //     alert('Savat bo\'sh!');
+  //     return;
+  //   }
     
-    window.open(`https://t.me/${ownerTelegramId}`, '_blank');
-  }
+  //   window.open(`https://t.me/${ownerTelegramId}`, '_blank');
+  // }
+
+
 }
 
 // Initialize cart globally

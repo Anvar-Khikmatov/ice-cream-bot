@@ -73,6 +73,9 @@
             column-gap: 5%;
             row-gap: 25px;
         }
+        .products-container::-webkit-scrollbar{
+            display: none;
+        }
         
         .product-card {
             background: white;
@@ -143,6 +146,8 @@
             display: flex;
             justify-content: center;
             align-items: center;
+            min-width: 106px;
+            width: fit-content;
         }
         
         .edit-btn {
@@ -205,9 +210,21 @@
             <div class="loading">Yuklanmoqda...</div>
         </div>
         
+        <div id="clear-modal" style="display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:1000; align-items:center; justify-content:center;">
+            <div style="background:white; border-radius:16px; padding:24px; margin:20px; text-align:center;">
+                <p class="ic-name" style="font-size:16px; font-weight:600; margin-bottom:8px;"></p>
+                <p style="font-size:14px; color:#666; margin-bottom:20px;">Bu amalni qaytarib bo'lmaydi. Ishonchingiz komilmi?</p>
+                <div style="display:flex; gap:10px;">
+                <button id="modal-cancel" style="flex:1; padding:12px; border:1px solid #ddd; border-radius:8px; background:white; font-size:14px;">Bekor qilish</button>
+                <button id="modal-confirm" style="flex:1; padding:12px; border:none; border-radius:8px; background:#ef5350; color:white; font-size:14px; font-weight:600;">O'chirish</button>
+                </div>
+            </div>
+        </div>
+
         <!-- <button class="logout-btn" onclick="logout()">🚪 Chiqish</button> -->
     </div>
 
+    
     <script src="admin-product-list.js"></script>
 </body>
 </html>

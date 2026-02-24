@@ -47,7 +47,7 @@ async function loadDashboardData() {
         }
     } catch (error) {
         console.error('Error loading stats:', error);
-        document.getElementById('totalProducts').textContent = 'Error';
+        document.getElementById('totalProducts').textContent = 'Xatolik';
     }
 }
 

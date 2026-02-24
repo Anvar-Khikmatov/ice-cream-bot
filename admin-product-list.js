@@ -21,10 +21,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Set brand name
     document.getElementById('brandInfo').textContent = getBrandName(currentBrand) + ' mahsulotlari';
     
-    // Load products
     loadProducts();
-    
-    // Setup search
     setupSearch();
 });
 
@@ -37,8 +34,7 @@ function checkLogin() {
         window.location.href = 'admin-login.html';
         return false;
     }
-    
-    // Reset login timer
+   
     localStorage.setItem('loginTime', Date.now());
     return true;
 }
@@ -180,41 +176,61 @@ function editProduct(productId) {
     window.location.href = `admin-product-edit.html?brand=${currentBrand}&id=${productId}`;
 }
 
+const clearModal = document.getElementById('clear-modal')
+const confirmModal = document.getElementById('modal-confirm')
+const cancelModal = document.getElementById('modal-cancel')
+const icName = document.querySelector('.ic-name')
+
 function deleteProduct(productId, productName) {
-    if (!confirm(`"${productName}" mahsulotini o'chirishni istaysizmi?\n\nBu amalni qaytarib bo'lmaydi.`)) {
-        return;
-    }
+    // if (!confirm(`"${productName}" mahsulotini o'chirishni istaysizmi?\n\nBu amalni qaytarib bo'lmaydi.`)) {
+    //     return;
+    // }
     
-    const deleteBtn = event.target;
-    deleteBtn.disabled = true;
-    deleteBtn.textContent = 'Oʻchirilmoqda...';
-    
-    // Delete from Supabase
-    fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${encodeURIComponent(productId)}`, {
-        method: 'DELETE',
-        headers: {
-            'apikey': SUPABASE_KEY,
-            'Authorization': `Bearer ${SUPABASE_KEY}`,
-            'Prefer': 'return=minimal'
-        }
-    })
-    .then(response => {
-        if (response.ok) {
-            alert('✅ Mahsulot muvaffaqiyatli o\'chirildi!');
-            // Remove from local array and UI
-            allProducts = allProducts.filter(p => p.id !== productId);
-            displayProducts(allProducts);
-        } else {
-            throw new Error('Oʻchirishda xato');
-        }
-    })
-    .catch(error => {
-        console.error('Oʻchirishda xato:', error);
-        alert('❌ Xato: Mahsulotni o\'chirib boʻlmadi');
-        deleteBtn.disabled = false;
-        deleteBtn.textContent = '🗑️ O\'chirish';
-    });
+    // const deleteBtn = event.target;
+    // deleteBtn.disabled = true;
+    // deleteBtn.textContent = 'Oʻchirilmoqda...';
+
+    productToDelete = { id: productId, name: productName };
+    clearModal.style.display = 'flex';
+    icName.textContent = `${productName} mahsulotini o'chirish`;
 }
+    
+    
+confirmModal.addEventListener('click', () => {
+            // Delete from Supabase
+        fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${encodeURIComponent(productId)}`, {
+            method: 'DELETE',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Prefer': 'return=minimal'
+            }
+        })
+        .then(response => {
+            if (response.ok) {
+                console.log('✅ Mahsulot muvaffaqiyatli o\'chirildi!');
+                // Remove from local array and UI
+                allProducts = allProducts.filter(p => p.id !== productId);
+                displayProducts(allProducts);
+            } else {
+                throw new Error('Oʻchirishda xato');
+            }
+        })
+        .catch(error => {
+            console.error('Oʻchirishda xato:', error);
+            console.log('❌ Xato: Mahsulotni o\'chirib boʻlmadi');
+            deleteBtn.disabled = false;
+            deleteBtn.textContent = '🗑️ O\'chirish';
+        });
+        clearModal.style.display = 'none';  
+})
+
+
+
+cancelModal.addEventListener('click', () => {
+    clearModal.style.display = 'none';
+})
+
 
 function goToAddProduct() {
     window.location.href = `admin-product-form.html?brand=${currentBrand}`;
