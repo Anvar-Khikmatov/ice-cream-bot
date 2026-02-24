@@ -909,7 +909,7 @@ backButton.addEventListener('click', function() {
       if (hasPrice && hasBoxNum) {
         const boxNum = parseInt(item.boxNum) || 1;
         const subtotal = item.price * item.quantity * boxNum;
-        message += `Narxi: ${cart.s(subtotal)}\n`;
+        message += `Narxi: ${cart.formatPrice(subtotal)}\n`;
         grandTotal += subtotal;
       } else if (hasPrice) {
         const subtotal = item.price * item.quantity;
