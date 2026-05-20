@@ -1,3 +1,5 @@
+/*
+
 // Supabase Configuration
 const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
@@ -291,4 +293,251 @@ function logout() {
         localStorage.clear();
         window.location.href = 'admin-login.html';
     }
+}
+*/
+
+
+// auth.js handles SUPABASE_URL, SUPABASE_KEY, checkLogin(), getAuthHeaders(), logout()
+
+let selectedBrand = '';
+let mainImageFile = null;
+let galleryImages = [];
+
+document.addEventListener('DOMContentLoaded', async function() {
+    const loggedIn = await checkLogin();
+    if (!loggedIn) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    selectedBrand = urlParams.get('brand');
+
+    if (!selectedBrand) {
+        alert('No brand selected');
+        window.location.href = 'admin-brand-select.html?action=add';
+        return;
+    }
+
+    document.getElementById('pageTitle').textContent = `${getBrandName(selectedBrand)}`;
+    document.getElementById('brandName').value = getBrandName(selectedBrand);
+
+    setupImageUpload();
+});
+
+function getBrandName(brandId) {
+    const brands = {
+        'dairy': 'Dairy Classic',
+        'icegold': 'Ice & GolD',
+        'muzqaymoqlar': 'Muzqaymoqlar',
+        'naturel': 'Naturel',
+        'sodiqSavdo': 'Sodiq Savdo',
+        'zarli': 'Zarli',
+        'korovka': 'Коровка из Кореновки',
+        'bahroma': 'Bahroma',
+        'svitlogore': 'Свитлогорье'
+    };
+    return brands[brandId] || brandId;
+}
+
+function setupImageUpload() {
+    document.getElementById('mainImageInput').addEventListener('change', function(e) {
+        const file = e.target.files[0];
+        if (file) {
+            mainImageFile = file;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const preview = document.getElementById('mainImagePreview');
+                preview.src = e.target.result;
+                preview.style.display = 'block';
+            };
+            reader.readAsDataURL(file);
+        }
+    });
+
+    document.getElementById('galleryInput').addEventListener('change', function(e) {
+        const files = Array.from(e.target.files);
+        files.forEach(file => {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                addGalleryPreview(e.target.result, file);
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+}
+
+function addGalleryPreview(imageSrc, file) {
+    galleryImages.push({ src: imageSrc, file: file });
+
+    const galleryDiv = document.getElementById('galleryPreview');
+    const imageItem = document.createElement('div');
+    imageItem.className = 'image-item';
+    imageItem.innerHTML = `
+        <img src="${imageSrc}" class="gallery-preview">
+        <button class="remove-image" onclick="removeGalleryImage(${galleryImages.length - 1})">×</button>
+    `;
+    galleryDiv.appendChild(imageItem);
+}
+
+function removeGalleryImage(index) {
+    galleryImages.splice(index, 1);
+    updateGalleryPreview();
+}
+
+function updateGalleryPreview() {
+    const galleryDiv = document.getElementById('galleryPreview');
+    galleryDiv.innerHTML = '';
+
+    galleryImages.forEach((img, index) => {
+        const imageItem = document.createElement('div');
+        imageItem.className = 'image-item';
+        imageItem.innerHTML = `
+            <img src="${img.src}" class="gallery-preview">
+            <button class="remove-image" onclick="removeGalleryImage(${index})">×</button>
+        `;
+        galleryDiv.appendChild(imageItem);
+    });
+}
+
+async function saveProduct() {
+    const submitBtn = document.getElementById('submitBtn');
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Saqlanmoqda...';
+
+    try {
+        const productData = validateForm();
+        if (!productData) {
+            submitBtn.disabled = false;
+            submitBtn.textContent = '➕ Mahsulot qo\'shish';
+            return;
+        }
+
+        let mainImageUrl = '';
+        if (mainImageFile) {
+            mainImageUrl = await uploadToSupabaseStorage(mainImageFile, `products/${productData.id}_main`);
+        }
+
+        const galleryUrls = [];
+        for (let i = 0; i < galleryImages.length; i++) {
+            const url = await uploadToSupabaseStorage(
+                galleryImages[i].file,
+                `products/${productData.id}_gallery_${i}`
+            );
+            galleryUrls.push(url);
+        }
+
+        const supabaseData = {
+            name: productData.name,
+            brand: selectedBrand,
+            gram: productData.gram,
+            price: productData.price,
+            img: mainImageUrl || 'img/default.jpg',
+            viewimg: galleryUrls.length > 0 ? galleryUrls : null,
+            boxnum: productData.boxNum || null,
+            galleryname: productData.description,
+            id: productData.id
+        };
+
+        const response = await fetch(`${SUPABASE_URL}/rest/v1/products`, {
+            method: 'POST',
+            headers: { ...getAuthHeaders(), 'Prefer': 'return=minimal' },
+            body: JSON.stringify(supabaseData)
+        });
+
+        if (response.ok) {
+            alert('Mahsulot muvaffaqiyatli qo\'shildi!');
+            resetForm();
+        } else {
+            const error = await response.text();
+            throw new Error(`Database error: ${error}`);
+        }
+
+    } catch (error) {
+        console.error('Error saving product:', error);
+        alert(`Xato: ${error.message}`);
+    } finally {
+        submitBtn.disabled = false;
+        submitBtn.textContent = '➕ Mahsulot qo\'shish';
+    }
+}
+
+function validateForm() {
+    const name = document.getElementById('productName').value.trim();
+    const price = document.getElementById('productPrice').value.trim();
+    const gram = document.getElementById('productGram').value.trim();
+    const productId = document.getElementById('productId').value.trim();
+    const description = document.getElementById('productDescription').value.trim();
+
+    if (!name || !productId) {
+        alert('Iltimos, barcha majburiy maydonlarni (*) to\'ldiring');
+        return null;
+    }
+
+    if (!mainImageFile) {
+        if (!confirm('Asosiy rasm yuklanmadi. Davom etilsinmi?')) {
+            return null;
+        }
+    }
+
+    let formattedPrice = price;
+    if (!price.includes('UZS')) {
+        formattedPrice = price + ' UZS';
+    }
+
+    let formattedGram = gram;
+    if (!gram.toLowerCase().includes('gr') && !gram.toLowerCase().includes('g')) {
+        formattedGram = gram + 'gr';
+    }
+
+    return {
+        name,
+        price: formattedPrice,
+        gram: formattedGram,
+        boxNum: document.getElementById('boxNum').value.trim(),
+        id: productId.toLowerCase(),
+        description
+    };
+}
+
+async function uploadToSupabaseStorage(file, path) {
+    const ext = file.name.split('.').pop();
+    const fullPath = `${path}_${Date.now()}.${ext}`;
+
+    const response = await fetch(
+        `${SUPABASE_URL}/storage/v1/object/product-images/${fullPath}`,
+        {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${sessionStorage.getItem('sb_access_token')}`,
+                'Content-Type': file.type
+            },
+            body: file
+        }
+    );
+
+    if (!response.ok) {
+        const err = await response.text();
+        throw new Error(`Image upload failed: ${err}`);
+    }
+
+    return `${SUPABASE_URL}/storage/v1/object/public/product-images/${fullPath}`;
+}
+
+function resetForm() {
+    document.getElementById('productName').value = '';
+    document.getElementById('productPrice').value = '';
+    document.getElementById('productGram').value = '';
+    document.getElementById('boxNum').value = '';
+    document.getElementById('productId').value = '';
+    document.getElementById('productDescription').value = '';
+
+    mainImageFile = null;
+    galleryImages = [];
+    document.getElementById('mainImagePreview').style.display = 'none';
+    document.getElementById('galleryPreview').innerHTML = '';
+    document.getElementById('mainImageInput').value = '';
+    document.getElementById('galleryInput').value = '';
+}
+
+function goBack() {
+    window.location.href = `admin-brand-select.html?action=add`;
 }

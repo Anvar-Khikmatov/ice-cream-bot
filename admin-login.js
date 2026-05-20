@@ -1,3 +1,4 @@
+/*
 // Supabase Configuration
 const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
@@ -110,3 +111,84 @@ if (localStorage.getItem('adminLoggedIn') === 'true') {
         localStorage.removeItem('loginTime');
     }
 }
+*/
+
+
+const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
+
+async function login() {
+    const username = document.getElementById('username').value.trim();
+    const password = document.getElementById('password').value.trim();
+    const errorElement = document.getElementById('errorMessage');
+
+    errorElement.style.display = 'none';
+
+    if (!username || !password) {
+        errorElement.textContent = 'Iltimos, foydalanuvchi nomi va parolni kiriting';
+        errorElement.style.display = 'block';
+        return;
+    }
+
+    try {
+        // Convert username to email format silently
+        const email = `${username.toLowerCase()}@icecream.admin`;
+
+        const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+            method: 'POST',
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email, password })
+        });
+
+        const data = await response.json();
+
+        if (response.ok && data.access_token) {
+            // Store real session token
+            sessionStorage.setItem('sb_access_token', data.access_token);
+            sessionStorage.setItem('sb_refresh_token', data.refresh_token);
+            sessionStorage.setItem('adminUsername', username);
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            errorElement.textContent = 'Foydalanuvchi nomi yoki parol xato';
+            errorElement.style.display = 'block';
+        }
+
+    } catch (error) {
+        errorElement.textContent = 'Xato: ' + error.message;
+        errorElement.style.display = 'block';
+    }
+}
+
+// Check if already logged in with valid token
+async function checkExistingSession() {
+    const token = sessionStorage.getItem('sb_access_token');
+    if (!token) return;
+
+    try {
+        const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (response.ok) {
+            window.location.href = 'admin-dashboard.html';
+        } else {
+            sessionStorage.clear();
+        }
+    } catch (err) {
+        sessionStorage.clear();
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    checkExistingSession();
+
+    document.getElementById('password').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') login();
+    });
+});

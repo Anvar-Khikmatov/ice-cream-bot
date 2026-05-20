@@ -1,3 +1,5 @@
+/*
+
 // Check login first
 document.addEventListener('DOMContentLoaded', function() {
     checkLogin();
@@ -56,5 +58,35 @@ function logout() {
         localStorage.clear();
         sessionStorage.clear();
         window.location.href = 'admin-login.html';
+    }
+}
+    */
+
+
+
+document.addEventListener('DOMContentLoaded', async function() {
+    const loggedIn = await checkLogin();
+    if (!loggedIn) return;
+
+    const username = sessionStorage.getItem('adminUsername') || 'Admin';
+    document.getElementById('welcomeMessage').textContent = `Xush kelibsiz, ${username}!`;
+
+    loadDashboardData();
+});
+
+async function loadDashboardData() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/products?select=count`,
+            { headers: getAuthHeaders() }
+        );
+
+        if (response.ok) {
+            const data = await response.json();
+            document.getElementById('totalProducts').textContent = data[0].count || '0';
+        }
+    } catch (error) {
+        console.error('Error loading stats:', error);
+        document.getElementById('totalProducts').textContent = 'Xatolik';
     }
 }

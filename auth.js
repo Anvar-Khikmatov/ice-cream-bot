@@ -1,3 +1,5 @@
+/*
+
 const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
 
@@ -90,4 +92,57 @@ async function createAdmin() {
     console.error('Error:', error);
     alert('❌ Network error: ' + error.message);
   }
+}
+  */
+
+
+
+const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
+const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
+
+async function checkLogin() {
+    const token = sessionStorage.getItem('sb_access_token');
+
+    if (!token) {
+        window.location.href = 'admin-login.html';
+        return false;
+    }
+
+    try {
+        const response = await fetch(`${SUPABASE_URL}/auth/v1/user`, {
+            headers: {
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${token}`
+            }
+        });
+
+        if (!response.ok) {
+            sessionStorage.clear();
+            window.location.href = 'admin-login.html';
+            return false;
+        }
+
+        return true;
+
+    } catch (err) {
+        sessionStorage.clear();
+        window.location.href = 'admin-login.html';
+        return false;
+    }
+}
+
+function getAuthHeaders() {
+    const token = sessionStorage.getItem('sb_access_token');
+    return {
+        'apikey': SUPABASE_KEY,
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+    };
+}
+
+function logout() {
+    if (confirm('Chiqishni xohlaysizmi?')) {
+        sessionStorage.clear();
+        window.location.href = 'admin-login.html';
+    }
 }

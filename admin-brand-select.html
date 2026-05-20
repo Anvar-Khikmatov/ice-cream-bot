@@ -6,10 +6,10 @@
     <title>Select Brand - Admin</title>
     <link rel="stylesheet" href="style.css">
     <style>
-        .admin-brand-container {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
+         .admin-brand-container {
+           margin: 0;
+           padding: 0;
+            
         }
         
         .admin-header {
@@ -52,12 +52,11 @@
             flex-wrap: wrap;    
             justify-content: center;
             align-items: center;
-            column-gap: 9%;
-            row-gap: 15%;
-            padding: 20px;
+            column-gap: 1.5rem;
+            row-gap: 1rem;
             overflow-y: auto;
-            /* flex: 1; */
-            margin-top: 9%;
+            margin-top: 3rem;
+            padding: 0.4rem 0.2rem;
         }
         
         .admin-brand-card {
@@ -93,13 +92,14 @@
             background: #e74c3c;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 0.5rem 1rem;
             border-radius: 5px;
             cursor: pointer;
-            display: block;
+            display: flex;
             width: fit-content;
-            margin: auto auto 4vh auto;
-            box-sizing: border-box;
+            justify-content: center;
+            align-items: center;
+            margin: 1.5rem auto 1rem auto;
         }
     </style>
 </head>
@@ -122,6 +122,7 @@
     </div>
 
     <script src="admin-brand-select.js"></script>
+    <script src="auth.js"></script>    
 
     
 </body>

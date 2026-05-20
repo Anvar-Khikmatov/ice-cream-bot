@@ -1,3 +1,4 @@
+/*
 // Supabase Configuration
 const SUPABASE_URL = 'https://duhauvyhekixzaxvbgze.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImR1aGF1dnloZWtpeHpheHZiZ3plIiwicm9sZSI6ImFub24iLCJpYXQiOjE3Njg4OTg2NjksImV4cCI6MjA4NDQ3NDY2OX0.ytteNJ0FFjA_2pl-1bguTBASJVtkyRa8zPQdLb4eX38';
@@ -245,4 +246,179 @@ function logout() {
         localStorage.clear();
         window.location.href = 'admin-login.html';
     }
+}
+*/
+
+
+
+// auth.js handles SUPABASE_URL, SUPABASE_KEY, checkLogin(), getAuthHeaders(), logout()
+
+let currentBrand = '';
+let allProducts = [];
+
+document.addEventListener('DOMContentLoaded', async function() {
+    const loggedIn = await checkLogin();
+    if (!loggedIn) return;
+
+    const urlParams = new URLSearchParams(window.location.search);
+    currentBrand = urlParams.get('brand');
+
+    if (!currentBrand) {
+        alert('Brend tanlanmagan');
+        window.location.href = 'admin-brand-select.html?action=manage';
+        return;
+    }
+
+    document.getElementById('brandInfo').textContent = getBrandName(currentBrand) + ' mahsulotlari';
+
+    loadProducts();
+    setupSearch();
+});
+
+function getBrandName(brandId) {
+    const brands = {
+        'dairy': 'Dairy Classic',
+        'icegold': 'Ice & GolD',
+        'muzqaymoqlar': 'Muzqaymoqlar',
+        'naturel': 'Naturel',
+        'sodiqSavdo': 'Sodiq Savdo',
+        'zarli': 'Zarli',
+        'korovka': 'Коровка из Кореновки',
+        'bahroma': 'Bahroma',
+        'svitlogore': 'Свитлогорье'
+    };
+    return brands[brandId] || brandId;
+}
+
+async function loadProducts() {
+    try {
+        const response = await fetch(
+            `${SUPABASE_URL}/rest/v1/products?brand=eq.${encodeURIComponent(currentBrand)}&order=name.asc`,
+            { headers: getAuthHeaders() }
+        );
+
+        if (!response.ok) throw new Error(`Xato: ${response.status}`);
+
+        allProducts = await response.json();
+        displayProducts(allProducts);
+
+    } catch (error) {
+        console.error('Mahsulotlarni yuklashda xato:', error);
+        document.getElementById('productsContainer').innerHTML = `
+            <div class="no-products">Xato yuz berdi: ${error.message}</div>
+        `;
+    }
+}
+
+function displayProducts(products) {
+    const container = document.getElementById('productsContainer');
+
+    if (!products || products.length === 0) {
+        container.innerHTML = `
+            <div class="no-products">
+                Bu brenda mahsulot topilmadi.<br>
+                <button onclick="goToAddProduct()" style="margin-top: 15px; padding: 10px 20px; background: #3498db; color: white; border: none; border-radius: 5px; cursor: pointer;">
+                    Yangi mahsulot qo'shish
+                </button>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+
+    products.forEach(product => {
+        const imageSrc = (product.img && product.img.trim() !== '') ? product.img : 'img/default.jpg';
+
+        html += `
+            <div class="ic-box" data-id="${product.id}">
+                <div class="ic-img">
+                    <img src="${imageSrc}" alt="${product.name}" class="product-image">
+                </div>
+                <div class="ic-details">
+                    <div class="ic-name">${product.name} <div class="ic-gram">${product.gram}</div></div>
+                    <span class="ic-price">${product.price}</span>
+                </div>
+            </div>
+            <div class="product-actions">
+                <button class="action-btn edit-btn" onclick="editProduct('${product.id}')">
+                    Tahrirlash
+                </button>
+                <button class="action-btn delete-btn" onclick="deleteProduct('${product.id}', '${product.name}')">
+                    O'chirish
+                </button>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+
+    searchInput.addEventListener('input', function() {
+        const searchTerm = this.value.toLowerCase().trim();
+
+        if (searchTerm === '') {
+            displayProducts(allProducts);
+            return;
+        }
+
+        const filtered = allProducts.filter(product =>
+            (product.name && product.name.toLowerCase().includes(searchTerm)) ||
+            (product.id && product.id.toLowerCase().includes(searchTerm)) ||
+            (product.price && product.price.toLowerCase().includes(searchTerm))
+        );
+
+        displayProducts(filtered);
+    });
+}
+
+function editProduct(productId) {
+    window.location.href = `admin-product-edit.html?brand=${currentBrand}&id=${productId}`;
+}
+
+const clearModal = document.getElementById('clear-modal');
+const confirmModal = document.getElementById('modal-confirm');
+const cancelModal = document.getElementById('modal-cancel');
+const icName = document.querySelector('.ic-name');
+
+let productToDelete = null;
+
+function deleteProduct(productId, productName) {
+    productToDelete = { id: productId, name: productName };
+    clearModal.style.display = 'flex';
+    icName.textContent = `${productName} mahsulotini o'chirish`;
+}
+
+confirmModal.addEventListener('click', () => {
+    fetch(`${SUPABASE_URL}/rest/v1/products?id=eq.${encodeURIComponent(productToDelete.id)}`, {
+        method: 'DELETE',
+        headers: { ...getAuthHeaders(), 'Prefer': 'return=minimal' }
+    })
+    .then(response => {
+        if (response.ok) {
+            allProducts = allProducts.filter(p => p.id !== productToDelete.id);
+            displayProducts(allProducts);
+        } else {
+            throw new Error('Oʻchirishda xato');
+        }
+    })
+    .catch(error => {
+        console.error('Oʻchirishda xato:', error);
+    });
+    clearModal.style.display = 'none';
+});
+
+cancelModal.addEventListener('click', () => {
+    clearModal.style.display = 'none';
+});
+
+function goToAddProduct() {
+    window.location.href = `admin-product-form.html?brand=${currentBrand}`;
+}
+
+function goBack() {
+    window.location.href = 'admin-brand-select.html?action=manage';
 }
