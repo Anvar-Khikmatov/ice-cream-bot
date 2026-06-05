@@ -19,14 +19,21 @@ This app lets customers browse ice cream products by brand directly inside Teleg
 - Send order summary directly to Telegram
 
 ### Admin Panel
-- Secure login with SHA-256 password hashing
-- 24-hour session management
+- Secure login via Supabase Auth (email/password)
+- Session management handled by Supabase JWT tokens
 - Add new products with main image and gallery upload
 - Edit existing products including image replacement
 - Delete products with confirmation
 - Live product count on dashboard
 - Brand-based product filtering and search
-- First-time setup page for creating admin account
+
+### Security
+- Row Level Security (RLS) enabled on all tables
+- Admin write access restricted to specific owner UUID via Supabase RLS
+- Public read-only access for product catalog
+- Supabase anon key used client-side (intended public key, protected by RLS policies)
+- Service role key never exposed in frontend code
+
 
 ---
 
